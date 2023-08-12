@@ -1,0 +1,3 @@
+# carthage update --platform macOS
+github "sparkle-project/Sparkle" ~> 1.2
+github "PaddleHQ/Mac-Framework-V4"

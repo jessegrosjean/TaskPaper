@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LR4-O1-eev">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Search Bar View Controller-->
+        <scene sceneID="Ope-fe-5rh">
+            <objects>
+                <customObject id="sd2-9F-Ahw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <viewController id="LR4-O1-eev" customClass="SearchBarViewController" customModule="TaskPaper" customModuleProvider="target" sceneMemberID="viewController">
+                    <customView key="view" id="qVQ-pM-dXn">
+                        <rect key="frame" x="0.0" y="0.0" width="799" height="29"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Wgc-wJ-QSC">
+                                <rect key="frame" x="0.0" y="26" width="799" height="5"/>
+                            </box>
+                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ILy-9J-Pmr">
+                                <rect key="frame" x="0.0" y="0.0" width="799" height="28"/>
+                                <subviews>
+                                    <button horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="e6a-xK-oBu">
+                                        <rect key="frame" x="8" y="5" width="18" height="18"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="ToolbarSearchIcon" imagePosition="overlaps" alignment="center" controlSize="small" imageScaling="proportionallyDown" inset="2" id="kVO-0Q-JNO">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="smallSystem"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="beginSearch:" target="LR4-O1-eev" id="Q1o-60-cXj"/>
+                                        </connections>
+                                    </button>
+                                    <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N2J-E6-Pqz" customClass="SearchBarSearchField" customModule="TaskPaper" customModuleProvider="target">
+                                        <rect key="frame" x="34" y="6" width="666" height="16"/>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" focusRingType="none" placeholderString="Search" drawsBackground="YES" usesSingleLineMode="YES" id="vkn-xF-Zs5">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </searchFieldCell>
+                                        <connections>
+                                            <action selector="searchFieldAction:" target="sd2-9F-Ahw" id="V4T-yq-15V"/>
+                                            <outlet property="delegate" destination="LR4-O1-eev" id="QTn-fX-LeC"/>
+                                        </connections>
+                                    </searchField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cWl-nE-dk0">
+                                        <rect key="frame" x="706" y="7" width="67" height="14"/>
+                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="No matches" id="76l-A5-oWW">
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vCa-cT-Fj8">
+                                        <rect key="frame" x="779" y="8.5" width="12" height="11"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" controlSize="small" imageScaling="proportionallyDown" inset="2" id="cGs-ZG-YiB">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <connections>
+                                                <action selector="closeSearch:" target="LR4-O1-eev" id="Nj1-Ba-lsS"/>
+                                            </connections>
+                                        </buttonCell>
+                                    </button>
+                                </subviews>
+                                <edgeInsets key="edgeInsets" left="8" right="8" top="0.0" bottom="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="Uvt-3a-GwJ"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="EWM-fW-Lwq">
+                                <rect key="frame" x="0.0" y="-2" width="799" height="5"/>
+                            </box>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="ILy-9J-Pmr" firstAttribute="top" secondItem="Wgc-wJ-QSC" secondAttribute="bottom" id="1QL-cO-Rhw"/>
+                            <constraint firstItem="EWM-fW-Lwq" firstAttribute="leading" secondItem="qVQ-pM-dXn" secondAttribute="leading" id="7e5-lz-Ppq"/>
+                            <constraint firstItem="Wgc-wJ-QSC" firstAttribute="leading" secondItem="qVQ-pM-dXn" secondAttribute="leading" id="Aru-cM-K1W"/>
+                            <constraint firstAttribute="trailing" secondItem="Wgc-wJ-QSC" secondAttribute="trailing" id="EwL-Va-7U8"/>
+                            <constraint firstItem="ILy-9J-Pmr" firstAttribute="leading" secondItem="qVQ-pM-dXn" secondAttribute="leading" id="HDb-c6-NCx"/>
+                            <constraint firstAttribute="bottom" secondItem="EWM-fW-Lwq" secondAttribute="bottom" id="iV0-Wk-dxZ"/>
+                            <constraint firstAttribute="bottom" secondItem="ILy-9J-Pmr" secondAttribute="bottom" id="pgs-60-2Eh"/>
+                            <constraint firstAttribute="trailing" secondItem="ILy-9J-Pmr" secondAttribute="trailing" id="trx-tr-NSD"/>
+                            <constraint firstAttribute="trailing" secondItem="EWM-fW-Lwq" secondAttribute="trailing" id="yyo-Gj-SZi"/>
+                        </constraints>
+                    </customView>
+                    <connections>
+                        <outlet property="noMatchesLabel" destination="cWl-nE-dk0" id="IUR-Kq-fBP"/>
+                        <outlet property="searchField" destination="N2J-E6-Pqz" id="vZ1-LH-Mmd"/>
+                        <outlet property="topDividerLine" destination="Wgc-wJ-QSC" id="ttD-3x-b56"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-2594.5" y="360"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="NSStopProgressTemplate" width="17" height="16"/>
+        <image name="ToolbarSearchIcon" width="18" height="18"/>
+    </resources>
+</document>

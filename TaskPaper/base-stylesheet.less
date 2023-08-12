@@ -1,0 +1,152 @@
+// Appearance
+@appearance: $APPEARANCE; // dark or light
+
+// UI Scale
+@base-font-size: 14;
+@user-font-size: $USER_FONT_SIZE;
+@ui-scale: @user-font-size / @base-font-size;
+
+// Light Appearance Colors
+@light-text-color: rgb(20%, 20%, 20%);
+@light-background-color: rgb(100%, 100%, 100%);
+@light-guide-line-color-percent: 10%;
+@light-handle-secondary-color-percent: 20%;
+@light-selection-color-percent: 30%;
+@light-searchbar-background-color: @light-background-color;
+
+// Dark Appearance Colors
+@dark-text-color: rgb(86%, 86%, 86%);
+@dark-background-color: rgb(18%, 18%, 18%);
+@dark-guide-line-color-percent: 30%;
+@dark-handle-secondary-color-percent: 40%;
+@dark-selection-color-percent: 50%;
+@dark-searchbar-background-color: @dark-background-color;
+
+// Current Appearance Colors
+@current-appearance-text-color: "@{appearance}-text-color";
+@current-appearance-background-color: "@{appearance}-background-color";
+@current-guide-line-color-percent: "@{appearance}-guide-line-color-percent";
+@current-handle-secondary-color-percent: "@{appearance}-handle-secondary-color-percent";
+@current-selection-color-percent: "@{appearance}-selection-color-percent";
+@current-searchbar-background-color: "@{appearance}-searchbar-background-color";
+
+// UI Colors
+@tint-color: $CONTROL_ACCENT_COLOR;
+@selection-color: mix($SELECTED_CONTENT_BACKGROUND_COLOR, @background-color, @@current-selection-color-percent);
+@invisibles-color: mix(@tint-color, @background-color, 70%); // rgb(67, 119, 211);
+
+// Base text
+@text-color: @@current-appearance-text-color;
+@background-color: @@current-appearance-background-color;
+@font-family: -apple-user;
+@line-height-multiple: 1.3;
+
+// Handle size
+@handle-size: floor(7 * @ui-scale);
+@handle-color: @tint-color;
+@handle-secondary-color: mix(@tint-color, @background-color, @@current-handle-secondary-color-percent);
+
+window {
+  //appearance: NSAppearanceNameVibrantLight;
+}
+
+sidebar {
+}
+
+searchbar {
+  color: @text-color;
+  error-text-color: @tint-color;
+  placeholder-color: mix(@text-color, @background-color, 50%);
+  secondary-text-color: mix(@text-color, @background-color, 50%);
+  background-color: @@current-searchbar-background-color;
+}
+
+editor {
+  color: @text-color;
+  ui-scale: @ui-scale;
+  font-size: @user-font-size;
+  font-family: @font-family;
+  background-color: @background-color;
+  line-height-multiple: @line-height-multiple;
+  item-indent: 17 * @ui-scale;
+  caret-width: floor(2 * @ui-scale);
+  caret-color: @tint-color;
+  drop-indicator-color: @tint-color;
+  invisibles-color: @invisibles-color;
+  selection-background-color: @selection-color;
+  guide-line-color: mix(@tint-color, @background-color, @@current-guide-line-color-percent);
+  guide-line-width: floor(1 * @ui-scale);
+}
+
+item {
+  handle-size: @handle-size;
+  handle-border-width: floor(1 * @ui-scale);
+}
+
+item[expanded] {
+    handle-border-color: @handle-secondary-color;
+}
+
+item[collapsed] {
+  handle-color: @handle-color;
+  handle-border-color: none;
+}
+
+item[filtered] {
+  handle-color: @handle-secondary-color;
+  handle-border-color: none;
+}
+
+item[mouseOverHandle] {
+  handle-size: @handle-size + (1.5 * @ui-scale);
+}
+
+item[mouseOverHandle][leaf] {
+  handle-border-color: @handle-secondary-color;
+}
+
+item[data-type="note"] {
+  font-style: italic;
+}
+
+item[data-type="task"] {
+  font-style: normal;
+}
+
+item[data-type="project"] {
+  font-weight: bold;
+}
+
+item[hoisted] {
+  line-height-multiple: @line-height-multiple * 2;
+  handle-color: none;
+  handle-border-color: none;
+}
+
+item[data-done] {
+  > run[content] {
+    text-strikethrough: NSUnderlineStyleSingle;
+    text-strikethrough-color: @text-color;
+  }
+}
+
+run[link] {
+  cursor: pointer;
+  color: @tint-color;
+}
+
+run[link^="button"] {
+  color: @text-color;
+  text-expansion: 0.8;
+}
+
+run[link^="filter"] {
+  color: @text-color;
+}
+
+run[tag] {
+  font-size: @user-font-size;
+  font-style: normal;
+  font-weight: normal;
+  color: mix(@text-color, @background-color, 35%);
+}

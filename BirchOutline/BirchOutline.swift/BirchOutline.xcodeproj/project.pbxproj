@@ -1,0 +1,884 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4300222B1D4435AA00E7908D /* MutationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4300222A1D4435AA00E7908D /* MutationType.swift */; };
+		4300222D1D452DA500E7908D /* ItemPathQueryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4300222C1D452DA500E7908D /* ItemPathQueryType.swift */; };
+		431852681D32A8DE0049BBB0 /* BirchCrossPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431852671D32A8DE0049BBB0 /* BirchCrossPlatform.swift */; };
+		431852691D32AA7F0049BBB0 /* DisposableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436A90C21D2D7C630082CF46 /* DisposableType.swift */; };
+		4318526A1D32ABD80049BBB0 /* BirchCrossPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431852671D32A8DE0049BBB0 /* BirchCrossPlatform.swift */; };
+		4318526C1D32C7C60049BBB0 /* String-Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4318526B1D32C7C60049BBB0 /* String-Path.swift */; };
+		4318526D1D32C7C60049BBB0 /* String-Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4318526B1D32C7C60049BBB0 /* String-Path.swift */; };
+		4318528D1D3488B90049BBB0 /* ObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 4318528B1D3488B90049BBB0 /* ObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4318528E1D3488B90049BBB0 /* ObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 4318528B1D3488B90049BBB0 /* ObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4318528F1D3488B90049BBB0 /* ObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4318528C1D3488B90049BBB0 /* ObjC.m */; };
+		431852901D3488B90049BBB0 /* ObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4318528C1D3488B90049BBB0 /* ObjC.m */; };
+		433815D61DB69F5700120078 /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433815D51DB69F5700120078 /* DateTime.swift */; };
+		433815D71DB69F5700120078 /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433815D51DB69F5700120078 /* DateTime.swift */; };
+		435A3C011D38292F00E05ED5 /* OutlineFixture.bml in Resources */ = {isa = PBXBuildFile; fileRef = 435A3BFF1D38292F00E05ED5 /* OutlineFixture.bml */; };
+		435A3C021D38292F00E05ED5 /* OutlineFixture.bml in Resources */ = {isa = PBXBuildFile; fileRef = 435A3BFF1D38292F00E05ED5 /* OutlineFixture.bml */; };
+		435A3C031D38292F00E05ED5 /* OutlineFixture.txt in Resources */ = {isa = PBXBuildFile; fileRef = 435A3C001D38292F00E05ED5 /* OutlineFixture.txt */; };
+		435A3C041D38292F00E05ED5 /* OutlineFixture.txt in Resources */ = {isa = PBXBuildFile; fileRef = 435A3C001D38292F00E05ED5 /* OutlineFixture.txt */; };
+		436A90C31D2D7C630082CF46 /* DisposableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436A90C21D2D7C630082CF46 /* DisposableType.swift */; };
+		436C0D741D1D56D50089FA7A /* BirchOutline.h in Headers */ = {isa = PBXBuildFile; fileRef = 436C0D731D1D56D50089FA7A /* BirchOutline.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		436C0D7B1D1D56D50089FA7A /* BirchOutline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436C0D701D1D56D50089FA7A /* BirchOutline.framework */; };
+		436C0DB51D1D63630089FA7A /* BirchOutlineiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 436C0DB41D1D63630089FA7A /* BirchOutlineiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		436C0DBC1D1D63630089FA7A /* BirchOutline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436C0DB21D1D63630089FA7A /* BirchOutline.framework */; };
+		436C0DDE1D1D64D30089FA7A /* BirchOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD01D1D64CC0089FA7A /* BirchOutline.swift */; };
+		436C0DDF1D1D64D40089FA7A /* BirchOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD01D1D64CC0089FA7A /* BirchOutline.swift */; };
+		436C0DE21D1D65090089FA7A /* ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD31D1D64CC0089FA7A /* ItemType.swift */; };
+		436C0DE31D1D65090089FA7A /* ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD31D1D64CC0089FA7A /* ItemType.swift */; };
+		436C0DE41D1D650C0089FA7A /* BirchScriptContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD41D1D64CC0089FA7A /* BirchScriptContext.swift */; };
+		436C0DE51D1D650D0089FA7A /* BirchScriptContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD41D1D64CC0089FA7A /* BirchScriptContext.swift */; };
+		436C0DE61D1D650F0089FA7A /* JSValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD51D1D64CC0089FA7A /* JSValue.swift */; };
+		436C0DE71D1D65100089FA7A /* JSValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD51D1D64CC0089FA7A /* JSValue.swift */; };
+		436C0DEA1D1D65170089FA7A /* OutlineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD71D1D64CC0089FA7A /* OutlineType.swift */; };
+		436C0DEB1D1D65170089FA7A /* OutlineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD71D1D64CC0089FA7A /* OutlineType.swift */; };
+		436C0DEC1D1D651C0089FA7A /* ItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD91D1D64CC0089FA7A /* ItemTests.swift */; };
+		436C0DED1D1D651D0089FA7A /* ItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD91D1D64CC0089FA7A /* ItemTests.swift */; };
+		436C0DEE1D1D65200089FA7A /* JavaScriptContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DDA1D1D64CC0089FA7A /* JavaScriptContextTests.swift */; };
+		436C0DEF1D1D65210089FA7A /* JavaScriptContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DDA1D1D64CC0089FA7A /* JavaScriptContextTests.swift */; };
+		436C0DF01D1D65230089FA7A /* OutlineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DDD1D1D64CC0089FA7A /* OutlineTests.swift */; };
+		436C0DF11D1D65240089FA7A /* OutlineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DDD1D1D64CC0089FA7A /* OutlineTests.swift */; };
+		4391F82D1D4FEFEA00ED3CF9 /* MutationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4300222A1D4435AA00E7908D /* MutationType.swift */; };
+		43B6ADB41D6BA78100ACA66C /* JSContext-GarbageCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 43B6ADB21D6BA78100ACA66C /* JSContext-GarbageCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43B6ADB51D6BA78100ACA66C /* JSContext-GarbageCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B6ADB31D6BA78100ACA66C /* JSContext-GarbageCollection.m */; };
+		43E6193E1D2340B3001E3F4D /* String-Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E6193D1D2340B3001E3F4D /* String-Localize.swift */; };
+		43E6193F1D2340B3001E3F4D /* String-Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E6193D1D2340B3001E3F4D /* String-Localize.swift */; };
+		43E619501D244344001E3F4D /* birchoutline.js in Resources */ = {isa = PBXBuildFile; fileRef = 43E6194F1D244344001E3F4D /* birchoutline.js */; };
+		43E619511D244344001E3F4D /* birchoutline.js in Resources */ = {isa = PBXBuildFile; fileRef = 43E6194F1D244344001E3F4D /* birchoutline.js */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		436C0D7C1D1D56D50089FA7A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 436C0D671D1D56D50089FA7A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 436C0D6F1D1D56D50089FA7A;
+			remoteInfo = BirchOutline;
+		};
+		436C0DBD1D1D63630089FA7A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 436C0D671D1D56D50089FA7A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 436C0DB11D1D63630089FA7A;
+			remoteInfo = BirchOutlineiOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4300222A1D4435AA00E7908D /* MutationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutationType.swift; sourceTree = "<group>"; };
+		4300222C1D452DA500E7908D /* ItemPathQueryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPathQueryType.swift; sourceTree = "<group>"; };
+		431852671D32A8DE0049BBB0 /* BirchCrossPlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirchCrossPlatform.swift; sourceTree = "<group>"; };
+		4318526B1D32C7C60049BBB0 /* String-Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String-Path.swift"; sourceTree = "<group>"; };
+		4318528B1D3488B90049BBB0 /* ObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjC.h; sourceTree = "<group>"; };
+		4318528C1D3488B90049BBB0 /* ObjC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjC.m; sourceTree = "<group>"; };
+		433815D51DB69F5700120078 /* DateTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTime.swift; sourceTree = "<group>"; };
+		435A3BFF1D38292F00E05ED5 /* OutlineFixture.bml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OutlineFixture.bml; sourceTree = "<group>"; };
+		435A3C001D38292F00E05ED5 /* OutlineFixture.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OutlineFixture.txt; sourceTree = "<group>"; };
+		436A90C21D2D7C630082CF46 /* DisposableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisposableType.swift; sourceTree = "<group>"; };
+		436C0D701D1D56D50089FA7A /* BirchOutline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BirchOutline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		436C0D731D1D56D50089FA7A /* BirchOutline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BirchOutline.h; sourceTree = "<group>"; };
+		436C0D751D1D56D50089FA7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		436C0D7A1D1D56D50089FA7A /* BirchOutlineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BirchOutlineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		436C0D811D1D56D50089FA7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		436C0DB21D1D63630089FA7A /* BirchOutline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BirchOutline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		436C0DB41D1D63630089FA7A /* BirchOutlineiOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BirchOutlineiOS.h; sourceTree = "<group>"; };
+		436C0DB61D1D63630089FA7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		436C0DBB1D1D63630089FA7A /* BirchOutlineiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BirchOutlineiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		436C0DC21D1D63630089FA7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		436C0DD01D1D64CC0089FA7A /* BirchOutline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirchOutline.swift; sourceTree = "<group>"; };
+		436C0DD31D1D64CC0089FA7A /* ItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemType.swift; sourceTree = "<group>"; };
+		436C0DD41D1D64CC0089FA7A /* BirchScriptContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirchScriptContext.swift; sourceTree = "<group>"; };
+		436C0DD51D1D64CC0089FA7A /* JSValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSValue.swift; sourceTree = "<group>"; };
+		436C0DD71D1D64CC0089FA7A /* OutlineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineType.swift; sourceTree = "<group>"; };
+		436C0DD91D1D64CC0089FA7A /* ItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTests.swift; sourceTree = "<group>"; };
+		436C0DDA1D1D64CC0089FA7A /* JavaScriptContextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaScriptContextTests.swift; sourceTree = "<group>"; };
+		436C0DDD1D1D64CC0089FA7A /* OutlineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineTests.swift; sourceTree = "<group>"; };
+		43B6ADB21D6BA78100ACA66C /* JSContext-GarbageCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JSContext-GarbageCollection.h"; sourceTree = "<group>"; };
+		43B6ADB31D6BA78100ACA66C /* JSContext-GarbageCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JSContext-GarbageCollection.m"; sourceTree = "<group>"; };
+		43E6193D1D2340B3001E3F4D /* String-Localize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String-Localize.swift"; sourceTree = "<group>"; };
+		43E6194F1D244344001E3F4D /* birchoutline.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = birchoutline.js; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		436C0D6C1D1D56D50089FA7A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		436C0D771D1D56D50089FA7A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				436C0D7B1D1D56D50089FA7A /* BirchOutline.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		436C0DAE1D1D63630089FA7A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		436C0DB81D1D63630089FA7A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				436C0DBC1D1D63630089FA7A /* BirchOutline.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		435A3C051D38295800E05ED5 /* Shared Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				435A3BFF1D38292F00E05ED5 /* OutlineFixture.bml */,
+				435A3C001D38292F00E05ED5 /* OutlineFixture.txt */,
+			);
+			name = "Shared Fixtures";
+			sourceTree = "<group>";
+		};
+		436C0D661D1D56D50089FA7A = {
+			isa = PBXGroup;
+			children = (
+				43E6194E1D244344001E3F4D /* Dependencies */,
+				436C0DCE1D1D64CC0089FA7A /* Common */,
+				436C0D721D1D56D50089FA7A /* BirchOutline */,
+				436C0D7E1D1D56D50089FA7A /* BirchOutlineTests */,
+				436C0DB31D1D63630089FA7A /* BirchOutlineiOS */,
+				436C0DBF1D1D63630089FA7A /* BirchOutlineiOSTests */,
+				436C0D711D1D56D50089FA7A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		436C0D711D1D56D50089FA7A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				436C0D701D1D56D50089FA7A /* BirchOutline.framework */,
+				436C0D7A1D1D56D50089FA7A /* BirchOutlineTests.xctest */,
+				436C0DB21D1D63630089FA7A /* BirchOutline.framework */,
+				436C0DBB1D1D63630089FA7A /* BirchOutlineiOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		436C0D721D1D56D50089FA7A /* BirchOutline */ = {
+			isa = PBXGroup;
+			children = (
+				436C0DAB1D1D60B00089FA7A /* Support Files */,
+			);
+			path = BirchOutline;
+			sourceTree = "<group>";
+		};
+		436C0D7E1D1D56D50089FA7A /* BirchOutlineTests */ = {
+			isa = PBXGroup;
+			children = (
+				436C0D811D1D56D50089FA7A /* Info.plist */,
+			);
+			path = BirchOutlineTests;
+			sourceTree = "<group>";
+		};
+		436C0DAB1D1D60B00089FA7A /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				435A3C051D38295800E05ED5 /* Shared Fixtures */,
+				436C0D731D1D56D50089FA7A /* BirchOutline.h */,
+				436C0D751D1D56D50089FA7A /* Info.plist */,
+			);
+			name = "Support Files";
+			sourceTree = "<group>";
+		};
+		436C0DB31D1D63630089FA7A /* BirchOutlineiOS */ = {
+			isa = PBXGroup;
+			children = (
+				436C0DB41D1D63630089FA7A /* BirchOutlineiOS.h */,
+				436C0DB61D1D63630089FA7A /* Info.plist */,
+			);
+			path = BirchOutlineiOS;
+			sourceTree = "<group>";
+		};
+		436C0DBF1D1D63630089FA7A /* BirchOutlineiOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				436C0DC21D1D63630089FA7A /* Info.plist */,
+			);
+			path = BirchOutlineiOSTests;
+			sourceTree = "<group>";
+		};
+		436C0DCE1D1D64CC0089FA7A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				436C0DCF1D1D64CC0089FA7A /* Sources */,
+				436C0DD81D1D64CC0089FA7A /* Tests */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		436C0DCF1D1D64CC0089FA7A /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				436C0DD01D1D64CC0089FA7A /* BirchOutline.swift */,
+				436C0DD41D1D64CC0089FA7A /* BirchScriptContext.swift */,
+				431852671D32A8DE0049BBB0 /* BirchCrossPlatform.swift */,
+				436C0DFA1D1D65DD0089FA7A /* Outline */,
+				436C0DFB1D1D66380089FA7A /* Extensions */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		436C0DD81D1D64CC0089FA7A /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				436C0DF81D1D65850089FA7A /* Fixtures */,
+				436C0DDA1D1D64CC0089FA7A /* JavaScriptContextTests.swift */,
+				436C0DDD1D1D64CC0089FA7A /* OutlineTests.swift */,
+				436C0DD91D1D64CC0089FA7A /* ItemTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		436C0DF81D1D65850089FA7A /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Fixtures;
+			sourceTree = "<group>";
+		};
+		436C0DFA1D1D65DD0089FA7A /* Outline */ = {
+			isa = PBXGroup;
+			children = (
+				433815D51DB69F5700120078 /* DateTime.swift */,
+				436C0DD31D1D64CC0089FA7A /* ItemType.swift */,
+				436C0DD71D1D64CC0089FA7A /* OutlineType.swift */,
+				4300222A1D4435AA00E7908D /* MutationType.swift */,
+				436A90C21D2D7C630082CF46 /* DisposableType.swift */,
+				4300222C1D452DA500E7908D /* ItemPathQueryType.swift */,
+			);
+			name = Outline;
+			sourceTree = "<group>";
+		};
+		436C0DFB1D1D66380089FA7A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				436C0DD51D1D64CC0089FA7A /* JSValue.swift */,
+				43E6193D1D2340B3001E3F4D /* String-Localize.swift */,
+				4318526B1D32C7C60049BBB0 /* String-Path.swift */,
+				4318528B1D3488B90049BBB0 /* ObjC.h */,
+				4318528C1D3488B90049BBB0 /* ObjC.m */,
+				43B6ADB21D6BA78100ACA66C /* JSContext-GarbageCollection.h */,
+				43B6ADB31D6BA78100ACA66C /* JSContext-GarbageCollection.m */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		43E6194E1D244344001E3F4D /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				43E6194F1D244344001E3F4D /* birchoutline.js */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		436C0D6D1D1D56D50089FA7A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4318528D1D3488B90049BBB0 /* ObjC.h in Headers */,
+				436C0D741D1D56D50089FA7A /* BirchOutline.h in Headers */,
+				43B6ADB41D6BA78100ACA66C /* JSContext-GarbageCollection.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		436C0DAF1D1D63630089FA7A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4318528E1D3488B90049BBB0 /* ObjC.h in Headers */,
+				436C0DB51D1D63630089FA7A /* BirchOutlineiOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		436C0D6F1D1D56D50089FA7A /* BirchOutline */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 436C0D841D1D56D50089FA7A /* Build configuration list for PBXNativeTarget "BirchOutline" */;
+			buildPhases = (
+				436C0D6B1D1D56D50089FA7A /* Sources */,
+				436C0D6C1D1D56D50089FA7A /* Frameworks */,
+				436C0D6D1D1D56D50089FA7A /* Headers */,
+				43E619471D243A97001E3F4D /* Import birchoutline.js dependency if present and changed */,
+				436C0D6E1D1D56D50089FA7A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BirchOutline;
+			productName = BirchOutline;
+			productReference = 436C0D701D1D56D50089FA7A /* BirchOutline.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		436C0D791D1D56D50089FA7A /* BirchOutlineTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 436C0D871D1D56D50089FA7A /* Build configuration list for PBXNativeTarget "BirchOutlineTests" */;
+			buildPhases = (
+				436C0D761D1D56D50089FA7A /* Sources */,
+				436C0D771D1D56D50089FA7A /* Frameworks */,
+				436C0D781D1D56D50089FA7A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				436C0D7D1D1D56D50089FA7A /* PBXTargetDependency */,
+			);
+			name = BirchOutlineTests;
+			productName = BirchOutlineTests;
+			productReference = 436C0D7A1D1D56D50089FA7A /* BirchOutlineTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		436C0DB11D1D63630089FA7A /* BirchOutlineiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 436C0DC31D1D63630089FA7A /* Build configuration list for PBXNativeTarget "BirchOutlineiOS" */;
+			buildPhases = (
+				436C0DAD1D1D63630089FA7A /* Sources */,
+				436C0DAE1D1D63630089FA7A /* Frameworks */,
+				436C0DAF1D1D63630089FA7A /* Headers */,
+				436C0DB01D1D63630089FA7A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BirchOutlineiOS;
+			productName = BirchOutlineiOS;
+			productReference = 436C0DB21D1D63630089FA7A /* BirchOutline.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		436C0DBA1D1D63630089FA7A /* BirchOutlineiOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 436C0DC61D1D63630089FA7A /* Build configuration list for PBXNativeTarget "BirchOutlineiOSTests" */;
+			buildPhases = (
+				436C0DB71D1D63630089FA7A /* Sources */,
+				436C0DB81D1D63630089FA7A /* Frameworks */,
+				436C0DB91D1D63630089FA7A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				436C0DBE1D1D63630089FA7A /* PBXTargetDependency */,
+			);
+			name = BirchOutlineiOSTests;
+			productName = BirchOutlineiOSTests;
+			productReference = 436C0DBB1D1D63630089FA7A /* BirchOutlineiOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		436C0D671D1D56D50089FA7A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 1410;
+				ORGANIZATIONNAME = "Jesse Grosjean";
+				TargetAttributes = {
+					436C0D6F1D1D56D50089FA7A = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 1020;
+					};
+					436C0D791D1D56D50089FA7A = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
+					};
+					436C0DB11D1D63630089FA7A = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
+					};
+					436C0DBA1D1D63630089FA7A = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
+					};
+				};
+			};
+			buildConfigurationList = 436C0D6A1D1D56D50089FA7A /* Build configuration list for PBXProject "BirchOutline" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 436C0D661D1D56D50089FA7A;
+			productRefGroup = 436C0D711D1D56D50089FA7A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				436C0D6F1D1D56D50089FA7A /* BirchOutline */,
+				436C0D791D1D56D50089FA7A /* BirchOutlineTests */,
+				436C0DB11D1D63630089FA7A /* BirchOutlineiOS */,
+				436C0DBA1D1D63630089FA7A /* BirchOutlineiOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		436C0D6E1D1D56D50089FA7A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				435A3C031D38292F00E05ED5 /* OutlineFixture.txt in Resources */,
+				435A3C011D38292F00E05ED5 /* OutlineFixture.bml in Resources */,
+				43E619501D244344001E3F4D /* birchoutline.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		436C0D781D1D56D50089FA7A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		436C0DB01D1D63630089FA7A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				435A3C041D38292F00E05ED5 /* OutlineFixture.txt in Resources */,
+				435A3C021D38292F00E05ED5 /* OutlineFixture.bml in Resources */,
+				43E619511D244344001E3F4D /* birchoutline.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		436C0DB91D1D63630089FA7A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		43E619471D243A97001E3F4D /* Import birchoutline.js dependency if present and changed */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../birch-outline.js/min/birchoutline.js",
+			);
+			name = "Import birchoutline.js dependency if present and changed";
+			outputPaths = (
+				"$(SRCROOT)/Dependencies/birchoutline.js",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -f $SCRIPT_INPUT_FILE_0 ]\nthen\n  cp \"${SCRIPT_INPUT_FILE_0}\" \"${SCRIPT_OUTPUT_FILE_0}\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		436C0D6B1D1D56D50089FA7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43E6193E1D2340B3001E3F4D /* String-Localize.swift in Sources */,
+				4318526C1D32C7C60049BBB0 /* String-Path.swift in Sources */,
+				4300222D1D452DA500E7908D /* ItemPathQueryType.swift in Sources */,
+				436C0DEA1D1D65170089FA7A /* OutlineType.swift in Sources */,
+				436A90C31D2D7C630082CF46 /* DisposableType.swift in Sources */,
+				436C0DE41D1D650C0089FA7A /* BirchScriptContext.swift in Sources */,
+				4318528F1D3488B90049BBB0 /* ObjC.m in Sources */,
+				43B6ADB51D6BA78100ACA66C /* JSContext-GarbageCollection.m in Sources */,
+				436C0DE21D1D65090089FA7A /* ItemType.swift in Sources */,
+				431852681D32A8DE0049BBB0 /* BirchCrossPlatform.swift in Sources */,
+				436C0DE61D1D650F0089FA7A /* JSValue.swift in Sources */,
+				436C0DDE1D1D64D30089FA7A /* BirchOutline.swift in Sources */,
+				433815D61DB69F5700120078 /* DateTime.swift in Sources */,
+				4300222B1D4435AA00E7908D /* MutationType.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		436C0D761D1D56D50089FA7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				436C0DEE1D1D65200089FA7A /* JavaScriptContextTests.swift in Sources */,
+				436C0DEC1D1D651C0089FA7A /* ItemTests.swift in Sources */,
+				436C0DF01D1D65230089FA7A /* OutlineTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		436C0DAD1D1D63630089FA7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43E6193F1D2340B3001E3F4D /* String-Localize.swift in Sources */,
+				4318526D1D32C7C60049BBB0 /* String-Path.swift in Sources */,
+				431852691D32AA7F0049BBB0 /* DisposableType.swift in Sources */,
+				4318526A1D32ABD80049BBB0 /* BirchCrossPlatform.swift in Sources */,
+				436C0DEB1D1D65170089FA7A /* OutlineType.swift in Sources */,
+				431852901D3488B90049BBB0 /* ObjC.m in Sources */,
+				436C0DE51D1D650D0089FA7A /* BirchScriptContext.swift in Sources */,
+				436C0DE31D1D65090089FA7A /* ItemType.swift in Sources */,
+				436C0DE71D1D65100089FA7A /* JSValue.swift in Sources */,
+				436C0DDF1D1D64D40089FA7A /* BirchOutline.swift in Sources */,
+				433815D71DB69F5700120078 /* DateTime.swift in Sources */,
+				4391F82D1D4FEFEA00ED3CF9 /* MutationType.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		436C0DB71D1D63630089FA7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				436C0DEF1D1D65210089FA7A /* JavaScriptContextTests.swift in Sources */,
+				436C0DED1D1D651D0089FA7A /* ItemTests.swift in Sources */,
+				436C0DF11D1D65240089FA7A /* OutlineTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		436C0D7D1D1D56D50089FA7A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 436C0D6F1D1D56D50089FA7A /* BirchOutline */;
+			targetProxy = 436C0D7C1D1D56D50089FA7A /* PBXContainerItemProxy */;
+		};
+		436C0DBE1D1D63630089FA7A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 436C0DB11D1D63630089FA7A /* BirchOutlineiOS */;
+			targetProxy = 436C0DBD1D1D63630089FA7A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		436C0D821D1D56D50089FA7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 3;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		436C0D831D1D56D50089FA7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 3;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		436C0D851D1D56D50089FA7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 3;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = BirchOutline/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hogbaysoftware.BirchOutline;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		436C0D861D1D56D50089FA7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 3;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = BirchOutline/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hogbaysoftware.BirchOutline;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		436C0D881D1D56D50089FA7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				INFOPLIST_FILE = BirchOutlineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hogbaysoftware.BirchOutlineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		436C0D891D1D56D50089FA7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				INFOPLIST_FILE = BirchOutlineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hogbaysoftware.BirchOutlineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		436C0DC41D1D63630089FA7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 3;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = BirchOutlineiOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hogbaysoftware.BirchOutlineiOS;
+				PRODUCT_NAME = BirchOutline;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		436C0DC51D1D63630089FA7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 3;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = BirchOutlineiOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hogbaysoftware.BirchOutlineiOS;
+				PRODUCT_NAME = BirchOutline;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		436C0DC71D1D63630089FA7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = BirchOutlineiOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hogbaysoftware.BirchOutlineiOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		436C0DC81D1D63630089FA7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = BirchOutlineiOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hogbaysoftware.BirchOutlineiOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		436C0D6A1D1D56D50089FA7A /* Build configuration list for PBXProject "BirchOutline" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				436C0D821D1D56D50089FA7A /* Debug */,
+				436C0D831D1D56D50089FA7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		436C0D841D1D56D50089FA7A /* Build configuration list for PBXNativeTarget "BirchOutline" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				436C0D851D1D56D50089FA7A /* Debug */,
+				436C0D861D1D56D50089FA7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		436C0D871D1D56D50089FA7A /* Build configuration list for PBXNativeTarget "BirchOutlineTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				436C0D881D1D56D50089FA7A /* Debug */,
+				436C0D891D1D56D50089FA7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		436C0DC31D1D63630089FA7A /* Build configuration list for PBXNativeTarget "BirchOutlineiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				436C0DC41D1D63630089FA7A /* Debug */,
+				436C0DC51D1D63630089FA7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		436C0DC61D1D63630089FA7A /* Build configuration list for PBXNativeTarget "BirchOutlineiOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				436C0DC71D1D63630089FA7A /* Debug */,
+				436C0DC81D1D63630089FA7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 436C0D671D1D56D50089FA7A /* Project object */;
+}

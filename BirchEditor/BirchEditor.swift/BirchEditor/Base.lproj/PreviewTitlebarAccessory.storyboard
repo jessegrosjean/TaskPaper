@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Preview Titlebar Accessory View Controller-->
+        <scene sceneID="seC-TQ-ncF">
+            <objects>
+                <viewController storyboardIdentifier="Preview Titlebar Accessory View Controller" id="kpJ-ig-b2w" customClass="PreviewTitlebarAccessoryViewController" customModule="TaskPaper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" horizontalHuggingPriority="1000" id="s9N-Ke-a9n">
+                        <rect key="frame" x="0.0" y="0.0" width="113" height="16"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uj2-Ld-8OE">
+                                <rect key="frame" x="0.0" y="0.0" width="103" height="16"/>
+                                <buttonCell key="cell" type="bevel" title="Preview Release" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="bxr-kN-FUE">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <connections>
+                                        <action selector="previewButtonClicked:" target="kpJ-ig-b2w" id="RPE-oZ-w0X"/>
+                                    </connections>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Uj2-Ld-8OE" secondAttribute="bottom" id="QST-mT-7rk"/>
+                            <constraint firstAttribute="trailing" secondItem="Uj2-Ld-8OE" secondAttribute="trailing" constant="10" id="fqk-Na-QgF"/>
+                            <constraint firstItem="Uj2-Ld-8OE" firstAttribute="leading" secondItem="s9N-Ke-a9n" secondAttribute="leading" id="i9S-bb-zX6"/>
+                            <constraint firstItem="Uj2-Ld-8OE" firstAttribute="top" secondItem="s9N-Ke-a9n" secondAttribute="top" id="utq-MK-8Yn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="previewButton" destination="Uj2-Ld-8OE" id="spa-eY-qTr"/>
+                    </connections>
+                </viewController>
+                <customObject id="R2Y-LB-Ff9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="319" y="286"/>
+        </scene>
+    </scenes>
+</document>

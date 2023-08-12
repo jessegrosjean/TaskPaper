@@ -1,0 +1,38 @@
+## Build generated
+/build
+/DerivedData
+
+# Carthage, Keep Build/Mac, ignore everything else
+Carthage/Build/iOS
+Carthage/Build/tvOS
+Carthage/Build/watchOS
+Carthage/Checkouts
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+## Other
+*.moved-aside
+*.xcuserstate
+
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+dist
+min
+node_modules
+lib
+.DS_Store
+npm-debug.log
+*.swp

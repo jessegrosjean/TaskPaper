@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "4D2A25B29DF3044CB7C8F6562FECCA962AD85B3A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "4D2A25B29DF3044CB7C8F6562FECCA962AD85B3A" : 0,
+    "47FB398CF68C166BB012BDFDC409950BF4D7C7C7" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "718DAB93-E647-43D5-B981-7B2E29547B9C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "4D2A25B29DF3044CB7C8F6562FECCA962AD85B3A" : "BirchOutline\/",
+    "47FB398CF68C166BB012BDFDC409950BF4D7C7C7" : "birch-outline\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "BirchOutline",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "BirchOutline.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jessegrosjean\/birch-outline.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "47FB398CF68C166BB012BDFDC409950BF4D7C7C7"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jessegrosjean\/BirchOutline.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4D2A25B29DF3044CB7C8F6562FECCA962AD85B3A"
+    }
+  ]
+}

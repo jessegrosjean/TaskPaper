@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17503.1" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17503.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Outline Editor Split View Controller-->
+        <scene sceneID="vTc-KA-qKx">
+            <objects>
+                <splitViewController storyboardIdentifier="Outline Split View Controller" id="zXg-hz-Kec" customClass="OutlineEditorSplitViewController" customModule="TaskPaper" customModuleProvider="target" sceneMemberID="viewController">
+                    <splitViewItems>
+                        <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="J1j-lk-Tzl"/>
+                        <splitViewItem id="ZaT-lB-FNY"/>
+                    </splitViewItems>
+                    <splitView key="splitView" wantsLayer="YES" autosaveName="" dividerStyle="thin" vertical="YES" id="5tO-w8-Czc" customClass="OutlineEditorSplitView" customModule="TaskPaper" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="zXg-hz-Kec" id="v9W-0R-8za"/>
+                        </connections>
+                    </splitView>
+                    <connections>
+                        <outlet property="outlineEditorSplitViewItem" destination="ZaT-lB-FNY" id="oAL-IU-cl9"/>
+                        <outlet property="sidebarSplitViewItem" destination="J1j-lk-Tzl" id="ykC-gk-7fh"/>
+                        <outlet property="splitView" destination="5tO-w8-Czc" id="nA9-va-kf4"/>
+                        <segue destination="LU4-XZ-UZV" kind="relationship" relationship="splitItems" id="5Iq-gp-Bix"/>
+                        <segue destination="ASa-qm-JQS" kind="relationship" relationship="splitItems" id="xXB-so-uIp"/>
+                    </connections>
+                </splitViewController>
+                <customObject id="QGN-Y2-8iT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-375" y="189"/>
+        </scene>
+        <!--Outline Sidebar View Controller-->
+        <scene sceneID="BkQ-FT-LYL">
+            <objects>
+                <customObject id="4Vk-si-Ldw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <controllerPlaceholder storyboardName="OutlineSidebarView" referencedIdentifier="Outline Sidebar View Controller" id="LU4-XZ-UZV" sceneMemberID="viewController"/>
+            </objects>
+            <point key="canvasLocation" x="-536" y="501"/>
+        </scene>
+        <!--Outline Editor View Controller-->
+        <scene sceneID="yL5-kV-HM8">
+            <objects>
+                <customObject id="he1-bt-8HB" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <controllerPlaceholder storyboardName="OutlineEditorView" referencedIdentifier="Outline Editor View Controller" id="ASa-qm-JQS" sceneMemberID="viewController"/>
+            </objects>
+            <point key="canvasLocation" x="-228" y="501"/>
+        </scene>
+    </scenes>
+</document>

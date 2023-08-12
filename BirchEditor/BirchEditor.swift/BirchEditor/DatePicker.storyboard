@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.13.2"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="mTQ-QJ-JTk">
+            <objects>
+                <windowController storyboardIdentifier="Date Picker Window Controller" id="aEp-8f-s4Z" customClass="DatePickerWindowController" customModule="TaskPaper" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Ea4-as-09a" customClass="PaletteWindow" customModule="TaskPaper" customModuleProvider="target">
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="425" y="461" width="350" height="200"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+                        <connections>
+                            <outlet property="delegate" destination="aEp-8f-s4Z" id="a1k-K6-AQF"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="qzN-v6-HFS" kind="relationship" relationship="window.shadowedContentViewController" id="99u-09-gYW"/>
+                    </connections>
+                </windowController>
+                <customObject id="oPS-eW-XmT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="195" y="86"/>
+        </scene>
+        <!--Date Picker View Controller-->
+        <scene sceneID="qKd-v0-Tcg">
+            <objects>
+                <viewController id="qzN-v6-HFS" customClass="DatePickerViewController" customModule="TaskPaper" customModuleProvider="target" sceneMemberID="viewController">
+                    <visualEffectView key="view" wantsLayer="YES" blendingMode="behindWindow" material="popover" state="followsWindowActiveState" id="Y6S-Kl-Fbs">
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="205"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BZX-OH-E0D">
+                                <rect key="frame" x="6" y="173" width="338" height="24"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="LOCALIZED" id="95I-ra-aW0">
+                                    <font key="font" metaFont="system" size="20"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <outlet property="delegate" destination="qzN-v6-HFS" id="WB9-wE-MBX"/>
+                                </connections>
+                            </textField>
+                            <datePicker horizontalHuggingPriority="1000" verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eeb-Oq-bD1">
+                                <rect key="frame" x="8" y="8" width="139" height="148"/>
+                                <datePickerCell key="cell" alignment="left" drawsBackground="NO" datePickerStyle="clockAndCalendar" id="0FF-Nr-D8V">
+                                    <font key="font" metaFont="system"/>
+                                    <date key="date" timeIntervalSinceReferenceDate="-595929600">
+                                        <!--1982-02-12 16:00:00 +0000-->
+                                    </date>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                </datePickerCell>
+                                <connections>
+                                    <action selector="pickedCalendar:" target="qzN-v6-HFS" id="8HQ-d8-lQh"/>
+                                </connections>
+                            </datePicker>
+                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="GEa-vy-5aV">
+                                <rect key="frame" x="0.0" y="162" width="350" height="5"/>
+                            </box>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zM8-RD-MOD">
+                                <rect key="frame" x="162" y="74" width="182" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="truncatingTail" truncatesLastVisibleLine="YES" sendsActionOnEndEditing="YES" alignment="center" title="LOCALIZED" id="077-w6-9mf">
+                                    <font key="font" metaFont="systemLight" size="13"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="eu3-iy-boe">
+                                <rect key="frame" x="153" y="0.0" width="5" height="165"/>
+                            </box>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="zM8-RD-MOD" firstAttribute="leading" secondItem="eu3-iy-boe" secondAttribute="trailing" constant="8" id="A3T-yr-xEB"/>
+                            <constraint firstItem="GEa-vy-5aV" firstAttribute="leading" secondItem="Y6S-Kl-Fbs" secondAttribute="leading" id="OXv-Rw-Az8"/>
+                            <constraint firstItem="BZX-OH-E0D" firstAttribute="leading" secondItem="Y6S-Kl-Fbs" secondAttribute="leading" constant="8" id="RXF-OW-rcW"/>
+                            <constraint firstAttribute="trailing" secondItem="BZX-OH-E0D" secondAttribute="trailing" constant="8" id="RmF-20-94J"/>
+                            <constraint firstItem="GEa-vy-5aV" firstAttribute="top" secondItem="BZX-OH-E0D" secondAttribute="bottom" constant="8" id="SaI-yN-9lf"/>
+                            <constraint firstAttribute="bottom" secondItem="eu3-iy-boe" secondAttribute="bottom" id="VXQ-qI-87P"/>
+                            <constraint firstAttribute="bottom" secondItem="Eeb-Oq-bD1" secondAttribute="bottom" constant="8" id="bUP-tD-wfg"/>
+                            <constraint firstItem="eu3-iy-boe" firstAttribute="leading" secondItem="Eeb-Oq-bD1" secondAttribute="trailing" constant="8" id="gZm-CP-SyM"/>
+                            <constraint firstItem="eu3-iy-boe" firstAttribute="top" secondItem="Y6S-Kl-Fbs" secondAttribute="top" constant="40" id="gqi-py-cSM"/>
+                            <constraint firstItem="BZX-OH-E0D" firstAttribute="top" secondItem="Y6S-Kl-Fbs" secondAttribute="top" constant="8" id="poV-AK-CiM"/>
+                            <constraint firstItem="Eeb-Oq-bD1" firstAttribute="leading" secondItem="Y6S-Kl-Fbs" secondAttribute="leading" constant="8" id="qhj-vX-cu1"/>
+                            <constraint firstAttribute="trailing" secondItem="zM8-RD-MOD" secondAttribute="trailing" constant="8" id="rK1-O4-h6u"/>
+                            <constraint firstItem="zM8-RD-MOD" firstAttribute="centerY" secondItem="Eeb-Oq-bD1" secondAttribute="centerY" id="vXn-b4-Ovz"/>
+                            <constraint firstAttribute="trailing" secondItem="GEa-vy-5aV" secondAttribute="trailing" id="wSp-rw-e0k"/>
+                        </constraints>
+                    </visualEffectView>
+                    <connections>
+                        <outlet property="datePicker" destination="Eeb-Oq-bD1" id="YS4-pN-VPT"/>
+                        <outlet property="dateTextField" destination="BZX-OH-E0D" id="MIr-2w-rTL"/>
+                        <outlet property="messageTextField" destination="zM8-RD-MOD" id="EUB-kx-5Bl"/>
+                    </connections>
+                </viewController>
+                <customObject id="yk9-xA-Ubw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="195" y="483.5"/>
+        </scene>
+    </scenes>
+</document>

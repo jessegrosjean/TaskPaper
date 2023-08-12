@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/jessegrosjean/BirchOutline
+	branch = master
+	commit = a965c079a604312c06657fae81993ef8d965410f
+	parent = 8afaf4228ad57530e6a4be708fdb32856d4d44b2
+	cmdver = 0.3.0

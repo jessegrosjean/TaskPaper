@@ -1,0 +1,19 @@
+{
+  "Mac" : [
+    {
+      "name" : "Paddle",
+      "hash" : "927a413d40279dcc4c363e8fe7cf7fef0fe9d4b91d75ed060f2fadce632659a0",
+      "linking" : "dynamic"
+    }
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "v4.4.0",
+  "iOS" : [
+
+  ]
+}

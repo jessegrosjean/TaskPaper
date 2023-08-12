@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Outline Editor View Controller-->
+        <scene sceneID="Q5H-gC-UbO">
+            <objects>
+                <viewController storyboardIdentifier="Outline Editor View Controller" id="1Ox-Br-tFi" customClass="OutlineEditorViewController" customModule="TaskPaper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" wantsLayer="YES" id="4XX-96-WX8">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="500"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4bV-5I-YZc">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="500"/>
+                                <subviews>
+                                    <containerView placeholderIntrinsicWidth="450" placeholderIntrinsicHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tGv-hR-n7J">
+                                        <rect key="frame" x="0.0" y="278" width="450" height="222"/>
+                                        <connections>
+                                            <segue destination="fR6-Pv-GUT" kind="embed" id="gya-Yw-Hfy"/>
+                                        </connections>
+                                    </containerView>
+                                    <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUq-19-0a6">
+                                        <rect key="frame" x="0.0" y="0.0" width="450" height="278"/>
+                                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="G0R-FR-Amy" customClass="OutlineEditorTextClipView" customModule="TaskPaper" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="278"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="Es9-DR-mr6" customClass="OutlineEditorView" customModule="TaskPaper" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="450" height="278"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <gestureRecognizers>
+                                                        <gestureRecognizer delaysPrimaryMouseButtonEvents="YES" id="7mJ-o0-IEC" customClass="OutlineEditorHandleDragStartGestureRecognizer" customModule="TaskPaper" customModuleProvider="target">
+                                                            <connections>
+                                                                <action selector="handleDragStart:" target="1Ox-Br-tFi" id="R5v-1G-u86"/>
+                                                                <outlet property="delegate" destination="1Ox-Br-tFi" id="K1n-kr-alv"/>
+                                                            </connections>
+                                                        </gestureRecognizer>
+                                                        <gestureRecognizer delaysPrimaryMouseButtonEvents="YES" id="j6b-8R-8qg" customClass="OutlineEditorHandleClickGestureRecognizer" customModule="TaskPaper" customModuleProvider="target">
+                                                            <connections>
+                                                                <action selector="handleClick:" target="1Ox-Br-tFi" id="YNH-uB-UjU"/>
+                                                                <outlet property="delegate" destination="1Ox-Br-tFi" id="UhY-eN-vt6"/>
+                                                            </connections>
+                                                        </gestureRecognizer>
+                                                    </gestureRecognizers>
+                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    <size key="minSize" width="450" height="278"/>
+                                                    <size key="maxSize" width="463" height="10000000"/>
+                                                    <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                </textView>
+                                            </subviews>
+                                        </clipView>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="edO-cc-Z6H"/>
+                                        </constraints>
+                                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="67y-sC-Qtg">
+                                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="ian-l3-8YK">
+                                            <rect key="frame" x="434" y="0.0" width="16" height="278"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                    </scrollView>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="4bV-5I-YZc" firstAttribute="leading" secondItem="4XX-96-WX8" secondAttribute="leading" id="13z-kd-5ZO"/>
+                            <constraint firstAttribute="bottom" secondItem="4bV-5I-YZc" secondAttribute="bottom" id="1Jn-aO-1NG"/>
+                            <constraint firstAttribute="trailing" secondItem="4bV-5I-YZc" secondAttribute="trailing" id="SKU-Wa-puA"/>
+                            <constraint firstItem="4bV-5I-YZc" firstAttribute="top" secondItem="4XX-96-WX8" secondAttribute="top" id="Ugr-Qk-Lqn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="handleClickGestureRecognizer" destination="j6b-8R-8qg" id="mYC-6W-BoL"/>
+                        <outlet property="handleDragGestureRecognizer" destination="7mJ-o0-IEC" id="6p9-T7-IDu"/>
+                        <outlet property="outlineEditorView" destination="Es9-DR-mr6" id="bNe-ND-xDa"/>
+                        <outlet property="searchToolbarContainerView" destination="tGv-hR-n7J" id="DgX-8r-uDT"/>
+                    </connections>
+                </viewController>
+                <customObject id="mwZ-uR-ASk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-340" y="170"/>
+        </scene>
+        <!--SearchbarView-->
+        <scene sceneID="sIT-2a-201">
+            <objects>
+                <customObject id="zkY-V0-pOA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <controllerPlaceholder storyboardName="SearchbarView" id="fR6-Pv-GUT" sceneMemberID="viewController"/>
+            </objects>
+            <point key="canvasLocation" x="-340" y="476"/>
+        </scene>
+    </scenes>
+</document>

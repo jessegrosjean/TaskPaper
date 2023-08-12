@@ -1,0 +1,19 @@
+{
+  "Mac" : [
+    {
+      "name" : "Sparkle",
+      "hash" : "bab8718d80deea550578b1b7fa4b1243cb39cf52455ec99da9d3c600e08afc93",
+      "linking" : "dynamic"
+    }
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "1.27.1",
+  "iOS" : [
+
+  ]
+}

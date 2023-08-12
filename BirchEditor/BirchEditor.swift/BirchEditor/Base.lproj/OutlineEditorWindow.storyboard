@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="R2V-B0-nI4">
+            <objects>
+                <windowController storyboardIdentifier="Outline Editor Window Controller" id="jGA-0Y-lOj" customClass="OutlineEditorWindowController" customModule="TaskPaper" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" identifier="OutlineEditorWindow" allowsToolTipsWhenApplicationIsInactive="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="OutlineWindow" animationBehavior="default" tabbingIdentifier="OutlineEditorWindow" id="Ckk-yw-fiv" customClass="OutlineEditorWindow" customModule="TaskPaper" customModuleProvider="target">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="450" height="300"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+                        <connections>
+                            <outlet property="delegate" destination="jGA-0Y-lOj" id="jKl-ed-iFZ"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="lCn-yd-oJ2" kind="relationship" relationship="window.shadowedContentViewController" id="IfA-V3-Fe1"/>
+                    </connections>
+                </windowController>
+                <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="402" y="234"/>
+        </scene>
+        <!--Outline Split View Controller-->
+        <scene sceneID="8YR-tm-OFv">
+            <objects>
+                <customObject id="NiE-hr-zlT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <controllerPlaceholder storyboardName="OutlineSplitView" referencedIdentifier="Outline Split View Controller" id="lCn-yd-oJ2" sceneMemberID="viewController"/>
+            </objects>
+            <point key="canvasLocation" x="403" y="575"/>
+        </scene>
+    </scenes>
+</document>

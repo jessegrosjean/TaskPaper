@@ -1,0 +1,11 @@
+{
+  "commitish" : "0.7.4",
+  "Mac" : [
+    {
+      "hash" : "027d714d58cf46bd452b37b80fe32a51a964bda8bf5982756b290c9b765c22f5",
+      "name" : "AppReceiptValidator",
+      "linking" : "dynamic",
+      "swiftToolchainVersion" : "5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)"
+    }
+  ]
+}

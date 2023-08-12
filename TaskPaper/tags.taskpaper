@@ -1,0 +1,4 @@
+This is a configuration outline. Use it to store tags that you want to show (or always exclude) in the sidebar for all TaskPaper documents.
+
+Include Tags: @due @start @today @done
+Exclude Tags: @search

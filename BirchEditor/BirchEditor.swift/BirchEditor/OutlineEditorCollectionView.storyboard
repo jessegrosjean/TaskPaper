@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.13.2"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Outline Editor Collection View Controller-->
+        <scene sceneID="tfC-Qq-L62">
+            <objects>
+                <viewController storyboardIdentifier="Outline Editor Collection View Controller" id="OyO-7E-VFy" customClass="OutlineEditorCollectionViewController" customModule="TaskPaper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="GGP-Fp-WOy" customClass="OutlineEditorCollectionView" customModule="TaskPaper" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView wantsLayer="YES" borderType="line" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKu-K6-ycG">
+                                <rect key="frame" x="20" y="20" width="410" height="260"/>
+                                <clipView key="contentView" id="GVM-h9-udh">
+                                    <rect key="frame" x="1" y="1" width="408" height="258"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <collectionView id="86Y-vh-1wq">
+                                            <rect key="frame" x="0.0" y="0.0" width="408" height="258"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="NXt-EJ-NLL"/>
+                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <outlet property="dataSource" destination="OyO-7E-VFy" id="Jz5-dO-0SV"/>
+                                                <outlet property="delegate" destination="OyO-7E-VFy" id="ZqI-mh-7Y5"/>
+                                            </connections>
+                                        </collectionView>
+                                    </subviews>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="g4s-dA-gzv">
+                                    <rect key="frame" x="1" y="283" width="408" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="XOv-de-VFM">
+                                    <rect key="frame" x="393" y="1" width="16" height="258"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="mKu-K6-ycG" firstAttribute="top" secondItem="GGP-Fp-WOy" secondAttribute="top" constant="20" id="06t-qa-b98"/>
+                            <constraint firstAttribute="bottom" secondItem="mKu-K6-ycG" secondAttribute="bottom" constant="20" id="MKz-t4-aZT"/>
+                            <constraint firstAttribute="trailing" secondItem="mKu-K6-ycG" secondAttribute="trailing" constant="20" id="Z2x-IF-mpa"/>
+                            <constraint firstItem="mKu-K6-ycG" firstAttribute="leading" secondItem="GGP-Fp-WOy" secondAttribute="leading" constant="20" id="gAQ-RS-ofh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="86Y-vh-1wq" id="fOc-7T-j0S"/>
+                    </connections>
+                </viewController>
+                <customObject id="n8I-Uk-0FM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="93" y="37"/>
+        </scene>
+    </scenes>
+</document>

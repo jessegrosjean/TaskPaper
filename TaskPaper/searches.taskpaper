@@ -1,0 +1,5 @@
+This is a configuration outline. Use it to store searches that you want to show in the sidebar for all TaskPaper documents.
+
+Searches:
+    Today @search(@today union @due <[d] tomorrow)
+    Not Done @search(not @done except @done//*)

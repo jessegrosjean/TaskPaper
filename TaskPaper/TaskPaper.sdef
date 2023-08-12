@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+
+<!-- declare the namespace for using XInclude so we can include the standard suite -->
+<dictionary xmlns:xi="http://www.w3.org/2003/XInclude">
+	
+	<!-- use XInclude to include the standard suite -->
+	<xi:include href="file:///System/Library/ScriptingDefinitions/CocoaStandard.sdef" xpointer="xpointer(/dictionary/suite)"/>
+	
+	<!--
+	 Birch Scripting Suite
+	 -->
+	
+	<suite name="TaskPaper Suite" code="BRsu" description="See 'Users Guide > Advanced Features > Creating Scripts">
+		
+		<command name="evaluate" code="BRsuevjS" description="Evaluate JavaScript in the editor.">
+			<direct-parameter type="document" />
+			<parameter name="script" code="BRjs" type="text" optional="no" description="Javascript function to evaluate. Results will be converted to AppleScript and returned by this command.">
+				<cocoa key="Script"/>
+			</parameter>
+			<parameter name="with options" code="BRop" type="any" optional="yes" description="Options to pass in when evaluating script. Pass in AppleScript string, number, array, or record and it will be converted to appropriate JavaScript object and passed into your script function.">
+				<cocoa key="WithOptions"/>
+			</parameter>
+			<result description="Results of evaluating the script after converting those JavaScript results (string, number, object, array) to appropriate AppleScript structure. ">
+				<type type="any" />
+			</result>
+		</command>
+				
+		<class-extension extends="document">
+			<cocoa class="TaskPaper.TaskPaperDocument" />
+			<contents name="text contents" code="BRtc" type="text" description="The text of document." />
+			<responds-to command="evaluate">
+				<cocoa method="handleEvaluateScriptCommand:"/>
+			</responds-to>
+		</class-extension>
+		
+	</suite>
+	
+</dictionary>
