@@ -52636,9 +52636,10 @@ var bircheditor =
 	  };
 	
 	  OutlineEditor.prototype.getComputedStyleKeyPathForItem = function(item) {
-	    var attributes, ref2;
+	    var attributes, ref2, ref3, ref4;
 	    attributes = Object.assign({}, (ref2 = item.attributes) != null ? ref2 : {});
 	    attributes['depth'] = item.depth;
+	    attributes['focusDepth'] = item.depth - ((ref3 = (ref4 = this.focusedItem) != null ? ref4.depth : void 0) != null ? ref3 : 0);
 	    attributes['bodyContent'] = item.bodyContentString;
 	    if (item === this.focusedItem) {
 	      attributes['focused'] = 'true';
@@ -53008,8 +53009,13 @@ var bircheditor =
 	      anchorItem = headItem;
 	      anchorOffset = headOffset;
 	    }
-	    headOffset = Math.min(headOffset, headItem.bodyString.length + 1);
-	    anchorOffset = Math.min(anchorOffset, anchorItem.bodyString.length + 1);
+	    if (headItem === anchorItem && headOffset === anchorOffset) {
+	      headOffset = Math.min(headOffset, headItem.bodyString.length);
+	      anchorOffset = Math.min(anchorOffset, anchorItem.bodyString.length);
+	    } else {
+	      headOffset = Math.min(headOffset, headItem.bodyString.length + 1);
+	      anchorOffset = Math.min(anchorOffset, anchorItem.bodyString.length + 1);
+	    }
 	    focusLocation = (ref2 = this.getLocationForItemOffset(headItem, headOffset)) != null ? ref2 : 0;
 	    anchorLocation = (ref3 = this.getLocationForItemOffset(anchorItem, anchorOffset)) != null ? ref3 : focusLocation;
 	    return this.moveSelectionToRange(focusLocation, anchorLocation);

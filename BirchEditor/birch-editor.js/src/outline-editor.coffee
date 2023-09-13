@@ -564,6 +564,7 @@ class OutlineEditor
   getComputedStyleKeyPathForItem: (item) ->
     attributes = Object.assign({}, item.attributes ? {})
     attributes['depth'] = item.depth
+    attributes['focusDepth'] = item.depth - (@focusedItem?.depth ? 0)
     attributes['bodyContent'] = item.bodyContentString
     if item is @focusedItem
       attributes['focused'] = 'true'
@@ -849,8 +850,12 @@ class OutlineEditor
       anchorItem = headItem
       anchorOffset = headOffset
 
-    headOffset = Math.min(headOffset, headItem.bodyString.length + 1)
-    anchorOffset = Math.min(anchorOffset, anchorItem.bodyString.length + 1)
+    if headItem is anchorItem and headOffset is anchorOffset
+      headOffset = Math.min(headOffset, headItem.bodyString.length)
+      anchorOffset = Math.min(anchorOffset, anchorItem.bodyString.length)
+    else
+      headOffset = Math.min(headOffset, headItem.bodyString.length + 1)
+      anchorOffset = Math.min(anchorOffset, anchorItem.bodyString.length + 1)
 
     focusLocation = @getLocationForItemOffset(headItem, headOffset) ? 0
     anchorLocation = @getLocationForItemOffset(anchorItem, anchorOffset) ? focusLocation
