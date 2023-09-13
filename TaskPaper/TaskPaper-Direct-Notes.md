@@ -1,3 +1,3 @@
-TaskPaper 3.9.1
+TaskPaper 3.9.2
 
-- Fixed sidebar search selections and tab titles when restoring a window
+- Fixed text caret moving to next line when remove tags
