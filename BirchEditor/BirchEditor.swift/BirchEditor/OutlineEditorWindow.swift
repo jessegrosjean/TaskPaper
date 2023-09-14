@@ -9,6 +9,7 @@
 import Foundation
 
 var TabbedWindowsKey = "tabbedWindows"
+var tabbedWindowsContext = malloc(1)!
 
 extension Notification.Name {
     static let isTabbedWindowDidChange = Notification.Name("isTabbedWindowDidChange")
@@ -19,7 +20,7 @@ class OutlineEditorWindow: NSWindowTabbedBase {
 
     override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing bufferingType: NSWindow.BackingStoreType, defer flag: Bool) {
         super.init(contentRect: contentRect, styleMask: style, backing: bufferingType, defer: flag)
-        addObserver(self, forKeyPath: TabbedWindowsKey, options: [], context: &TabbedWindowsKey)
+        addObserver(self, forKeyPath: TabbedWindowsKey, options: [], context: tabbedWindowsContext)
         if #available(OSX 10.12, *) {
             DispatchQueue.main.async { [weak self] in
                 self?.lastTabbedWindows = self?.tabbedWindows
@@ -31,7 +32,7 @@ class OutlineEditorWindow: NSWindowTabbedBase {
     }
 
     deinit {
-        removeObserver(self, forKeyPath: TabbedWindowsKey, context: &TabbedWindowsKey)
+        removeObserver(self, forKeyPath: TabbedWindowsKey, context: tabbedWindowsContext)
     }
 
     var isFloatingWindow: Bool {
@@ -53,7 +54,7 @@ class OutlineEditorWindow: NSWindowTabbedBase {
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        if context == &TabbedWindowsKey {
+        if context == tabbedWindowsContext {
             let last = lastTabbedWindows
             DispatchQueue.main.async {
                 if let windows = last {

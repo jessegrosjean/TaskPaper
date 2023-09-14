@@ -5,8 +5,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/MacPaw/Setapp-framework.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "f04e502c01c29715a5c89e7ae0d44c09fcca3dc4"
+        "revision" : "b0f5c4875a6c5256364fcfe97ce207517bdfb0a6",
+        "version" : "3.4.0"
+      }
+    },
+    {
+      "identity" : "sparkle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparkle-project/Sparkle",
+      "state" : {
+        "revision" : "87e4fcbac39912f9cdb9a9acf205cad60e1ca3bc",
+        "version" : "2.4.2"
       }
     }
   ],

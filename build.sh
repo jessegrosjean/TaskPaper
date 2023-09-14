@@ -88,7 +88,7 @@ function buildApp() {
     local SETAPP_INFOPLIST_FILE="./$APP_NAME/$APP_NAME-Setapp-Info.plist"
 
     # Plist extractions
-    local SHORT_VERSION_STRING=$(xcodebuild -project "./Birch.xcodeproj" -scheme "$APP_NAME" -showBuildSettings | grep "MARKETING_VERSION" | sed 's/[ ]*MARKETING_VERSION = //')
+    local SHORT_VERSION_STRING=$(xcodebuild -project "./TaskPaper.xcodeproj" -scheme "$APP_NAME" -showBuildSettings | grep "MARKETING_VERSION" | sed 's/[ ]*MARKETING_VERSION = //')
     local SHORT_VERSION_STRING_PREVIEW="$SHORT_VERSION_STRING Preview"
     local BUNDLE_VERSION=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "${INFOPLIST_FILE}")
     local PRODUCT_NAME="$APP_NAME-$SHORT_VERSION_STRING"
@@ -116,7 +116,7 @@ function buildApp() {
     open "$RELEASE_CANDIDATE_FOLDER"
 
     # Package Direct Release
-    xcodebuild -project "./Birch.xcodeproj" -scheme "$APP_NAME Direct" -archivePath "build/$APP_NAME" clean archive
+    xcodebuild -project "./TaskPaper.xcodeproj" -scheme "$APP_NAME Direct" -archivePath "build/$APP_NAME" clean archive
     mv "build/$APP_NAME.xcarchive/dSYMs" "$RELEASE_CANDIDATE_FOLDER/Direct-dSYMs"
     packageDMG $APP_NAME $PRODUCT_NAME $BUNDLE_VERSION $SHORT_VERSION_STRING "$APP_NAME.dmg"
     local MIN_SYSTEM_VERSION=$(/usr/libexec/PlistBuddy -c "Print :LSMinimumSystemVersion" "build/$APP_NAME.xcarchive/Products/Applications/$APP_NAME.app/Contents/Info.plist")
@@ -125,7 +125,7 @@ function buildApp() {
 
     # Package Direct Preview Release
     /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString \"$SHORT_VERSION_STRING_PREVIEW\"" "${PADDLE_INFOPLIST_FILE}"
-    xcodebuild -project "./Birch.xcodeproj" -scheme "$APP_NAME Direct" -archivePath "build/$APP_NAME" clean archive
+    xcodebuild -project "./TaskPaper.xcodeproj" -scheme "$APP_NAME Direct" -archivePath "build/$APP_NAME" clean archive
     cp "build/$APP_NAME.xcarchive/dSYMs" "$RELEASE_CANDIDATE_FOLDER/Preview-dSYMs"
     /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString \"$SHORT_VERSION_STRING\"" "${PADDLE_INFOPLIST_FILE}"
     packageDMG $APP_NAME "$PRODUCT_NAME-Preview" $BUNDLE_VERSION "$SHORT_VERSION_STRING Preview" "$APP_NAME-Preview.dmg"
@@ -133,11 +133,11 @@ function buildApp() {
     createFeed $APP_NAME "$PRODUCT_NAME-Preview" $BUNDLE_VERSION $SHORT_VERSION_STRING "$APP_NAME-Preview.dmg" "$APP_NAME-Preview.rss" $MIN_SYSTEM_VERSION
 
     # App Store Build, archived to Xcode location
-    xcodebuild -project "./Birch.xcodeproj" -scheme "$APP_NAME" clean archive
+    xcodebuild -project "./TaskPaper.xcodeproj" -scheme "$APP_NAME" clean archive
 
     # Package Setapp Release
     mkdir "$RELEASE_CANDIDATE_FOLDER/Setapp"
-    xcodebuild -project "./Birch.xcodeproj" -scheme "$APP_NAME Setapp" -archivePath "build/$APP_NAME-Setapp" clean archive
+    xcodebuild -project "./TaskPaper.xcodeproj" -scheme "$APP_NAME Setapp" -archivePath "build/$APP_NAME-Setapp" clean archive
     xcodebuild -exportArchive -exportOptionsPlist "./$APP_NAME/ExportOptions-direct.plist" -archivePath "build/$APP_NAME-Setapp.xcarchive" -exportPath "./build/"
     codesign --timestamp --options runtime --entitlements "./$APP_NAME/$APP_NAME-Direct.entitlements" -f -s "Developer ID Application: Jesse Grosjean" "./build/$APP_NAME.app"
     cp "build/$APP_NAME-Setapp.xcarchive/dSYMs" "$RELEASE_CANDIDATE_FOLDER/Setapp/dSYMs"
