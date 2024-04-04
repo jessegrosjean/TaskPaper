@@ -212,7 +212,8 @@ class OutlineEditorLayoutManager: NSLayoutManager {
 
                         if handleColor != nil || handleBorderColor != nil {
                             if let lastVisibleDescendent = outlineEditorTextStorage.storageItemAtIndex(each.location + each.length - 1) {
-                                let topHandleRect = ancestor.itemGeometry(self).handleRect
+                                let itemGeometry = ancestor.itemGeometry(self)
+                                let topHandleRect = itemGeometry.handleRect
 
                                 let x = NSMidX(topHandleRect) + -0.5 + origin.x
                                 let y = NSMidY(topHandleRect) + (handleSize / 2.0) + origin.y

@@ -910,13 +910,13 @@ class OutlineEditorView: NSTextView {
 
             if let dropTargetPick = dropTargetStorageItemPick {
                 let geometry = dropTargetPick.storageItemPick.storageItem.itemGeometry(layoutManager!)
-                var dropTargetIndicatorRect = centerScanRect(geometry.itemRect.rectByTranslating(textContainerOrigin))
+                var dropTargetIndicatorRect = centerScanRect(geometry.itemUsedRect.rectByTranslating(textContainerOrigin))
 
                 switch dropTargetPick.dropLocation {
                 case .on:
                     break
                 case .above:
-                    dropTargetIndicatorRect.size.height = 0
+                    dropTargetIndicatorRect.size.height = NSMinY(dropTargetIndicatorRect)
                 case .below:
                     dropTargetIndicatorRect.origin.y = NSMaxY(dropTargetIndicatorRect)
                     dropTargetIndicatorRect.size.height = 0

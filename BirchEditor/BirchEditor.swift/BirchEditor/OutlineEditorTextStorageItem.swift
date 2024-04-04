@@ -23,6 +23,7 @@ public let SharedHandlePath = NSBezierPath()
 
 public struct ItemGeometry {
     let itemRect: NSRect
+    let itemUsedRect: NSRect
     let handleRect: NSRect
 }
 
@@ -131,20 +132,26 @@ public struct OutlineEditorTextStorageItem {
         let endGlyphIndex = layoutManager.glyphIndexForCharacter(at: max(0, NSMaxRange(range) - 1))
         var lineFragmentGlyphRange = NSMakeRange(0, 0)
         let lineFragmentRect = layoutManager.lineFragmentRect(forGlyphAt: startGlyphIndex, effectiveRange: &lineFragmentGlyphRange)
-        var handleRect = NSMakeRect(lineFragmentRect.origin.x - itemIndent, lineFragmentRect.origin.y, itemIndent, lineFragmentRect.size.height)
+        let lineFragmentUsedRect = layoutManager.lineFragmentUsedRect(forGlyphAt: startGlyphIndex, effectiveRange: nil)
+        var handleRect = NSMakeRect(lineFragmentUsedRect.origin.x - itemIndent, lineFragmentUsedRect.origin.y, itemIndent, lineFragmentUsedRect.size.height)
+
         var itemRect = lineFragmentRect
+        var itemUsedRect = lineFragmentUsedRect
 
         var location = NSMaxRange(lineFragmentGlyphRange)
         while location <= endGlyphIndex {
             itemRect = itemRect.union(layoutManager.lineFragmentRect(forGlyphAt: location, effectiveRange: &lineFragmentGlyphRange))
+            itemUsedRect = itemUsedRect.union(layoutManager.lineFragmentUsedRect(forGlyphAt: location, effectiveRange: nil))
             location = NSMaxRange(lineFragmentGlyphRange)
         }
 
         itemRect.origin.x += lineFragmentPadding
         itemRect.size.width -= (lineFragmentPadding * 2)
+        itemUsedRect.origin.x += lineFragmentPadding
+        itemUsedRect.size.width -= (lineFragmentPadding * 2)
         handleRect.origin.x += lineFragmentPadding
 
-        return ItemGeometry(itemRect: itemRect, handleRect: handleRect)
+        return ItemGeometry(itemRect: itemRect, itemUsedRect: itemUsedRect, handleRect: handleRect)
     }
 
     func itemBodySnapshot(_ layoutManager: OutlineEditorLayoutManager) -> (image: NSImage, bounds: NSRect) {

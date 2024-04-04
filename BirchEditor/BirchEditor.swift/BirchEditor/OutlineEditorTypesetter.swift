@@ -39,6 +39,7 @@ class OutlineEditorTypesetter: NSATSTypesetter {
                                       lineSpacing: CGFloat,
                                       paragraphSpacingBefore: CGFloat,
                                       paragraphSpacingAfter: CGFloat) {
+        
         if let tc = currentTextContainer as? OutlineEditorTextContainer {
             tc.itemIndentLevel = currentTextStorageItem?.indentLevel ?? 1
         }
