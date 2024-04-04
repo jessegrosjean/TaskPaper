@@ -174,6 +174,8 @@ typedef NS_ENUM(NSInteger, PADErrorCode) {
     PADErrorNoLicenseCode = -129,
     
     PADErrorNoActivations = -130,
+    
+    PADErrorChargebackFound = -131,
 };
 
 /**
@@ -238,5 +240,10 @@ typedef NS_ENUM(NSInteger, PADAPIErrorCode) {
     /**
      * @discussion Specifies that the machine identifier does not match the activation
      */
-    PADAPIErrorUUIDNotMached = 144
+    PADAPIErrorUUIDNotMached = 144,
+    
+    /**
+     * @discussion Specifies that the order for the license has received a chargeback
+     */
+    PADAPIErrorChargebackFound = 146
 };
