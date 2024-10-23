@@ -189,9 +189,6 @@ open class StyleSheet {
                         allValues[.appearance] = nil
                     }
 
-                case "caret-width":
-                    allValues[.caretWidth] = value
-
                 case "guide-line-width":
                     allValues[.guideLineWidth] = value
 

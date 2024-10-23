@@ -108,7 +108,6 @@ open class OutlineEditorViewController: NSViewController, OutlineEditorHolderTyp
                 outlineEditorView.backgroundColor = computedStyle.attributedStringValues[.backgroundColor] as? NSColor ?? NSColor.white
                 outlineEditorView.insertionPointColor = computedStyle.allValues[.caretColor] as? NSColor ?? NSColor.black
                 outlineEditorView.dropTargetIndicatorColor = computedStyle.allValues[.dropIndicatorColor] as? NSColor ?? NSColor.black
-                outlineEditorView.insertionPointWidth = computedStyle.allValues[.caretWidth] as? CGFloat ?? 2
                 outlineEditorView.defaultParagraphStyle = computedStyle.attributedStringValues[.paragraphStyle] as? NSParagraphStyle ?? NSParagraphStyle.default
                 outlineEditorView.itemIndentPerLevel = CGFloat(outlineEditor?.computedItemIndent ?? 17)
                 outlineEditorView.uiScale = computedStyle.allValues[.uiScale] as? CGFloat ?? 1

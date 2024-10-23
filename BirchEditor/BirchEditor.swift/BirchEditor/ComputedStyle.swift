@@ -28,7 +28,6 @@ extension NSAttributedString.Key {
     static let caretColor = NSAttributedString.Key("caretColor")
 
     static let dropIndicatorColor = NSAttributedString.Key("dropIndicatorColor")
-    static let caretWidth = NSAttributedString.Key("caretWidth")
     static let uiScale = NSAttributedString.Key("uiScale")
     static let topPaddingPercent = NSAttributedString.Key("topPaddingPercent")
     static let bottomPaddingPercent = NSAttributedString.Key("bottomPaddingPercent")

@@ -96,7 +96,7 @@ function buildApp() {
 
     # Plist version update and sync
     #local BUNDLE_VERSION=$(($BUNDLE_VERSION + 1))
-    local BUNDLE_VERSION=481
+    local BUNDLE_VERSION=482
     /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUNDLE_VERSION" "${INFOPLIST_FILE}"
     /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUNDLE_VERSION" "${PADDLE_INFOPLIST_FILE}"
     /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUNDLE_VERSION" "${SETAPP_INFOPLIST_FILE}"

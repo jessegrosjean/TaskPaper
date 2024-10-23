@@ -196,44 +196,6 @@ class OutlineEditorView: NSTextView {
         }
     }
 
-    // MARK: - Insertion Point
-
-    var insertionPointWidth: CGFloat = 2
-
-    func cursorRect(_ defaultRect: NSRect) -> NSRect {
-        // Always calculate our own cursor rects. Very occasionally text view gets into state where
-        // text where cursor should be is visible on screen. But cursor isn't visible. Seems NSTextView
-        // caches cursor rect... and in that problem case the cached location is offscreen for some reason.
-        // so cursor is being drawn, but offscreen. Seems to fix problem to alway calculate cursor position
-        // dynamically like this.
-        var rect = rectForRange(selectedRange())
-        if NSEqualSizes(rect.size, NSZeroSize) {
-            // Amended, don't ALWYAs caulcaute our own rects. Sometimes (such as around hebrew character ג) rectForRange
-            // returns rect with zero size, but proper location. So if get empty rect go back to default and just make wider
-            rect = defaultRect
-            rect.size.width = 0
-        }
-        rect.size.width = insertionPointWidth
-        rect.origin.x -= insertionPointWidth / 2.0
-        rect = centerScanRect(rect)
-        return rect
-    }
-
-    override func drawInsertionPoint(in rect: NSRect, color: NSColor, turnedOn flag: Bool) {
-        super.drawInsertionPoint(in: cursorRect(rect), color: color, turnedOn: flag)
-    }
-
-    override func setNeedsDisplay(_ rect: NSRect, avoidAdditionalLayout flag: Bool) {
-        // Extend hight so that opposite split cursor is redrawn
-        var r = NSInsetRect(rect, 0, -rect.size.height * 2)
-
-        // Extend to view boundaries so that item bullets are redrawn (and opposite split cursor)
-        r.origin.x = 0
-        r.size.width = bounds.size.width
-        r = centerScanRect(r)
-        super.setNeedsDisplay(r, avoidAdditionalLayout: flag)
-    }
-
     // MARK: - Selection
 
     override func setSelectedRange(_ charRange: NSRange) {
