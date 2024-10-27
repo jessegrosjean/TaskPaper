@@ -460,6 +460,23 @@ class OutlineEditorView: NSTextView {
             NSGraphicsContext.restoreGraphicsState()
         }
     }
+    
+    func expandInvalidRect(_ rect: NSRect) -> NSRect {
+        var rect = rect.insetBy(dx: -1, dy: -1)
+        rect.origin.x = 0
+        rect.origin.y = rect.minY.rounded()
+        rect.size.width = bounds.width
+        rect.size.height = rect.height.rounded()
+        return rect
+    }
+    
+    override func setNeedsDisplay(_ rect: NSRect) {
+        super.setNeedsDisplay(expandInvalidRect(rect))
+    }
+    
+    override func setNeedsDisplay(_ rect: NSRect, avoidAdditionalLayout flag: Bool) {
+        super.setNeedsDisplay(expandInvalidRect(rect), avoidAdditionalLayout: flag)
+    }
 
     // MARK: - Actions
 
