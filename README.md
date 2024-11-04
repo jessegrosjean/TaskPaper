@@ -48,3 +48,13 @@ This is a bit of a mess. Goal was to make `birch-outline.js` and `BirchOutline.s
 
 npm link - from within `birch-outline` so that `birch-editor` can easily make changes to both birch-outline and birch-editor and keep in sync.
 npm start - from within both `birch-outline` so that `birch-editor` so that an updated webpack build will always be in each packages "min" folder. When Xcode BirchOutline and BirchEditor build they will always check if that file has changed, and if so copy the new version into there dependencies.
+
+## Releasing
+
+Update TaskPaper-Direct-Notes.md
+./build.sh # update build number in script, because me dumb!
+
+That should build all versions, direct, direct preview, setapp, and app store
+
+- Direct and setapp version are bundled into a new folder in TaskPaper/build and can be copied from there.
+- App store version is found in Xcode organizer and can be submitted from there.

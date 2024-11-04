@@ -1,19 +1,19 @@
 {
-  "tvOS" : [
-
-  ],
   "iOS" : [
 
   ],
+  "commitish" : "v4.4.3",
   "Mac" : [
     {
-      "linking" : "dynamic",
+      "hash" : "c7056a606729edeba96635071ec6e1c7f4e1cfb69fec362edd821b7d9f8fdfde",
       "name" : "Paddle",
-      "hash" : "c7056a606729edeba96635071ec6e1c7f4e1cfb69fec362edd821b7d9f8fdfde"
+      "linking" : "dynamic"
     }
   ],
   "watchOS" : [
 
   ],
-  "commitish" : "v4.4.3"
+  "tvOS" : [
+
+  ]
 }
