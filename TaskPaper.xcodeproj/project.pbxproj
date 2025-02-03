@@ -303,6 +303,9 @@
 		4352816F1D80841700EA03DD /* OutlineSidebarSearchEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4352816D1D80841700EA03DD /* OutlineSidebarSearchEditorViewController.swift */; };
 		435281711D80BCFD00EA03DD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435281701D80BCFD00EA03DD /* String.swift */; };
 		435281721D80BCFD00EA03DD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435281701D80BCFD00EA03DD /* String.swift */; };
+		4356001A2D4FBC31008F0483 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435600162D4FBC2D008F0483 /* DatePicker.swift */; };
+		4356001B2D4FBC31008F0483 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435600162D4FBC2D008F0483 /* DatePicker.swift */; };
+		4356001C2D4FBC31008F0483 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435600162D4FBC2D008F0483 /* DatePicker.swift */; };
 		435CAD1E1D7F2B3A0056B1AB /* getFileDescriptorPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 435CAD1D1D7F2B3A0056B1AB /* getFileDescriptorPath.m */; };
 		435CAD1F1D7F2B3A0056B1AB /* getFileDescriptorPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 435CAD1D1D7F2B3A0056B1AB /* getFileDescriptorPath.m */; };
 		435F931E2AB38C0500A3ECE1 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 435F931D2AB38C0500A3ECE1 /* Sparkle */; };
@@ -712,6 +715,7 @@
 		434DA1E71E4E28E200513DCC /* String-RangeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String-RangeExtensions.swift"; sourceTree = "<group>"; };
 		4352816D1D80841700EA03DD /* OutlineSidebarSearchEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineSidebarSearchEditorViewController.swift; sourceTree = "<group>"; };
 		435281701D80BCFD00EA03DD /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		435600162D4FBC2D008F0483 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		435CAD1C1D7F2B3A0056B1AB /* getFileDescriptorPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getFileDescriptorPath.h; sourceTree = "<group>"; };
 		435CAD1D1D7F2B3A0056B1AB /* getFileDescriptorPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getFileDescriptorPath.m; sourceTree = "<group>"; };
 		4363FEE01DCBD88400B5A084 /* NSTextField-AttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextField-AttributedString.swift"; sourceTree = "<group>"; };
@@ -844,6 +848,7 @@
 		433815C01DB67EAC00120078 /* DatePicker */ = {
 			isa = PBXGroup;
 			children = (
+				435600162D4FBC2D008F0483 /* DatePicker.swift */,
 				433815CD1DB67FA800120078 /* DatePickerWindowController.swift */,
 				433815C11DB67EE900120078 /* DatePickerViewController.swift */,
 				433815C91DB67F9100120078 /* DatePicker.storyboard */,
@@ -1768,6 +1773,7 @@
 				431DEEF11E43C04400C1546F /* ItemViewController.swift in Sources */,
 				433816311DB93DB900120078 /* test.m in Sources */,
 				433816321DB93DB900120078 /* SearchBarViewController.swift in Sources */,
+				4356001A2D4FBC31008F0483 /* DatePicker.swift in Sources */,
 				433816331DB93DB900120078 /* OutlineEditorLayoutManager.swift in Sources */,
 				433816341DB93DB900120078 /* NSView-Hiearchy.swift in Sources */,
 				433816351DB93DB900120078 /* OutlineSidebarItem.swift in Sources */,
@@ -1891,6 +1897,7 @@
 				431DEEEF1E43C04400C1546F /* ItemViewController.swift in Sources */,
 				43402C561D6B5C0A001F6A2B /* test.m in Sources */,
 				43402BA51D69FB96001F6A2B /* SearchBarViewController.swift in Sources */,
+				4356001C2D4FBC31008F0483 /* DatePicker.swift in Sources */,
 				43402B871D69FB96001F6A2B /* OutlineEditorLayoutManager.swift in Sources */,
 				43402B801D69FB96001F6A2B /* NSView-Hiearchy.swift in Sources */,
 				43402BA61D69FB96001F6A2B /* OutlineSidebarItem.swift in Sources */,
@@ -2027,6 +2034,7 @@
 				431DEEF01E43C04400C1546F /* ItemViewController.swift in Sources */,
 				43B6AE201D6CE91600ACA66C /* test.m in Sources */,
 				43B6AE211D6CE91600ACA66C /* SearchBarViewController.swift in Sources */,
+				4356001B2D4FBC31008F0483 /* DatePicker.swift in Sources */,
 				43B6AE221D6CE91600ACA66C /* OutlineEditorLayoutManager.swift in Sources */,
 				43B6AE231D6CE91600ACA66C /* NSView-Hiearchy.swift in Sources */,
 				43B6AE241D6CE91600ACA66C /* OutlineSidebarItem.swift in Sources */,
@@ -2325,7 +2333,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CURRENT_PROJECT_VERSION = 483;
+				CURRENT_PROJECT_VERSION = 484;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2338,7 +2346,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 3.9.3;
+				MARKETING_VERSION = 3.9.4;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -2366,7 +2374,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CURRENT_PROJECT_VERSION = 483;
+				CURRENT_PROJECT_VERSION = 484;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -2378,7 +2386,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 3.9.3;
+				MARKETING_VERSION = 3.9.4;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;

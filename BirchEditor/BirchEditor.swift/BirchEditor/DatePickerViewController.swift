@@ -12,7 +12,7 @@ import Cocoa
 class DatePickerViewController: NSViewController {
     @IBOutlet var dateTextField: NSTextField!
     @IBOutlet var messageTextField: NSTextField!
-    @IBOutlet var datePicker: NSDatePicker!
+    @IBOutlet var datePicker: DatePicker!
 
     var completionHandler: ((Date?) -> Void)?
     var dateTextTemplate = "%@" {

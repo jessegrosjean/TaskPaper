@@ -1,3 +1,3 @@
-TaskPaper 3.9.3
+TaskPaper 3.9.4
 
-- Fixed occasional selection drawing marks left on screen
+Don't allow Insert Date's calendard to get keyboard focus. This way Enter will always work to insert selected date.

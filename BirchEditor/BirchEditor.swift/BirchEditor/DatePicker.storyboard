@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.13.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -34,7 +33,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="350" height="205"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BZX-OH-E0D">
+                            <textField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BZX-OH-E0D">
                                 <rect key="frame" x="6" y="173" width="338" height="24"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="LOCALIZED" id="95I-ra-aW0">
                                     <font key="font" metaFont="system" size="20"/>
@@ -45,9 +44,9 @@
                                     <outlet property="delegate" destination="qzN-v6-HFS" id="WB9-wE-MBX"/>
                                 </connections>
                             </textField>
-                            <datePicker horizontalHuggingPriority="1000" verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eeb-Oq-bD1">
+                            <datePicker horizontalHuggingPriority="1000" verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eeb-Oq-bD1" customClass="DatePicker" customModule="TaskPaper" customModuleProvider="target">
                                 <rect key="frame" x="8" y="8" width="139" height="148"/>
-                                <datePickerCell key="cell" alignment="left" drawsBackground="NO" datePickerStyle="clockAndCalendar" id="0FF-Nr-D8V">
+                                <datePickerCell key="cell" refusesFirstResponder="YES" alignment="left" drawsBackground="NO" datePickerStyle="clockAndCalendar" id="0FF-Nr-D8V">
                                     <font key="font" metaFont="system"/>
                                     <date key="date" timeIntervalSinceReferenceDate="-595929600">
                                         <!--1982-02-12 16:00:00 +0000-->
@@ -62,8 +61,8 @@
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="GEa-vy-5aV">
                                 <rect key="frame" x="0.0" y="162" width="350" height="5"/>
                             </box>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zM8-RD-MOD">
-                                <rect key="frame" x="162" y="74" width="182" height="17"/>
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zM8-RD-MOD">
+                                <rect key="frame" x="162" y="74" width="182" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" truncatesLastVisibleLine="YES" sendsActionOnEndEditing="YES" alignment="center" title="LOCALIZED" id="077-w6-9mf">
                                     <font key="font" metaFont="systemLight" size="13"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
