@@ -1,5 +1,5 @@
 {
-  "iOS" : [
+  "tvOS" : [
 
   ],
   "commitish" : "v4.4.3",
@@ -10,10 +10,10 @@
       "linking" : "dynamic"
     }
   ],
-  "watchOS" : [
+  "iOS" : [
 
   ],
-  "tvOS" : [
+  "watchOS" : [
 
   ]
 }

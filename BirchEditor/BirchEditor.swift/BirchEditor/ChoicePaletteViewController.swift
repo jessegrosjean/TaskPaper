@@ -344,7 +344,7 @@ extension ChoicePaletteViewController: NSTableViewDelegate {
             }
         } else {
             if let cell = tableView.makeView(withIdentifier: convertToNSUserInterfaceItemIdentifier(dataCellIdentifier), owner: self) as? ChoicePaletteTableCellView {
-                cell.backgroundStyle = .light
+                cell.backgroundStyle = .normal
                 cell.detailTextField.objectValue = nil
                 if let textField = cell.titleTextField {
                     textField.textColor = NSColor.labelColor
