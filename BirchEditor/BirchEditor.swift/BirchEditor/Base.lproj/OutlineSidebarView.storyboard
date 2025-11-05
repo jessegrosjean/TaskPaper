@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,13 +15,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DX2-8p-pza">
-                                <rect key="frame" x="0.0" y="0.0" width="170" height="231"/>
+                                <rect key="frame" x="0.0" y="0.0" width="170" height="229"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="nG3-TU-nsg">
-                                    <rect key="frame" x="0.0" y="0.0" width="170" height="231"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="170" height="229"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" tableStyle="sourceList" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" viewBased="YES" floatsGroupRows="NO" indentationPerLevel="13" autosaveExpandedItems="YES" outlineTableColumn="9Lt-0y-dBc" id="3E3-Hi-tdq" customClass="OutlineSidebarView" customModule="TaskPaper" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="170" height="231"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="170" height="229"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="0.0"/>
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -133,9 +133,6 @@
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kkY-Id-rfX">
                                 <rect key="frame" x="275" y="13" width="94" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="CS6-Pi-lIa"/>
-                                </constraints>
                                 <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Tnd-KZ-BEY">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -143,6 +140,9 @@
 Gw
 </string>
                                 </buttonCell>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="CS6-Pi-lIa"/>
+                                </constraints>
                                 <connections>
                                     <action selector="dismissController:" target="D0D-hP-RC5" id="8UB-Mj-9HE"/>
                                 </connections>
@@ -228,9 +228,6 @@ Gw
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ymc-NA-ieq">
                                 <rect key="frame" x="367" y="13" width="94" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="b9p-M5-6Ax"/>
-                                </constraints>
                                 <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="23p-qJ-LvH">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -238,6 +235,9 @@ Gw
 DQ
 </string>
                                 </buttonCell>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="b9p-M5-6Ax"/>
+                                </constraints>
                                 <connections>
                                     <action selector="ok:" target="D0D-hP-RC5" id="0wh-KP-T42"/>
                                     <binding destination="D0D-hP-RC5" name="enabled" keyPath="validated" id="6GN-Vl-YKi"/>

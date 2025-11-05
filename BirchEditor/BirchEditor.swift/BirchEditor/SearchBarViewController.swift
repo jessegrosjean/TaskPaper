@@ -49,6 +49,8 @@ class SearchBarViewController: NSViewController, OutlineEditorHolderType, Styles
         searchField.centersPlaceholder = false
         searchField.drawsBackground = true
         searchField.backgroundColor = .clear
+        (searchField.cell as? NSSearchFieldCell)?.searchButtonCell = nil
+        (searchField.cell as? NSSearchFieldCell)?.cancelButtonCell = nil
     }
     
     override func viewWillAppear() {
