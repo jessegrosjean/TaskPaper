@@ -78,6 +78,9 @@ class DatePickerViewController: NSViewController {
 
     @IBAction func pickedCalendar(_: AnyObject) {
         updateDateField(newDate: Calendar.autoupdatingCurrent.startOfDay(for: datePicker.dateValue))
+        if let event = NSApp.currentEvent, event.clickCount == 2 {
+            performPickDate(date)
+        }
     }
 }
 
