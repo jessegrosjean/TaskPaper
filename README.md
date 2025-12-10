@@ -1,6 +1,6 @@
 # TaskPaper
 
-This project is "shared source" for TaskPaper license owners:
+This project is "shared source" for TaskPaper (www.taskpaper.com) license owners:
 
 1. Do modify as you see fit for your own use.
 2. Do not change or disable any of the licensing code.
