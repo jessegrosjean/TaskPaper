@@ -81,3 +81,42 @@ Test files:
 - AppleScript support is defined in `TaskPaper/TaskPaper.sdef`
 - Three distribution variants share plist files: `TaskPaper-Info.plist`, `TaskPaper-Direct-Info.plist`, `TaskPaper-Setapp-Info.plist`
 - Version is set via `MARKETING_VERSION` in the Xcode project; bundle version is hardcoded in `build.sh`
+
+## Todo
+
+### Bugs (tracked for next release)
+
+- Fix: Expand/Contract by Level gets stuck when a row has extra indentation (over-indented children)
+- Fix: Titlebar does not show background color until you scroll
+- Fix: Sidebar projects auto-expand when dropping items onto them — should stay collapsed or delay expansion
+  https://support.hogbaysoftware.com/t/preventing-projects-from-expanding-in-the-sidebar/6080
+
+### Bugs (open, unresolved)
+
+- `item-wrap-to-column` display corruption when switching stylesheets — layout distorts and persists until document is reopened. Confirmed by multiple users.
+  https://support.hogbaysoftware.com/t/item-wrap-to-column-bug/6126
+- Search bar occasionally appears at wrong position on the page. Intermittent, hard to reproduce.
+  https://support.hogbaysoftware.com/t/taskpaper-3-9-4-preview-486-487/6186
+- Emoji/emoticon characters return empty search results.
+  https://support.hogbaysoftware.com/t/search-and-emoticons/5606
+- Sidebar peek shows a vertical bar artifact during window resize (cosmetic).
+  https://support.hogbaysoftware.com/t/bug-with-temporary-sidebar-peek/6035
+
+### Feature requests (from forum and web)
+
+- Better visual feedback for active filters/searches — make it clearer which filter or project is currently applied.
+  https://support.hogbaysoftware.com/t/new-feature-request/3478
+- Search results should optionally show child nodes of matching items.
+  https://support.hogbaysoftware.com/t/request-search-feature-should-optionally-show-child-nodes/1413
+- Jump to next/previous project keyboard shortcuts.
+  https://support.hogbaysoftware.com/t/feature-request-jump-to-next-previous-project/1407
+- Horizontal divider lines for visual separation between sections.
+  https://support.hogbaysoftware.com/t/feature-request-horizontal-divders/2063
+- Paragraph/row border decorations in stylesheets (currently only background-color works for full-row styling).
+  https://support.hogbaysoftware.com/t/paragraph-formatting/5602
+- Enhanced sidebar styling — allow color-coding sidebar items by tag.
+  https://support.hogbaysoftware.com/t/unable-to-style-taskbar-elements-in-taskpaper/5778
+- Maintain focus/frame when file is externally edited (relevant for AI tool integrations).
+  https://support.hogbaysoftware.com/t/maintain-frame-when-file-externally-edited/5755
+- Improved scripting/API documentation.
+  https://support.hogbaysoftware.com/t/suggestion-improving-scripting-guide-and-api-documentation/1751
