@@ -4,3 +4,13 @@ TaskPaper 3.9.4
 - Fixed crash on macOS 26.1
 - Disable Insert Date/Calendar keyboard focus
 - Enable double-click on Date/Calendar to insert date
+
+
+NEXT RELEASE:
+    Fix: Expand/Contract by Level gets stuck when row has extra indentation. For example in this outline c is overindented:
+        a
+            b
+                    c
+    Fix: Titlebar does not show background color until you scoll now.
+        Re: Request regarding transaction ID: 706763
+    https://support.hogbaysoftware.com/t/preventing-projects-from-expanding-in-the-sidebar/6080/3

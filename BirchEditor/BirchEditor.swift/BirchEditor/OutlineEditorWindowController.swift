@@ -9,13 +9,13 @@
 import BirchOutline
 import Cocoa
 
-let DocumentWindowFrameAutosaveName = "DocumentWindowFrameAutosaveName"
-
 open class OutlineEditorWindowController: NSWindowController, OutlineEditorHolderType {
+    
     var pathMonitor: PathMonitor?
     var styleSheetUpdateDebouncer: Debouncer?
     var sidebarSelectionDisposable: DisposableType?
     var outlineEditorSerializedRestorableState: String?
+    var windowAutosaveName: NSWindow.FrameAutosaveName = ""
     // var showTitlebarDebouncer: Debouncer?
     // var hideTitlebarDebouncer: Debouncer?
 
@@ -75,42 +75,25 @@ open class OutlineEditorWindowController: NSWindowController, OutlineEditorHolde
         }
     }
 
-    fileprivate var saveFrames = false
-
     override open func windowDidLoad() {
         super.windowDidLoad()
 
+
         if let window = window {
+            shouldCascadeWindows = false
+            window.setFrameAutosaveName("WorkspaceWindow")
+            if let mainWindow = NSApp.mainWindow {
+                let cascadingPoint = mainWindow.cascadeTopLeft(from: NSZeroPoint)
+                
+                window.cascadeTopLeft(from: cascadingPoint)
+            }
+            
             userDefaults.addObserver(self, forKeyPath: BUserFontSizeDefaultsKey, options: .new, context: nil)
 
             window.contentView?.wantsLayer = true // round corners, animated titlebar
             hideTitlebar()
 
-            /* showTitlebarDebouncer = Debouncer(delay: 0.15, callback: { [weak self] in
-                 self?.showTitlebar()
-             })
-
-             hideTitlebarDebouncer = Debouncer(delay: 0.3, callback: { [weak self] in
-                 self?.hideTitlebar()
-             }) */
-
             PreviewTitlebarAccessoryViewController.addPreviewTitlebarAccessoryIfNeeded(window)
-
-            shouldCascadeWindows = false
-            window.setFrameUsingName(DocumentWindowFrameAutosaveName)
-            let frame = window.frame
-            let topLeft = NSPoint(x: NSMinX(frame), y: NSMaxX(frame))
-            for each in NSApp.windows {
-                if each != window {
-                    let eachFrame = each.frame
-                    let eachTopLeft = NSPoint(x: NSMinX(eachFrame), y: NSMaxX(eachFrame))
-                    if NSEqualPoints(topLeft, eachTopLeft) {
-                        let newTopLeft = window.cascadeTopLeft(from: topLeft)
-                        window.setFrameTopLeftPoint(newTopLeft)
-                        break
-                    }
-                }
-            }
 
             windowEffectiveAppearanceObserver = window.observe(\.effectiveAppearance) { [weak self] _, _ in
                 if let `self` = self, let currentStyleSheet = self.styleSheet {
@@ -118,8 +101,6 @@ open class OutlineEditorWindowController: NSWindowController, OutlineEditorHolde
                 }
             }
         }
-
-        saveFrames = true
     }
 
     var windowEffectiveAppearanceObserver: NSKeyValueObservation?
@@ -216,23 +197,4 @@ open class OutlineEditorWindowController: NSWindowController, OutlineEditorHolde
 }
 
 extension OutlineEditorWindowController: NSWindowDelegate {
-    public func windowDidBecomeMain(_: Notification) {
-        if saveFrames {
-            window?.saveFrame(usingName: DocumentWindowFrameAutosaveName)
-        }
-    }
-
-    public func windowDidResignMain(_: Notification) {}
-
-    public func windowDidResize(_: Notification) {
-        if saveFrames {
-            window?.saveFrame(usingName: DocumentWindowFrameAutosaveName)
-        }
-    }
-
-    public func windowDidMove(_: Notification) {
-        if saveFrames {
-            window?.saveFrame(usingName: DocumentWindowFrameAutosaveName)
-        }
-    }
 }

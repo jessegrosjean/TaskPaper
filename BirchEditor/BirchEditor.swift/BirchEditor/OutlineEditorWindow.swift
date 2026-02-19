@@ -140,4 +140,16 @@ class OutlineEditorWindow: NSWindowTabbedBase {
         return super.validateMenuItem(menuItem)
     }
     
+    /*
+    override func setFrameOrigin(_ point: NSPoint) {
+        super.setFrameOrigin(point)
+    }
+    
+    override func setFrame(_ frameRect: NSRect, display flag: Bool) {
+        super.setFrame(frameRect, display: flag)
+    }
+    
+    override func setFrame(_ frameRect: NSRect, display displayFlag: Bool, animate animateFlag: Bool) {
+        super.setFrame(frameRect, display: displayFlag, animate: animateFlag)
+    }*/
 }
