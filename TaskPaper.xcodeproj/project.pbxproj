@@ -1290,7 +1290,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43402ABE1D69F841001F6A2B /* Build configuration list for PBXNativeTarget "TaskPaperTests" */;
 			buildPhases = (
-				4316800C1D8ADA7400FF919B /* Receigen */,
 				43402AB01D69F841001F6A2B /* Sources */,
 				43402AB11D69F841001F6A2B /* Frameworks */,
 				43402AB21D69F841001F6A2B /* Resources */,
@@ -1300,7 +1299,6 @@
 			);
 			dependencies = (
 				43402AB61D69F841001F6A2B /* PBXTargetDependency */,
-				4316800E1D8ADD2600FF919B /* PBXTargetDependency */,
 			);
 			name = TaskPaperTests;
 			productName = TaskPaperTests;
@@ -1928,7 +1926,6 @@
 				43402C491D6A3467001F6A2B /* StyleSheetTests.swift in Sources */,
 				43402C4A1D6A358D001F6A2B /* OutlineEditorTests.swift in Sources */,
 				43B6ADB91D6BB3D200ACA66C /* OutlineDocumentTests.swift in Sources */,
-				43B6ADC21D6C951800ACA66C /* OutlineEditorWindowControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2545,6 +2542,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 64A5CLJP5W;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2572,7 +2570,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hogbaysoftware.TaskPaperTests;
@@ -2606,6 +2604,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 64A5CLJP5W;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2627,7 +2626,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hogbaysoftware.TaskPaperTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

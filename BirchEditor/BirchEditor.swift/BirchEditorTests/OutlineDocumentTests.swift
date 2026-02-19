@@ -18,7 +18,7 @@ class OutlineDocument: XCTestCase {
     override func setUp() {
         super.setUp()
         autoreleasepool {
-            document = try! NSDocumentController.shared().makeUntitledDocument(ofType: "com.taskpaper.text") as? TaskPaperDocument
+            document = try! NSDocumentController.shared.makeUntitledDocument(ofType: "com.taskpaper.text") as? TaskPaperDocument
         }
         weakDocument = document
     }

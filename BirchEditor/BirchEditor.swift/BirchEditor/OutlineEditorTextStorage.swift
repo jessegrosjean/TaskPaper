@@ -108,10 +108,15 @@ open class OutlineEditorTextStorage: NSTextStorageBase {
             paragraphRanges.append(enclosingRange)
         }
 
-        let storeItems = storageItemsInRange(NSUnionRange(paragraphRanges.first!, paragraphRanges.last!))
+        guard let first = paragraphRanges.first, let last = paragraphRanges.last else {
+            return
+        }
+
+        let storeItems = storageItemsInRange(NSUnionRange(first, last))
 
         backingStorage.beginEditing()
         for (index, eachRange) in paragraphRanges.enumerated() {
+            guard index < storeItems.count else { break }
             storeItems[index].renderIntoAttributedString(backingStorage, atItemRange: eachRange)
         }
         backingStorage.endEditing()

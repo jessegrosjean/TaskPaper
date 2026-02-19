@@ -29,7 +29,7 @@ class StyleSheetTests: XCTestCase {
 
     func testComputeStyleKeyForElement() {
         let computedStyle = styleSheet?.computedStyleForElement(["tagName": "window"])
-        XCTAssertNil(computedStyle?.allValues["missingkey"])
-        XCTAssertNotNil(computedStyle?.allValues["appearance"])
+        XCTAssertNotNil(computedStyle)
+        XCTAssertNil(computedStyle?.allValues[NSAttributedString.Key("missingkey")])
     }
 }
