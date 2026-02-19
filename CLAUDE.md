@@ -102,6 +102,21 @@ Test files:
 - Sidebar peek shows a vertical bar artifact during window resize (cosmetic).
   https://support.hogbaysoftware.com/t/bug-with-temporary-sidebar-peek/6035
 
+### Crash report analysis (13 crash points reviewed 2026-02-19)
+
+Fixed crashes:
+- `fillBackingStoreAttributesInRange` index out of range — paragraph/item count mismatch during JS→Swift sync. Fixed with guard checks. (3 crash points: DRGI1, CU7t)
+- `rectForCancelButton` infinite recursion on macOS 26.x — Apple refactored NSSearchField internals causing mutual recursion with super call. Fixed by removing rect overrides. (4 crash points: CvFd, D5uR, DGIJ, DNyH)
+- `OutlineDocument.read` force-unwrap nil — non-UTF8 data caused crash opening documents. Fixed with guard-let in current code. (3 crash points: CtUW, Dufs, k3Ui)
+
+Not actionable (Apple framework bugs, no TaskPaper code in stack):
+- QuartzCore Metal lock corruption in MetalContext destructor (BuHH)
+- Autorelease pool over-release on macOS 12.0.1 (DcWJ)
+
+Monitor:
+- Exception during view drawing on macOS 26.2, current build 487, 1 report, no TaskPaper code in stack — likely AppKit bug (Cc7f)
+- Exception in `makeFirstResponder` during search bar hide, old build 477, 1 report (1HFM)
+
 ### Feature requests (from forum and web)
 
 - Better visual feedback for active filters/searches — make it clearer which filter or project is currently applied.
