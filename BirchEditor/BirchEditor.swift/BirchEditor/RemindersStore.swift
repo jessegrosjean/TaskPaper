@@ -13,7 +13,7 @@ class RemindersStoreAccessError: NSError {
     init() {
         let appName = ProcessInfo.processInfo.processName
         let description = NSLocalizedString("\(appName) does not have access to Reminders", tableName: "Reminders", comment: "message text")
-        let recoverySuggestion = NSLocalizedString("You may grant access through System Preferences > Security & Privacy > Privacy > Reminders.", tableName: "Reminders", comment: "message text")
+        let recoverySuggestion = NSLocalizedString("You may grant access through System Preferences > Privacy & Security > Privacy > Reminders.", tableName: "Reminders", comment: "message text")
         super.init(domain: "RemindersStore", code: 0, userInfo: [
             NSLocalizedDescriptionKey: description,
             NSLocalizedRecoverySuggestionErrorKey: recoverySuggestion,
