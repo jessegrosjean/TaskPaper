@@ -106,7 +106,8 @@ open class OutlineEditorWindowController: NSWindowController, OutlineEditorHolde
         }
     }
 
-    var windowEffectiveAppearanceObserver: NSKeyValueObservation?
+    // nonisolated(unsafe) so the nonisolated deinit can invalidate it.
+    nonisolated(unsafe) var windowEffectiveAppearanceObserver: NSKeyValueObservation?
 
     // Nonisolated NSObject override; UserDefaults KVO fires on the thread
     // that set the value — always main here (preferences UI).
