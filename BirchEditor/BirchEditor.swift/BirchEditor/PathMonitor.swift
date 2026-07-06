@@ -10,7 +10,6 @@ import Darwin
 import Foundation
 
 class PathMonitor {
-    let pathMonitorQueue = DispatchQueue(label: "com.Birch.pathmonitor", attributes: [])
     var monitoredFileDescriptor: CInt?
     var pathMonitorSource: DispatchSourceFileSystemObject?
     var callback: () -> Void
@@ -55,7 +54,12 @@ class PathMonitor {
             }
 
             if monitoredFileDescriptor != -1 {
-                pathMonitorSource = DispatchSource.makeFileSystemObjectSource(fileDescriptor: monitoredFileDescriptor!, eventMask: flags, queue: pathMonitorQueue)
+                // Deliver events on the main queue: the event handler mutates
+                // monitor state that startMonitoring/stopMonitoring touch from
+                // the main thread, and every callback ends up mutating
+                // main-thread state (script commands, configuration outlines).
+                // A private queue here raced against both.
+                pathMonitorSource = DispatchSource.makeFileSystemObjectSource(fileDescriptor: monitoredFileDescriptor!, eventMask: flags, queue: .main)
                 if let pathMonitorSource = pathMonitorSource {
                     pathMonitorSource.setEventHandler { [unowned self] in
                         if let flags = self.pathMonitorSource?.data {
