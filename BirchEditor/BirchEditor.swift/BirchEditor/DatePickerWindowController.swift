@@ -9,7 +9,7 @@
 import Cocoa
 
 let datePickerBundle = Bundle(for: DatePickerWindowController.self)
-let datePickerStoryboard = NSStoryboard(name: "DatePicker", bundle: datePickerBundle)
+@MainActor let datePickerStoryboard = NSStoryboard(name: "DatePicker", bundle: datePickerBundle)
 
 class DatePickerWindowController: NSWindowController {
     var isClosingWindowAfterPerformingCommand = 0

@@ -42,19 +42,6 @@ class OutlineSidebarView: NSOutlineView {
 
         frame.origin.x = indent
         frame.size.width = self.frame.width - (indent + indentationPerLevel)
-        /*
-        if let item = item(atRow: row) as? OutlineSidebarItem {
-            Swift.print("level: \(level), frame: \(frame) tyep: \(item.type)")
-
-            if item.type == "home" {
-                frame.origin.x -= ((indentationPerLevel / 2) + 1)
-                frame.size.width += ((indentationPerLevel / 2) + 1)
-            } else if item.type == "group" {
-                
-            } else {
-                
-            }
-        }*/
 
         return frame
     }

@@ -1,6 +1,6 @@
 import Cocoa
 
-let sharedTableRowView = NSTableRowView()
+@MainActor let sharedTableRowView = NSTableRowView()
 
 class ChoicePaletteRowView: NSTableRowView {
     

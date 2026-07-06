@@ -18,6 +18,11 @@ class OutlineSidebarViewController: NSViewController, OutlineEditorHolderType, S
 
     var sidebarSubscriptions: [DisposableType]?
     var syncingToJSSidebar = 0
+    let homeSpacerItem = NSObject()
+
+    func isSpacerItem(_ item: Any?) -> Bool {
+        return (item as AnyObject?) === homeSpacerItem
+    }
 
     override func viewDidLoad() {
         sidebarView.registerForDraggedTypes(ItemPasteboardUtilities.readablePasteboardTypes)
@@ -30,20 +35,17 @@ class OutlineSidebarViewController: NSViewController, OutlineEditorHolderType, S
         if userDefaults.bool(forKey: BSidebarFontSizeFollowsSystemPreferences) {
             sidebarView.rowSizeStyle = .default
         }
-
-        updateSidebarTopInset()
-    }
-
-    override func viewDidLayout() {
-        super.viewDidLayout()
-        updateSidebarTopInset()
     }
 
     deinit {
-        outlineEditor = nil
-        if let subscriptions = sidebarSubscriptions {
-            for each in subscriptions {
-                each.dispose()
+        // deinit is nonisolated, but view controllers deallocate on the main
+        // thread with their window hierarchy.
+        MainActor.assumeIsolated {
+            outlineEditor = nil
+            if let subscriptions = sidebarSubscriptions {
+                for each in subscriptions {
+                    each.dispose()
+                }
             }
         }
     }
@@ -53,25 +55,15 @@ class OutlineSidebarViewController: NSViewController, OutlineEditorHolderType, S
             if let computedStyle = styleSheet?.computedStyleForElement("sidebar") {
                 view.superview?.appearance = computedStyle.allValues[.appearance] as? NSAppearance
             }
-            updateSidebarTopInset()
-        }
-    }
-
-    private func updateSidebarTopInset() {
-        guard let scrollView = sidebarView?.enclosingScrollView else { return }
-        let itemIndent = CGFloat(outlineEditor?.computedItemIndent ?? 17)
-        let extraTop = (itemIndent / 2.0).rounded()
-        scrollView.automaticallyAdjustsContentInsets = false
-        let desiredTop = scrollView.safeAreaInsets.top + extraTop
-        if scrollView.contentInsets.top != desiredTop {
-            scrollView.contentInsets = NSEdgeInsets(top: desiredTop, left: 0, bottom: 0, right: 0)
+            // The spacer row height derives from the stylesheet's item indent.
+            if let sidebarView = sidebarView, sidebarView.numberOfRows > 0 {
+                sidebarView.noteHeightOfRows(withIndexesChanged: IndexSet(integer: 0))
+            }
         }
     }
 
     weak var outlineEditor: OutlineEditorType? {
         didSet {
-            updateSidebarTopInset()
-
             if let subscriptions = sidebarSubscriptions {
                 for each in subscriptions {
                     each.dispose()
@@ -91,7 +83,7 @@ class OutlineSidebarViewController: NSViewController, OutlineEditorHolderType, S
                             return
                         }
 
-                        func reloadIfNeeded(_ item: OutlineSidebarItem) {
+                        @MainActor func reloadIfNeeded(_ item: OutlineSidebarItem) {
                             if item.childrenChanged {
                                 sidebarView.reloadItem(item, reloadChildren: true)
                                 sidebarView.reloadItem(item)
@@ -209,8 +201,13 @@ class OutlineSidebarViewController: NSViewController, OutlineEditorHolderType, S
 
 extension OutlineSidebarViewController: NSOutlineViewDataSource {
     func outlineView(_: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        let item = (item as? OutlineSidebarItem ?? outlineEditor?.outlineSidebar?.rootItem)!
-        return item.children[index]
+        if let item = item as? OutlineSidebarItem {
+            return item.children[index]
+        }        
+        if index == 0 {
+            return homeSpacerItem
+        }
+        return outlineEditor!.outlineSidebar!.rootItem!.children[index - 1]
     }
 
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
@@ -218,8 +215,14 @@ extension OutlineSidebarViewController: NSOutlineViewDataSource {
     }
 
     func outlineView(_: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        if let item = item as? OutlineSidebarItem ?? outlineEditor?.outlineSidebar?.rootItem {
+        if isSpacerItem(item) {
+            return 0
+        }
+        if let item = item as? OutlineSidebarItem {
             return item.children.count
+        }
+        if let rootItem = outlineEditor?.outlineSidebar?.rootItem {
+            return rootItem.children.count + 1 // + homeSpacerItem
         }
         return 0
     }
@@ -322,6 +325,9 @@ extension OutlineSidebarViewController: NSOutlineViewDelegate {
     }
 
     func outlineView(_ outlineView: NSOutlineView, viewFor _: NSTableColumn?, item: Any) -> NSView? {
+        if isSpacerItem(item) {
+            return nil
+        }
         if let item = item as? OutlineSidebarItem ?? outlineEditor?.outlineSidebar?.rootItem {
             var view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "TextCell"), owner: self) as! NSTableCellView
 
@@ -344,6 +350,12 @@ extension OutlineSidebarViewController: NSOutlineViewDelegate {
     }
 
     func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {
+        if isSpacerItem(item) {
+            // Match the editor's first-line top offset (`originOffset.y` in OutlineEditorView).
+            let itemIndent = CGFloat(outlineEditor?.computedItemIndent ?? 17)
+            return (itemIndent / 2.0).rounded()
+        }
+
         if userDefaults.bool(forKey: BSidebarFontSizeFollowsSystemPreferences) {
             if self.outlineView(outlineView, isGroupItem: item) {
                 return outlineView.rowHeight
@@ -362,63 +374,53 @@ extension OutlineSidebarViewController: NSOutlineViewDelegate {
         var eachRow = start
 
         while eachRow != end {
-            if let eachItem = outlineView.item(atRow: eachRow) as? OutlineSidebarItem {
-                if eachItem.isSelectable {
-                    searchableItemIDs.append(eachItem.id)
-                }
-                eachRow += 1
-            } else {
+            if eachRow >= outlineView.numberOfRows {
                 eachRow = 0
+                continue
             }
+            if let eachItem = outlineView.item(atRow: eachRow) as? OutlineSidebarItem, eachItem.isSelectable {
+                searchableItemIDs.append(eachItem.id)
+            }
+            eachRow += 1
         }
 
         return outlineEditor?.outlineSidebar?.matchItemFromIDs(searchableItemIDs, searchString: searchString)
     }
 
     func outlineView(_: NSOutlineView, shouldSelectItem item: Any) -> Bool {
+        if isSpacerItem(item) {
+            return false
+        }
         if let newItem = item as? OutlineSidebarItem ?? outlineEditor?.outlineSidebar?.rootItem {
             guard let sidebar = outlineEditor?.outlineSidebar, syncingToJSSidebar == 0 else {
                 return newItem.isSelectable
             }
 
             if sidebar.shouldSelectItem(newItem) {
-                if #available(OSX 10.12, *) {
+                let newType = newItem.type
 
-                    let newType = newItem.type
-                    
-                    
-                    /*
-                    if @_selectedItem.type is 'home' or @_selectedItem.type is 'project'
-                      @outlineEditor.focusedItem = @outlineEditor.outline.getItemForID(@_selectedItem.representedObject)
-                    else
-                      switch @_selectedItem.type
-                        when 'search', 'tag', 'tag-value'
-                          @outlineEditor.itemPathFilter = @_selectedItem.representedObject
-                     */
-                    
-                    let isFocused = outlineEditor?.focusedItem != nil
-                    let isFiltered = !(outlineEditor?.itemPathFilter ?? "").isEmpty
-                    let isPerformingHoist = newType == "home" || newType == "project"
-                    let isPerformingFilter = !isPerformingHoist
-                    let maintainHoistedWhenFilter = userDefaults.bool(forKey: BMaintainHoistedItemWhenFiltering)
-                    let maintainFilterWhenHoisting = userDefaults.bool(forKey: BMaintainItemPathFilterWhenHoisting)
+                let isFocused = outlineEditor?.focusedItem != nil
+                let isFiltered = !(outlineEditor?.itemPathFilter ?? "").isEmpty
+                let isPerformingHoist = newType == "home" || newType == "project"
+                let isPerformingFilter = !isPerformingHoist
+                let maintainHoistedWhenFilter = userDefaults.bool(forKey: BMaintainHoistedItemWhenFiltering)
+                let maintainFilterWhenHoisting = userDefaults.bool(forKey: BMaintainItemPathFilterWhenHoisting)
 
-                    if isPerformingFilter && isFocused && maintainHoistedWhenFilter {
-                        return true
-                    }
-                    
-                    if isPerformingHoist && isFiltered && maintainFilterWhenHoisting {
-                        return true
-                    }
+                if isPerformingFilter && isFocused && maintainHoistedWhenFilter {
+                    return true
+                }
 
-                    if let window = sidebarView.window {
-                        for each in window.tabbedWindows ?? [] {
-                            if window != each, let eachOutlineEditor = (each.windowController as? OutlineEditorWindowController)?.outlineEditor, let eachSidebar = eachOutlineEditor.outlineSidebar {
-                                if outlineEditor?.outline.jsOutline == eachOutlineEditor.outline.jsOutline, eachSidebar.selectedItem.id == newItem.id {
-                                    // if different window, but same outline and same selected item... just switch tab
-                                    each.makeKeyAndOrderFront(nil)
-                                    return false
-                                }
+                if isPerformingHoist && isFiltered && maintainFilterWhenHoisting {
+                    return true
+                }
+
+                if let window = sidebarView.window {
+                    for each in window.tabbedWindows ?? [] {
+                        if window != each, let eachOutlineEditor = (each.windowController as? OutlineEditorWindowController)?.outlineEditor, let eachSidebar = eachOutlineEditor.outlineSidebar {
+                            if outlineEditor?.outline.jsOutline == eachOutlineEditor.outline.jsOutline, eachSidebar.selectedItem.id == newItem.id {
+                                // if different window, but same outline and same selected item... just switch tab
+                                each.makeKeyAndOrderFront(nil)
+                                return false
                             }
                         }
                     }
@@ -450,6 +452,9 @@ extension OutlineSidebarViewController: NSOutlineViewDelegate {
     }
 
     func outlineView(_: NSOutlineView, isGroupItem item: Any) -> Bool {
+        if isSpacerItem(item) {
+            return false
+        }
         if let item = item as? OutlineSidebarItem ?? outlineEditor?.outlineSidebar?.rootItem {
             return item.isGroup
         }
@@ -484,7 +489,6 @@ extension OutlineSidebarViewController: NSMenuDelegate {
         }
     }
 
-    @available(OSX 10.12, *)
     @IBAction func openInNewTab(_ sender: Any?) {
         guard let window = sidebarView.window else {
             return
@@ -589,9 +593,7 @@ extension OutlineSidebarViewController: NSMenuDelegate {
         if let clickedItem = sidebarView.item(atRow: sidebarView.clickedRow) as? OutlineSidebarItem {
             func addOpenInItems() {
                 menu.addItem(withTitle: NSLocalizedString("Open in New Window", tableName: "Sidebar", comment: "menu"), action: #selector(openInNewWindow(_:)), keyEquivalent: "")
-                if #available(OSX 10.12, *) {
-                    menu.addItem(withTitle: NSLocalizedString("Open in New Tab", tableName: "Sidebar", comment: "menu"), action: #selector(self.openInNewTab(_:)), keyEquivalent: "")
-                }
+                menu.addItem(withTitle: NSLocalizedString("Open in New Tab", tableName: "Sidebar", comment: "menu"), action: #selector(openInNewTab(_:)), keyEquivalent: "")
                 menu.addItem(NSMenuItem.separator())
             }
 

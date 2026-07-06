@@ -9,6 +9,7 @@
 import BirchOutline
 import Cocoa
 
+@MainActor
 protocol OutlineEditorViewHandleDelegate {
     func outlineEditor(_ outlineEditor: OutlineEditorView, clickedItemHandle: ItemType) -> Bool
 }
@@ -22,7 +23,11 @@ open class OutlineEditorViewController: NSViewController, OutlineEditorHolderTyp
     var selectionStack: [NSRange] = []
 
     deinit {
-        outlineEditorView?.delegate = nil
+        // deinit is nonisolated, but view controllers deallocate on the main
+        // thread with their window hierarchy.
+        assumeMainActor {
+            outlineEditorView?.delegate = nil
+        }
     }
 
     override open func viewDidLoad() {

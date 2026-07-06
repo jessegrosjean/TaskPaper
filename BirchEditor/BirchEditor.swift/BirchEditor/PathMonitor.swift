@@ -9,8 +9,8 @@
 import Darwin
 import Foundation
 
+@MainActor
 class PathMonitor {
-    let pathMonitorQueue = DispatchQueue(label: "com.Birch.pathmonitor", attributes: [])
     var monitoredFileDescriptor: CInt?
     var pathMonitorSource: DispatchSourceFileSystemObject?
     var callback: () -> Void
@@ -24,7 +24,11 @@ class PathMonitor {
     }
 
     deinit {
-        stopMonitoring()
+        // deinit is nonisolated, but every owner of a PathMonitor is a
+        // main-actor-isolated static, so the last release happens on main.
+        MainActor.assumeIsolated {
+            stopMonitoring()
+        }
     }
 
     func startDirectoryMonitoring() {
@@ -55,32 +59,43 @@ class PathMonitor {
             }
 
             if monitoredFileDescriptor != -1 {
-                pathMonitorSource = DispatchSource.makeFileSystemObjectSource(fileDescriptor: monitoredFileDescriptor!, eventMask: flags, queue: pathMonitorQueue)
+                // Deliver events on the main queue: the event handler mutates
+                // monitor state that startMonitoring/stopMonitoring touch from
+                // the main thread, and every callback ends up mutating
+                // main-thread state (script commands, configuration outlines).
+                // A private queue here raced against both.
+                pathMonitorSource = DispatchSource.makeFileSystemObjectSource(fileDescriptor: monitoredFileDescriptor!, eventMask: flags, queue: .main)
                 if let pathMonitorSource = pathMonitorSource {
+                    // Both handlers run on the main queue (source queue above);
+                    // assumeIsolated enforces that at runtime.
                     pathMonitorSource.setEventHandler { [unowned self] in
-                        if let flags = self.pathMonitorSource?.data {
-                            if flags.contains(.delete) {
-                                self.stopMonitoring()
-                                self.restart = true
-                            } else if flags.contains(.rename) {
-                                if let newPath = getFileDescriptorPath(self.monitoredFileDescriptor!) {
-                                    self.URL = Foundation.URL(fileURLWithPath: newPath)
-                                } else {
+                        MainActor.assumeIsolated {
+                            if let flags = self.pathMonitorSource?.data {
+                                if flags.contains(.delete) {
                                     self.stopMonitoring()
-                                    self.restart = false
+                                    self.restart = true
+                                } else if flags.contains(.rename) {
+                                    if let newPath = getFileDescriptorPath(self.monitoredFileDescriptor!) {
+                                        self.URL = Foundation.URL(fileURLWithPath: newPath)
+                                    } else {
+                                        self.stopMonitoring()
+                                        self.restart = false
+                                    }
                                 }
                             }
+                            self.callback()
                         }
-                        self.callback()
                     }
 
                     pathMonitorSource.setCancelHandler { [weak self] in
-                        if let strongSelf = self {
-                            close(strongSelf.monitoredFileDescriptor!)
-                            strongSelf.monitoredFileDescriptor = nil
-                            strongSelf.pathMonitorSource = nil
-                            if strongSelf.restart {
-                                strongSelf.startMonitoring(self!.flags!)
+                        MainActor.assumeIsolated {
+                            if let strongSelf = self {
+                                close(strongSelf.monitoredFileDescriptor!)
+                                strongSelf.monitoredFileDescriptor = nil
+                                strongSelf.pathMonitorSource = nil
+                                if strongSelf.restart {
+                                    strongSelf.startMonitoring(self!.flags!)
+                                }
                             }
                         }
                     }

@@ -11,18 +11,21 @@ import JavaScriptCore
 @testable import TaskPaper
 import XCTest
 
+@MainActor
 class StyleSheetTests: XCTestCase {
     var styleSheet: StyleSheet?
     weak var weakStyleSheet: StyleSheet?
 
-    override func setUp() {
+    // The async overrides may add @MainActor isolation (callers await),
+    // which puts setup/teardown on the main actor alongside the tests.
+    @MainActor
+    override func setUp() async throws {
         styleSheet = StyleSheet(source: nil, scriptContext: BirchOutline.sharedContext)
         weakStyleSheet = styleSheet
-        super.setUp()
     }
 
-    override func tearDown() {
-        super.tearDown()
+    @MainActor
+    override func tearDown() async throws {
         styleSheet = nil
         XCTAssertNil(weakStyleSheet)
     }

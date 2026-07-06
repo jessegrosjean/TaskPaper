@@ -7,9 +7,9 @@
 //
 
 import BirchOutline
-import EventKit
+@preconcurrency import EventKit
 
-class RemindersStoreAccessError: NSError {
+class RemindersStoreAccessError: NSError, @unchecked Sendable {
     init() {
         let appName = ProcessInfo.processInfo.processName
         let description = NSLocalizedString("\(appName) does not have access to Reminders", tableName: "Reminders", comment: "message text")
@@ -28,9 +28,14 @@ class RemindersStoreAccessError: NSError {
 let defaultListText = NSLocalizedString(" (Default List)", tableName: "Reminders", comment: "append to default calendar title text")
 
 class RemindersStore {
-    static let eventStore = EKEventStore()
+    // EKEventStore is documented as safe to use across threads; individual
+    // EK objects are handed off between threads here, never accessed
+    // concurrently.
+    nonisolated(unsafe) static let eventStore = EKEventStore()
 
     static func requestAccess(to entityType: EKEntityType, completion: @escaping EKEventStoreRequestAccessCompletionHandler) {
+        // Handed to EventKit's completion; invoked once, never shared.
+        nonisolated(unsafe) let completion = completion
         eventStore.requestAccess(to: entityType) { granted, error in
             if granted {
                 completion(granted, error)
@@ -40,22 +45,28 @@ class RemindersStore {
         }
     }
 
-    static func fetchReminderCalendars(callback: @escaping ([EKCalendar]?, Error?) -> Void) {
+    static func fetchReminderCalendars(callback: @escaping @MainActor ([EKCalendar]?, Error?) -> Void) {
+        // Handed to the main queue and only invoked there; the EK objects are
+        // handed off, never accessed concurrently.
+        nonisolated(unsafe) let callback = callback
         RemindersStore.requestAccess(to: .reminder) { granted, error in
             if granted {
-                let calendars = self.eventStore.calendars(for: .reminder)
+                nonisolated(unsafe) let calendars = self.eventStore.calendars(for: .reminder)
                 DispatchQueue.main.async {
-                    callback(calendars, error)
+                    MainActor.assumeIsolated { callback(calendars, error) }
                 }
             } else {
                 DispatchQueue.main.async {
-                    callback(nil, error)
+                    MainActor.assumeIsolated { callback(nil, error) }
                 }
             }
         }
     }
 
-    static func fetchReminders(useDefaultList: Bool = false, allowCompletedReminders: Bool = false, callback: @escaping ([EKReminder]?, Error?) -> Void) {
+    static func fetchReminders(useDefaultList: Bool = false, allowCompletedReminders: Bool = false, callback: @escaping @MainActor ([EKReminder]?, Error?) -> Void) {
+        // Handed to the main queue and only invoked there; the EK objects are
+        // handed off, never accessed concurrently.
+        nonisolated(unsafe) let callback = callback
         RemindersStore.requestAccess(to: .reminder) { granted, error in
             if granted {
                 let calendar = NSCalendar.current
@@ -69,7 +80,7 @@ class RemindersStore {
                     eventStore.predicateForReminders(in: calendars as? [EKCalendar]) :
                     eventStore.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: calendars as? [EKCalendar])
                 self.eventStore.fetchReminders(matching: predicate, completion: { fetchedReminders in
-                    let sortedReminders = fetchedReminders?.sorted {
+                    nonisolated(unsafe) let sortedReminders = fetchedReminders?.sorted {
                         if $0.isCompleted != $1.isCompleted {
                             return $1.isCompleted
                         }
@@ -106,12 +117,12 @@ class RemindersStore {
                     }
 
                     DispatchQueue.main.async {
-                        callback(sortedReminders, error)
+                        MainActor.assumeIsolated { callback(sortedReminders, error) }
                     }
                 })
             } else {
                 DispatchQueue.main.async {
-                    callback(nil, error)
+                    MainActor.assumeIsolated { callback(nil, error) }
                 }
             }
         }
@@ -131,6 +142,7 @@ class RemindersStore {
         try eventStore.commit()
     }
 
+    @MainActor
     static func createReminder(_ item: ItemType, outline: OutlineType, reminderCalendar: EKCalendar) -> EKReminder {
         let clonedItem = outline.cloneItem(item, deep: false)
         let calendar = Calendar.current
@@ -176,6 +188,7 @@ class RemindersStore {
         return reminder
     }
 
+    @MainActor
     static func createItem(_ reminder: EKReminder, outline: OutlineType) -> ItemType {
         let item = outline.createItem(reminder.title.replacingOccurrences(of: "\n", with: " "))
 
@@ -218,6 +231,7 @@ class RemindersStore {
         return item
     }
 
+    @MainActor
     static func showReminderCalendarsPalette(_ outlineEditor: OutlineEditorType, placeholder: String, useDefaultList: Bool = false, allowsEmptySelection: Bool = false, allowsMultipleSelection: Bool = false, completionHandler: @escaping ((String?, ([EKCalendar])?, Error?) -> Void)) {
         fetchReminderCalendars { calendars, error in
             let defaultCalendar = self.eventStore.defaultCalendarForNewReminders()
@@ -260,6 +274,7 @@ class RemindersStore {
         }
     }
 
+    @MainActor
     static func showRemindersPalette(_ outlineEditor: OutlineEditorType, placeholder: String, useDefaultList: Bool = false, allowCompletedReminders: Bool = false, allowsEmptySelection: Bool = false, allowsMultipleSelection: Bool = false, completionHandler: @escaping ((String?, ([EKReminder])?, Error?) -> Void)) {
         fetchReminders(useDefaultList: useDefaultList, allowCompletedReminders: allowCompletedReminders) { reminders, error in
             if let error = error {
@@ -272,7 +287,7 @@ class RemindersStore {
                 var idsToCalendarItems = [String: ChoicePaletteItem]()
                 let defaultCalendar = self.eventStore.defaultCalendarForNewReminders()
 
-                func calendarGroupItemForCalendar(calendar: EKCalendar) -> ChoicePaletteItem {
+                @MainActor func calendarGroupItemForCalendar(calendar: EKCalendar) -> ChoicePaletteItem {
                     if let calendarItem = idsToCalendarItems[calendar.calendarIdentifier] {
                         return calendarItem
                     } else {

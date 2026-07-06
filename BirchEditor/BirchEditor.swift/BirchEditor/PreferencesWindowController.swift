@@ -11,8 +11,8 @@ import Cocoa
 import JavaScriptCore
 
 let preferencesBundle = Bundle(for: ChoicePaletteWindowController.self)
-let preferencesStoryboard = NSStoryboard(name: "Preferences", bundle: preferencesBundle)
-let preferencesWindowController = preferencesStoryboard.instantiateController(withIdentifier: "Preferences Window Controller") as! PreferencesWindowController
+@MainActor let preferencesStoryboard = NSStoryboard(name: "Preferences", bundle: preferencesBundle)
+@MainActor let preferencesWindowController = preferencesStoryboard.instantiateController(withIdentifier: "Preferences Window Controller") as! PreferencesWindowController
 
 let NSProhibitMultipleTextSelectionByMouse = "NSProhibitMultipleTextSelectionByMouse"
 //let NSShowAppCentricOpenPanelInsteadOfUntitledFile = "NSShowAppCentricOpenPanelInsteadOfUntitledFile"
@@ -111,7 +111,7 @@ class PreferencesWindowController: NSWindowController {
     }
 }
 
-extension UserDefaults: PreferencesStoreType {
+extension UserDefaults: @retroactive JSExport, PreferencesStoreType {
     public func getPreference(_ key: String) -> Any? {
         return object(forKey: key)
     }

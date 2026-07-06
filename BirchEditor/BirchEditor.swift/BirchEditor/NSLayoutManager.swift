@@ -16,6 +16,8 @@ extension NSLayoutManager {
         set(value) {}
     }
 
+    // Snapshotting draws into an image on the caller's (main) thread.
+    @MainActor
     public func snapshotForGlyphRange(_ glyphRange: NSRange, textContainer: NSTextContainer? = nil) -> (image: NSImage, bounds: NSRect) {
         let tc = textContainer ?? textContainers[0]
         let tv = tc.textView

@@ -19,7 +19,7 @@ extension NSAttributedString.Key {
     static let storageItemIDAttributeName = NSAttributedString.Key("StorageItemID")
 }
 
-public let SharedHandlePath = NSBezierPath()
+@MainActor public let SharedHandlePath = NSBezierPath()
 
 public struct ItemGeometry {
     let itemRect: NSRect
@@ -27,6 +27,7 @@ public struct ItemGeometry {
     let handleRect: NSRect
 }
 
+@MainActor
 public struct OutlineEditorTextStorageItem {
     struct RunStyle {
         let styleKeyPath: String

@@ -10,6 +10,7 @@ import BirchOutline
 import Foundation
 import JavaScriptCore
 
+@MainActor
 public protocol OutlineSidebarType: AnyObject {
     var rootItem: OutlineSidebarItem! { get }
     var homeItem: OutlineSidebarItem { get }
@@ -42,10 +43,12 @@ public protocol OutlineSidebarType: AnyObject {
     func destroy()
 }
 
+@MainActor
 protocol OutlineSidebarItemFactoryType: AnyObject {
     func vendOutlineSidebarItem(_ jsOutlineSidebarItem: JSValue) -> OutlineSidebarItem
 }
 
+@MainActor
 final class OutlineSidebar: NSObject, OutlineSidebarType, OutlineSidebarItemFactoryType {
     weak var outlineEditor: OutlineEditor?
 

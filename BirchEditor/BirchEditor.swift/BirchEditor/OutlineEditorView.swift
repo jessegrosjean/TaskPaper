@@ -24,6 +24,7 @@ struct StorageItemPick {
     let handleContainsPoint: Bool
 }
 
+@MainActor
 struct StorageItemDropTargetPick {
     let storageItemPick: StorageItemPick
     let dropLocation: ItemDropLocation
@@ -174,7 +175,18 @@ class OutlineEditorView: NSTextView {
         }
     }
 
+    // Nonisolated NSObject override; UserDefaults KVO fires on the thread
+    // that set the value — always main here (preferences UI).
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
+        nonisolated(unsafe) let object = object
+        nonisolated(unsafe) let change = change
+        nonisolated(unsafe) let context = context
+        assumeMainActor {
+            observeValueAssumingMainActor(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
+    }
+
+    private func observeValueAssumingMainActor(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == BCheckSpellingAsYouType {
             isContinuousSpellCheckingEnabled = userDefaults.bool(forKey: BCheckSpellingAsYouType)
         } else if keyPath == BCheckGrammarWithSpelling {
@@ -606,25 +618,15 @@ class OutlineEditorView: NSTextView {
     // MARK: - Disable Old Forms Of Tracking
 
     override func addTrackingRect(_: NSRect, owner _: Any, userData _: UnsafeMutableRawPointer?, assumeInside _: Bool) -> NSView.TrackingRectTag {
-        Swift.print("BAD addTrackingRect called")
         return -1
     }
 
     override func addCursorRect(_: NSRect, cursor _: NSCursor) {
-        Swift.print("BAD addCursorRect called")
     }
 
     // MARK: - Menu
 
     override func menu(for event: NSEvent) -> NSMenu? {
-        /* if let _ = outlineEditor?.mouseOverItemHandle {
-             let menu = NSMenu(title: "")
-             menu.addItem(withTitle: "Cut".localized(), action: #selector(cut(_:)), keyEquivalent: "")
-             menu.addItem(withTitle: "Copy".localized(), action: #selector(copy(_:)), keyEquivalent: "")
-             menu.addItem(withTitle: "Paste".localized(), action: #selector(paste(_:)), keyEquivalent: "")
-             return menu
-         } */
-
         let menu = super.menu(for: event)
 
         if let removeItem = menu?.submenuItem(withAction: NSSelectorFromString("orderFrontColorPanel:"))?.parent {

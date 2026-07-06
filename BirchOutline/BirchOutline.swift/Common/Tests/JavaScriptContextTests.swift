@@ -9,16 +9,9 @@
 import XCTest
 @testable import BirchOutline
 
+@MainActor
 class JavaScriptContextTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-    }
-    
+
     func testInit() {
         XCTAssertNotNil(BirchOutline.sharedContext.context)
         XCTAssertNotNil(BirchOutline.sharedContext.jsBirchExports)

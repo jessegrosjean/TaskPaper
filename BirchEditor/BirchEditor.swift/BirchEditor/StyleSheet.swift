@@ -19,6 +19,7 @@ let baseStyleSheetURL = Bundle.main.url(forResource: "base-stylesheet", withExte
 let baseStyleSheetLESS = (try? String(contentsOf: baseStyleSheetURL, encoding: String.Encoding.utf8)) ?? ""
 let DefaultStyleSheetURL = "DefaultStyleSheetURL"
 
+@MainActor
 open class StyleSheet {
     public static let sharedInstance = BirchEditor.createStyleSheet(nil)
 
@@ -100,8 +101,6 @@ open class StyleSheet {
 
         jsStyleSheet = scriptContext.jsStyleSheetClass.construct(withArguments: [processedLessText])
     }
-
-    deinit {}
 
     public let source: URL
 
@@ -319,6 +318,7 @@ func lineStyleFromString(_ string: String) -> NSUnderlineStyle? {
     return NSUnderlineStyle(rawValue: style.rawValue | pattern.rawValue | word.rawValue)
 }
 
+@MainActor
 func fontFromJSStyle(_ jsStyle: [String: Any]) -> NSFont? {
     let font = NSFont.userFont(ofSize: 0)!
     var fontTraitMask = NSFontTraitMask()
@@ -412,6 +412,7 @@ func paragraphStyleFromJSStyle(_ jsStyle: [String: Any]) -> NSParagraphStyle? {
     return paragraphStyle
 }
 
+@MainActor
 public protocol StylesheetHolder {
     var styleSheet: StyleSheet? { get set }
 }

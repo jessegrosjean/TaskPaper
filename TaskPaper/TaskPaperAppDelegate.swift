@@ -14,7 +14,7 @@ import Cocoa
     import Sparkle
 #endif
 
-@NSApplicationMain
+@main
 class TaskPaperAppDelegate: OutlineEditorAppDelegate {
     override func applicationWillFinishLaunching(_ notification: Notification) {
         super.applicationWillFinishLaunching(notification)

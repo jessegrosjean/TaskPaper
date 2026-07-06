@@ -9,6 +9,7 @@
 import Foundation
 import JavaScriptCore
 
+@MainActor
 public protocol DisposableType: AnyObject {
     
     func dispose()

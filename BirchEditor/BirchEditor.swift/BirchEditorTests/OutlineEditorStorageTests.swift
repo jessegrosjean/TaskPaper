@@ -11,6 +11,7 @@ import JavaScriptCore
 @testable import TaskPaper
 import XCTest
 
+@MainActor
 class OutlineEditorTextStorageTests: XCTestCase {
     var outline: OutlineType!
     weak var weakOutline: OutlineType?
@@ -19,8 +20,10 @@ class OutlineEditorTextStorageTests: XCTestCase {
     var outlineEditorTextStorage: OutlineEditorTextStorage!
     weak var weakOutlineEditorTextStorage: OutlineEditorTextStorage?
 
-    override func setUp() {
-        super.setUp()
+    // The async overrides may add @MainActor isolation (callers await),
+    // which puts setup/teardown on the main actor alongside the tests.
+    @MainActor
+    override func setUp() async throws {
         outline = BirchEditor.createTaskPaperOutline(nil)
         weakOutline = outline
         outlineEditor = BirchEditor.createOutlineEditor(outline, styleSheet: nil)
@@ -33,7 +36,8 @@ class OutlineEditorTextStorageTests: XCTestCase {
         XCTAssertEqual(outline.retainCount, 1)
     }
 
-    override func tearDown() {
+    @MainActor
+    override func tearDown() async throws {
         outlineEditor = nil
         XCTAssertNil(weakOutlineEditor)
         outlineEditorTextStorage = nil
@@ -41,7 +45,6 @@ class OutlineEditorTextStorageTests: XCTestCase {
         XCTAssertEqual(outline.retainCount, 0)
         outline = nil
         XCTAssertNil(weakOutline)
-        super.tearDown()
     }
 
     func testStorageItemLookupByIndex() {

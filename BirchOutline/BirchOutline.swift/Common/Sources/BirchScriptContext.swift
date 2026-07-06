@@ -9,6 +9,7 @@
 import JavaScriptCore
 import WebKit
 
+@MainActor
 open class BirchScriptContext {
     
     open var context: JSContext!    
@@ -76,30 +77,63 @@ open class BirchScriptContext {
 }
 
 func setExceptionHandler(_ context: JSContext) {
-    context.exceptionHandler = { context, exception in
+    context.exceptionHandler = { _, exception in
         let message = NSLocalizedString("Uncaught JavaScript Exception", tableName: "JavascriptException", comment: "message text")
-        let informativeText = NSLocalizedString("\(String(describing: exception))\n\n\(String(describing: exception!.forProperty("stack")))", tableName: "JavascriptException", comment: "informative text")        
+        let description = exception?.toString() ?? "Unknown exception"
+        let stack = exception?.forProperty("stack")?.toString() ?? "No stack trace"
+        let informativeText = NSLocalizedString("\(description)\n\n\(stack)", tableName: "JavascriptException", comment: "informative text")
         cpAlert(message, informativeText: informativeText)
-        exit(EXIT_SUCCESS)
+        exit(EXIT_FAILURE)
     }
 }
 
+// JS timers are main-actor state: JS only ever evaluates on the main thread,
+// and the fired callbacks re-enter the JS context.
+@MainActor
+private final class TimeoutRegistry {
+    var nextID: Int32 = 1
+    var callbacks = [Int32: JSValue]()
+}
+
+@MainActor
 func setTimeoutAndClearTimeoutHandlers(_ context: JSContext) {
-    var setTimeoutID: Int32 = 1
-    var setTimeOutIDsToCallbacks = [Int32:JSValue]()
-    
+    installTimeoutHandlers(context, registry: TimeoutRegistry())
+}
+
+// Nonisolated so the blocks below stay nonisolated function values (a closure
+// formed in a @MainActor context would infer @MainActor isolation, which is
+// ill-formed for a block taking non-Sendable JSValue parameters).
+private func installTimeoutHandlers(_ context: JSContext, registry: TimeoutRegistry) {
+    // JSC invokes these blocks on whatever thread evaluates JS — always the
+    // main thread in this app. assumeIsolated documents and enforces that
+    // invariant at runtime rather than assuming it silently.
     let setTimeout: @convention(block) (JSValue, Int) -> JSValue = { (callback, wait) in
-        let thisTimeOutID = setTimeoutID
-        setTimeoutID += 1
-        setTimeOutIDsToCallbacks[thisTimeOutID] = callback
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(UInt64(wait) * NSEC_PER_MSEC)) / Double(NSEC_PER_SEC), execute: { () -> Void in
-            let _ = setTimeOutIDsToCallbacks[thisTimeOutID]?.call(withArguments: [])
-        })
-        return JSValue.init(int32: setTimeoutID, in: context)
+        // The block runs on the main thread (asserted below), so the JSValue
+        // parameter never actually crosses an isolation boundary.
+        nonisolated(unsafe) let callback = callback
+        // assumeIsolated can only return Sendable values, so hand back the
+        // timer ID and build the JSValue outside.
+        let thisTimeOutID: Int32 = MainActor.assumeIsolated {
+            let thisTimeOutID = registry.nextID
+            registry.nextID += 1
+            registry.callbacks[thisTimeOutID] = callback
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(UInt64(wait) * NSEC_PER_MSEC)) / Double(NSEC_PER_SEC)) {
+                MainActor.assumeIsolated {
+                    let _ = registry.callbacks.removeValue(forKey: thisTimeOutID)?.call(withArguments: [])
+                }
+            }
+            return thisTimeOutID
+        }
+        return JSValue.init(int32: thisTimeOutID, in: context)
     }
-    
+
     let clearTimeout: @convention(block) (JSValue) -> Void = { (timeoutID) in
-        setTimeOutIDsToCallbacks.removeValue(forKey: timeoutID.toInt32())
+        // The block runs on the main thread (asserted below), so the JSValue
+        // parameter never actually crosses an isolation boundary.
+        nonisolated(unsafe) let timeoutID = timeoutID
+        MainActor.assumeIsolated {
+            _ = registry.callbacks.removeValue(forKey: timeoutID.toInt32())
+        }
     }
 
     context.setObject(unsafeBitCast(setTimeout, to: AnyObject.self), forKeyedSubscript: "setTimeout" as (NSCopying & NSObjectProtocol))

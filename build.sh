@@ -1,4 +1,7 @@
-#!/bin/sh
+#!/bin/bash
+
+# Abort the release on the first failed step rather than continuing silently.
+set -euo pipefail
 
 function packageDMG() {
     local APP_NAME=$1
@@ -95,6 +98,7 @@ function buildApp() {
     local PRODUCT_NAME="${PRODUCT_NAME// /-}"
 
     # Plist version update and sync
+    # NOTE: bundle version is hardcoded; bump it here for each release (see CLAUDE.md).
     #local BUNDLE_VERSION=$(($BUNDLE_VERSION + 1))
     local BUNDLE_VERSION=487
     /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUNDLE_VERSION" "${INFOPLIST_FILE}"
@@ -112,7 +116,7 @@ function buildApp() {
     # Create Relase Candidate Folder
     local RELEASE_CANDIDATE_FOLDER="build/$APP_NAME-Candidate-($BUNDLE_VERSION)"
 
-    mkdir "$RELEASE_CANDIDATE_FOLDER"
+    mkdir -p "$RELEASE_CANDIDATE_FOLDER"
     open "$RELEASE_CANDIDATE_FOLDER"
 
     # Package Direct Release
@@ -120,13 +124,12 @@ function buildApp() {
     mv "build/$APP_NAME.xcarchive/dSYMs" "$RELEASE_CANDIDATE_FOLDER/Direct-dSYMs"
     packageDMG $APP_NAME $PRODUCT_NAME $BUNDLE_VERSION $SHORT_VERSION_STRING "$APP_NAME.dmg"
     local MIN_SYSTEM_VERSION=$(/usr/libexec/PlistBuddy -c "Print :LSMinimumSystemVersion" "build/$APP_NAME.xcarchive/Products/Applications/$APP_NAME.app/Contents/Info.plist")
-    cp "build/$APP_NAME.xcarchive/dSYMs" "$RELEASE_CANDIDATE_FOLDER/Direct/dSYMs"
     createFeed $APP_NAME $PRODUCT_NAME $BUNDLE_VERSION $SHORT_VERSION_STRING "$APP_NAME.dmg" "$APP_NAME.rss" $MIN_SYSTEM_VERSION
 
     # Package Direct Preview Release
     /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString \"$SHORT_VERSION_STRING_PREVIEW\"" "${PADDLE_INFOPLIST_FILE}"
     xcodebuild -project "./TaskPaper.xcodeproj" -scheme "$APP_NAME Direct" -archivePath "build/$APP_NAME" clean archive
-    cp "build/$APP_NAME.xcarchive/dSYMs" "$RELEASE_CANDIDATE_FOLDER/Preview-dSYMs"
+    cp -R "build/$APP_NAME.xcarchive/dSYMs" "$RELEASE_CANDIDATE_FOLDER/Preview-dSYMs"
     /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString \"$SHORT_VERSION_STRING\"" "${PADDLE_INFOPLIST_FILE}"
     packageDMG $APP_NAME "$PRODUCT_NAME-Preview" $BUNDLE_VERSION "$SHORT_VERSION_STRING Preview" "$APP_NAME-Preview.dmg"
     rm -rd "build/$APP_NAME.xcarchive"
@@ -140,7 +143,7 @@ function buildApp() {
     xcodebuild -project "./TaskPaper.xcodeproj" -scheme "$APP_NAME Setapp" -archivePath "build/$APP_NAME-Setapp" clean archive
     xcodebuild -exportArchive -exportOptionsPlist "./$APP_NAME/ExportOptions-direct.plist" -archivePath "build/$APP_NAME-Setapp.xcarchive" -exportPath "./build/"
     codesign --timestamp --options runtime --entitlements "./$APP_NAME/$APP_NAME-Direct.entitlements" -f -s "Developer ID Application: Jesse Grosjean" "./build/$APP_NAME.app"
-    cp "build/$APP_NAME-Setapp.xcarchive/dSYMs" "$RELEASE_CANDIDATE_FOLDER/Setapp/dSYMs"
+    cp -R "build/$APP_NAME-Setapp.xcarchive/dSYMs" "$RELEASE_CANDIDATE_FOLDER/Setapp/dSYMs"
 
     echo "Begin DMGCanvas for notarize side effect"
     dmgcanvas "$APP_NAME/DMGTemplate-Setapp.dmgCanvas/" "./build/$APP_NAME.dmg"

@@ -11,14 +11,16 @@ import JavaScriptCore
 
 typealias Command = (command: String, displayName: String)
 
+@MainActor
 class Commands: NSObject {
     static let jsCommands = BirchOutline.sharedContext.jsBirchCommands
     static var scriptCommandsDisposables: [DisposableType]?
     static var scriptsFolderMonitor: PathMonitor?
 
     static func add(_ target: String, commandName: String, callback: @escaping () -> Void) -> DisposableType {
+        // JSC invokes this block on the thread that evaluates JS (always main).
         let callbackWrapper: @convention(block) () -> Void = {
-            callback()
+            MainActor.assumeIsolated { callback() }
         }
         return jsCommands.invokeMethod("add", withArguments: [target, commandName, unsafeBitCast(callbackWrapper, to: AnyObject.self)])
     }

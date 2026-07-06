@@ -10,20 +10,24 @@ import XCTest
 import JavaScriptCore
 @testable import BirchOutline
 
+@MainActor
 class OutlineTests: XCTestCase {
 
     var outline: OutlineType!
     weak var weakOutline: OutlineType?
-    
-    override func setUp() {
-        super.setUp()
+
+    // The async overrides may add @MainActor isolation (callers await),
+    // which puts setup/teardown on the main actor alongside the tests.
+    @MainActor
+    override func setUp() async throws {
         let path = Bundle(for: BirchScriptContext.self).path(forResource: "OutlineFixture", ofType: "txt")!
         let textContents = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
         outline = BirchOutline.createTaskPaperOutline(textContents as String)
         weakOutline = outline
     }
-    
-    override func tearDown() {
+
+    @MainActor
+    override func tearDown() async throws {
         outline = nil
         XCTAssertNil(weakOutline)
     }

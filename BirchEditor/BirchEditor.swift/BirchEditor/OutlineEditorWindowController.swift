@@ -95,20 +95,28 @@ open class OutlineEditorWindowController: NSWindowController, OutlineEditorHolde
 
             PreviewTitlebarAccessoryViewController.addPreviewTitlebarAccessoryIfNeeded(window)
 
+            // Appearance KVO fires on the main thread with the window change.
             windowEffectiveAppearanceObserver = window.observe(\.effectiveAppearance) { [weak self] _, _ in
-                if let `self` = self, let currentStyleSheet = self.styleSheet {
-                    self.styleSheet = BirchEditor.createStyleSheet(currentStyleSheet.source)
+                MainActor.assumeIsolated {
+                    if let `self` = self, let currentStyleSheet = self.styleSheet {
+                        self.styleSheet = BirchEditor.createStyleSheet(currentStyleSheet.source)
+                    }
                 }
             }
         }
     }
 
-    var windowEffectiveAppearanceObserver: NSKeyValueObservation?
+    // nonisolated(unsafe) so the nonisolated deinit can invalidate it.
+    nonisolated(unsafe) var windowEffectiveAppearanceObserver: NSKeyValueObservation?
 
+    // Nonisolated NSObject override; UserDefaults KVO fires on the thread
+    // that set the value — always main here (preferences UI).
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == BUserFontSizeDefaultsKey {
-            if let currentStyleSheet = styleSheet {
-                styleSheet = BirchEditor.createStyleSheet(currentStyleSheet.source)
+            assumeMainActor {
+                if let currentStyleSheet = styleSheet {
+                    styleSheet = BirchEditor.createStyleSheet(currentStyleSheet.source)
+                }
             }
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
@@ -118,14 +126,12 @@ open class OutlineEditorWindowController: NSWindowController, OutlineEditorHolde
     override open func synchronizeWindowTitleWithDocumentName() {
         super.synchronizeWindowTitleWithDocumentName()
 
-        if #available(OSX 10.13, *) {
-            if let window = (window as? OutlineEditorWindow) {
-                let selectedItemTitle = outlineEditor?.outlineSidebar?.selectedItem?.title ?? ""
-                if window.isTabbedWindowWithSingleDocument {
-                    window.tab.title = selectedItemTitle
-                } else {
-                    window.tab.title = "\(window.title) • \(selectedItemTitle)"
-                }
+        if let window = (window as? OutlineEditorWindow) {
+            let selectedItemTitle = outlineEditor?.outlineSidebar?.selectedItem?.title ?? ""
+            if window.isTabbedWindowWithSingleDocument {
+                window.tab.title = selectedItemTitle
+            } else {
+                window.tab.title = "\(window.title) • \(selectedItemTitle)"
             }
         }
     }
@@ -173,7 +179,6 @@ open class OutlineEditorWindowController: NSWindowController, OutlineEditorHolde
         }
     }
 
-    @available(OSX 10.12, *)
     @IBAction func newTab(_: Any?) {
         if let document = document as? OutlineDocument {
             let windowController = document.makeWindowController()
@@ -186,11 +191,15 @@ open class OutlineEditorWindowController: NSWindowController, OutlineEditorHolde
     }
 
     deinit {
-        pathMonitor?.stopMonitoring()
-        pathMonitor = nil
-        styleSheetUpdateDebouncer?.cancel()
-        styleSheetUpdateDebouncer = nil
-        sidebarSelectionDisposable?.dispose()
+        // deinit is nonisolated, but window controllers deallocate on the
+        // main thread with their window.
+        MainActor.assumeIsolated {
+            pathMonitor?.stopMonitoring()
+            pathMonitor = nil
+            styleSheetUpdateDebouncer?.cancel()
+            styleSheetUpdateDebouncer = nil
+            sidebarSelectionDisposable?.dispose()
+        }
         windowEffectiveAppearanceObserver?.invalidate()
         userDefaults.removeObserver(self, forKeyPath: BUserFontSizeDefaultsKey)
     }

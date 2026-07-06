@@ -16,8 +16,6 @@
 		431673E21D9C3C2700A84EC6 /* searches.taskpaper in Resources */ = {isa = PBXBuildFile; fileRef = 431673E01D9C3C2700A84EC6 /* searches.taskpaper */; };
 		431673E41D9C3CB800A84EC6 /* tags.taskpaper in Resources */ = {isa = PBXBuildFile; fileRef = 431673E31D9C3CB800A84EC6 /* tags.taskpaper */; };
 		431673E51D9C3CB800A84EC6 /* tags.taskpaper in Resources */ = {isa = PBXBuildFile; fileRef = 431673E31D9C3CB800A84EC6 /* tags.taskpaper */; };
-		43167F951D89AD8B00FF919B /* NSWindowTabbedBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43167F941D89AD8B00FF919B /* NSWindowTabbedBase.m */; };
-		43167F961D89AD8B00FF919B /* NSWindowTabbedBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43167F941D89AD8B00FF919B /* NSWindowTabbedBase.m */; };
 		431713F91DD677CD00B9F605 /* OutlineEditorHandleClickGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431713F81DD677CD00B9F605 /* OutlineEditorHandleClickGestureRecognizer.swift */; };
 		431713FA1DD677CD00B9F605 /* OutlineEditorHandleClickGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431713F81DD677CD00B9F605 /* OutlineEditorHandleClickGestureRecognizer.swift */; };
 		431713FB1DD677CD00B9F605 /* OutlineEditorHandleClickGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431713F81DD677CD00B9F605 /* OutlineEditorHandleClickGestureRecognizer.swift */; };
@@ -88,7 +86,6 @@
 		433815F31DB93DB900120078 /* NSRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B281D69FB96001F6A2B /* NSRect.swift */; };
 		433815F41DB93DB900120078 /* OutlineEditorTextStorageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B411D69FB96001F6A2B /* OutlineEditorTextStorageItem.swift */; };
 		433815F51DB93DB900120078 /* OutlineEditorTypesetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B431D69FB96001F6A2B /* OutlineEditorTypesetter.swift */; };
-		433815F61DB93DB900120078 /* NSWindowTabbedBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43167F941D89AD8B00FF919B /* NSWindowTabbedBase.m */; };
 		433815F71DB93DB900120078 /* ChoicePaletteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B0E1D69FB96001F6A2B /* ChoicePaletteRowView.swift */; };
 		433815F81DB93DB900120078 /* ChoicePaletteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B101D69FB96001F6A2B /* ChoicePaletteTableView.swift */; };
 		433815F91DB93DB900120078 /* ChoicePaletteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B111D69FB96001F6A2B /* ChoicePaletteTextField.swift */; };
@@ -149,6 +146,7 @@
 		433816351DB93DB900120078 /* OutlineSidebarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B581D69FB96001F6A2B /* OutlineSidebarItem.swift */; };
 		433816361DB93DB900120078 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433815C11DB67EE900120078 /* DatePickerViewController.swift */; };
 		433816371DB93DB900120078 /* delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B181D69FB96001F6A2B /* delay.swift */; };
+		AA00000000000000000A0002 /* assumeMainActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000A0001 /* assumeMainActor.swift */; };
 		433816391DB93DB900120078 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B4D1D69FB96001F6A2B /* PreferencesWindowController.swift */; };
 		4338163A1DB93DB900120078 /* ItemPasteboardUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B1C1D69FB96001F6A2B /* ItemPasteboardUtilities.swift */; };
 		4338163B1DB93DB900120078 /* NSTextStorage-Performance.m in Sources */ = {isa = PBXBuildFile; fileRef = 43402B2A1D69FB96001F6A2B /* NSTextStorage-Performance.m */; };
@@ -199,6 +197,7 @@
 		43402B6B1D69FB96001F6A2B /* ComputedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B161D69FB96001F6A2B /* ComputedStyle.swift */; };
 		43402B6C1D69FB96001F6A2B /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B171D69FB96001F6A2B /* Debouncer.swift */; };
 		43402B6D1D69FB96001F6A2B /* delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B181D69FB96001F6A2B /* delay.swift */; };
+		AA00000000000000000A0003 /* assumeMainActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000A0001 /* assumeMainActor.swift */; };
 		43402B6F1D69FB96001F6A2B /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B1A1D69FB96001F6A2B /* Font.swift */; };
 		43402B711D69FB96001F6A2B /* ItemPasteboardUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B1C1D69FB96001F6A2B /* ItemPasteboardUtilities.swift */; };
 		43402B721D69FB96001F6A2B /* JGMethodSwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 43402B1E1D69FB96001F6A2B /* JGMethodSwizzler.m */; };
@@ -424,6 +423,7 @@
 		43B6AE231D6CE91600ACA66C /* NSView-Hiearchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B311D69FB96001F6A2B /* NSView-Hiearchy.swift */; };
 		43B6AE241D6CE91600ACA66C /* OutlineSidebarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B581D69FB96001F6A2B /* OutlineSidebarItem.swift */; };
 		43B6AE251D6CE91600ACA66C /* delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B181D69FB96001F6A2B /* delay.swift */; };
+		AA00000000000000000A0004 /* assumeMainActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000A0001 /* assumeMainActor.swift */; };
 		43B6AE261D6CE91600ACA66C /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B4D1D69FB96001F6A2B /* PreferencesWindowController.swift */; };
 		43B6AE271D6CE91600ACA66C /* ItemPasteboardUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B1C1D69FB96001F6A2B /* ItemPasteboardUtilities.swift */; };
 		43B6AE281D6CE91600ACA66C /* NSTextStorage-Performance.m in Sources */ = {isa = PBXBuildFile; fileRef = 43402B2A1D69FB96001F6A2B /* NSTextStorage-Performance.m */; };
@@ -562,8 +562,6 @@
 		431673DD1D9C2A8500A84EC6 /* ConfigurationOutlinesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationOutlinesController.swift; sourceTree = "<group>"; };
 		431673E01D9C3C2700A84EC6 /* searches.taskpaper */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = searches.taskpaper; sourceTree = "<group>"; };
 		431673E31D9C3CB800A84EC6 /* tags.taskpaper */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tags.taskpaper; sourceTree = "<group>"; };
-		43167F931D89AD8B00FF919B /* NSWindowTabbedBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSWindowTabbedBase.h; sourceTree = "<group>"; };
-		43167F941D89AD8B00FF919B /* NSWindowTabbedBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSWindowTabbedBase.m; sourceTree = "<group>"; };
 		431713F81DD677CD00B9F605 /* OutlineEditorHandleClickGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineEditorHandleClickGestureRecognizer.swift; sourceTree = "<group>"; };
 		431714001DD677FB00B9F605 /* OutlineEditorHandleDragGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineEditorHandleDragGestureRecognizer.swift; sourceTree = "<group>"; };
 		43192D082A87B8DB00FF7AA8 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
@@ -607,6 +605,7 @@
 		43402B161D69FB96001F6A2B /* ComputedStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputedStyle.swift; sourceTree = "<group>"; };
 		43402B171D69FB96001F6A2B /* Debouncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		43402B181D69FB96001F6A2B /* delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = delay.swift; sourceTree = "<group>"; };
+		AA00000000000000000A0001 /* assumeMainActor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = assumeMainActor.swift; sourceTree = "<group>"; };
 		43402B1A1D69FB96001F6A2B /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		43402B1C1D69FB96001F6A2B /* ItemPasteboardUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPasteboardUtilities.swift; sourceTree = "<group>"; };
 		43402B1D1D69FB96001F6A2B /* JGMethodSwizzler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGMethodSwizzler.h; sourceTree = "<group>"; };
@@ -1014,8 +1013,6 @@
 				4315A2B0219CADFB00348175 /* NSTextView-AccessibilityPerformanceHacks.m */,
 				43402B2B1D69FB96001F6A2B /* NSTextStorageBase.h */,
 				43402B2C1D69FB96001F6A2B /* NSTextStorageBase.m */,
-				43167F931D89AD8B00FF919B /* NSWindowTabbedBase.h */,
-				43167F941D89AD8B00FF919B /* NSWindowTabbedBase.m */,
 				43402B291D69FB96001F6A2B /* NSTextStorage-Performance.h */,
 				43402B2A1D69FB96001F6A2B /* NSTextStorage-Performance.m */,
 				43402B251D69FB96001F6A2B /* NSMutableAttributedString-Performance.h */,
@@ -1039,6 +1036,7 @@
 				43B6ADC31D6CCBC600ACA66C /* ItemPasteboardProvider.swift */,
 				43402B4B1D69FB96001F6A2B /* PathMonitor.swift */,
 				43402B181D69FB96001F6A2B /* delay.swift */,
+				AA00000000000000000A0001 /* assumeMainActor.swift */,
 				43402B1F1D69FB96001F6A2B /* JSON.swift */,
 				43402B171D69FB96001F6A2B /* Debouncer.swift */,
 				431D9C831D77795900CB4F8E /* getMACAddress.swift */,
@@ -1557,21 +1555,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4316800C1D8ADA7400FF919B /* Receigen */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Receigen;
-			outputPaths = (
-				"$(DERIVED_FILES_DIR)/receigen.h",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ./receigen.sh;
-		};
 		433815DC1DB93DB900120078 /* Import bircheditor.js dependency if present and changed */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1701,7 +1684,6 @@
 				433815F41DB93DB900120078 /* OutlineEditorTextStorageItem.swift in Sources */,
 				433815F51DB93DB900120078 /* OutlineEditorTypesetter.swift in Sources */,
 				434DA1EA1E4E28E200513DCC /* CoreFoundation-Extensions.swift in Sources */,
-				433815F61DB93DB900120078 /* NSWindowTabbedBase.m in Sources */,
 				433815F71DB93DB900120078 /* ChoicePaletteRowView.swift in Sources */,
 				433815F81DB93DB900120078 /* ChoicePaletteTableView.swift in Sources */,
 				433815F91DB93DB900120078 /* ChoicePaletteTextField.swift in Sources */,
@@ -1777,6 +1759,7 @@
 				433816351DB93DB900120078 /* OutlineSidebarItem.swift in Sources */,
 				433816361DB93DB900120078 /* DatePickerViewController.swift in Sources */,
 				433816371DB93DB900120078 /* delay.swift in Sources */,
+				AA00000000000000000A0002 /* assumeMainActor.swift in Sources */,
 				434DA1E11E4E288000513DCC /* OutlineEditorCollectionView.swift in Sources */,
 				433816391DB93DB900120078 /* PreferencesWindowController.swift in Sources */,
 				4338163A1DB93DB900120078 /* ItemPasteboardUtilities.swift in Sources */,
@@ -1825,7 +1808,6 @@
 				43402B8F1D69FB96001F6A2B /* OutlineEditorTextStorageItem.swift in Sources */,
 				43402B911D69FB96001F6A2B /* OutlineEditorTypesetter.swift in Sources */,
 				434DA1E81E4E28E200513DCC /* CoreFoundation-Extensions.swift in Sources */,
-				43167F951D89AD8B00FF919B /* NSWindowTabbedBase.m in Sources */,
 				43402B631D69FB96001F6A2B /* ChoicePaletteRowView.swift in Sources */,
 				43402B651D69FB96001F6A2B /* ChoicePaletteTableView.swift in Sources */,
 				43402B661D69FB96001F6A2B /* ChoicePaletteTextField.swift in Sources */,
@@ -1901,6 +1883,7 @@
 				43402BA61D69FB96001F6A2B /* OutlineSidebarItem.swift in Sources */,
 				433815C31DB67EE900120078 /* DatePickerViewController.swift in Sources */,
 				43402B6D1D69FB96001F6A2B /* delay.swift in Sources */,
+				AA00000000000000000A0003 /* assumeMainActor.swift in Sources */,
 				434DA1DF1E4E288000513DCC /* OutlineEditorCollectionView.swift in Sources */,
 				43402B9B1D69FB96001F6A2B /* PreferencesWindowController.swift in Sources */,
 				43402B711D69FB96001F6A2B /* ItemPasteboardUtilities.swift in Sources */,
@@ -1961,7 +1944,6 @@
 				43B6ADED1D6CE91600ACA66C /* OutlineEditorTextStorageItem.swift in Sources */,
 				43B6ADEE1D6CE91600ACA66C /* OutlineEditorTypesetter.swift in Sources */,
 				434DA1E91E4E28E200513DCC /* CoreFoundation-Extensions.swift in Sources */,
-				43167F961D89AD8B00FF919B /* NSWindowTabbedBase.m in Sources */,
 				43B6ADEF1D6CE91600ACA66C /* ChoicePaletteRowView.swift in Sources */,
 				43B6ADF01D6CE91600ACA66C /* ChoicePaletteTableView.swift in Sources */,
 				43B6ADF11D6CE91600ACA66C /* ChoicePaletteTextField.swift in Sources */,
@@ -2037,6 +2019,7 @@
 				43B6AE241D6CE91600ACA66C /* OutlineSidebarItem.swift in Sources */,
 				433815C41DB67EE900120078 /* DatePickerViewController.swift in Sources */,
 				43B6AE251D6CE91600ACA66C /* delay.swift in Sources */,
+				AA00000000000000000A0004 /* assumeMainActor.swift in Sources */,
 				434DA1E01E4E288000513DCC /* OutlineEditorCollectionView.swift in Sources */,
 				43B6AE261D6CE91600ACA66C /* PreferencesWindowController.swift in Sources */,
 				43B6AE271D6CE91600ACA66C /* ItemPasteboardUtilities.swift in Sources */,
@@ -2326,22 +2309,22 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CURRENT_PROJECT_VERSION = 485;
+				CURRENT_PROJECT_VERSION = 487;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 3.9.4;
 				ONLY_ACTIVE_ARCH = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -2367,22 +2350,22 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CURRENT_PROJECT_VERSION = 485;
+				CURRENT_PROJECT_VERSION = 487;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 3.9.4;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -2537,7 +2520,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
@@ -2599,7 +2582,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
@@ -2840,7 +2823,7 @@
 			repositoryURL = "https://github.com/sparkle-project/Sparkle";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.4.2;
+				minimumVersion = 2.9.4;
 			};
 		};
 		436A953029D1D25E00A2EA5C /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {

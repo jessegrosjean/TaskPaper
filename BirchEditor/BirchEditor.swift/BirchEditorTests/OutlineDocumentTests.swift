@@ -11,19 +11,23 @@ import JavaScriptCore
 @testable import TaskPaper
 import XCTest
 
+@MainActor
 class OutlineDocument: XCTestCase {
     var document: TaskPaperDocument?
     weak var weakDocument: TaskPaperDocument?
 
-    override func setUp() {
-        super.setUp()
+    // The async overrides may add @MainActor isolation (callers await),
+    // which puts setup/teardown on the main actor alongside the tests.
+    @MainActor
+    override func setUp() async throws {
         autoreleasepool {
             document = try! NSDocumentController.shared.makeUntitledDocument(ofType: "com.taskpaper.text") as? TaskPaperDocument
         }
         weakDocument = document
     }
 
-    override func tearDown() {
+    @MainActor
+    override func tearDown() async throws {
         autoreleasepool {
             document?.close()
             document = nil
@@ -37,15 +41,9 @@ class OutlineDocument: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 5) { error in
-            if let error = error {
-                XCTFail("Error: \(error.localizedDescription)")
-            }
-        }
+        await fulfillment(of: [expectation], timeout: 5)
 
         XCTAssertNil(weakDocument)
-
-        super.tearDown()
     }
 
     func testCreateDocument() {

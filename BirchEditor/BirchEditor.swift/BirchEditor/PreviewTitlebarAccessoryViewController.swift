@@ -9,7 +9,7 @@
 import Cocoa
 
 let previewTitlebarAccessoryBundle = Bundle(for: PreviewTitlebarAccessoryViewController.self)
-let previewTitlebarAccessoryStoryboard = NSStoryboard(name: "PreviewTitlebarAccessory", bundle: previewTitlebarAccessoryBundle)
+@MainActor let previewTitlebarAccessoryStoryboard = NSStoryboard(name: "PreviewTitlebarAccessory", bundle: previewTitlebarAccessoryBundle)
 
 class PreviewTitlebarAccessoryViewController: NSTitlebarAccessoryViewController {
     static func addPreviewTitlebarAccessoryIfNeeded(_ window: NSWindow) {
@@ -21,12 +21,10 @@ class PreviewTitlebarAccessoryViewController: NSTitlebarAccessoryViewController 
             let previewController = previewTitlebarAccessoryStoryboard.instantiateController(withIdentifier: "Preview Titlebar Accessory View Controller") as! PreviewTitlebarAccessoryViewController
             previewController.layoutAttribute = .right
             window.addTitlebarAccessoryViewController(previewController)
-            if #available(OSX 10.12, *) {
-                DispatchQueue.main.asyncAfter(deadline: .now()) {
-                    // Hack otherwise not showing up even though reports as proper location in view debugger
-                    previewController.isHidden = true
-                    previewController.isHidden = false
-                }
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                // Hack otherwise not showing up even though reports as proper location in view debugger
+                previewController.isHidden = true
+                previewController.isHidden = false
             }
         }
     }

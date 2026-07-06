@@ -8,6 +8,7 @@
 
 import BirchOutline
 
+@MainActor
 class ScriptCommands: NSObject {
     static var scriptCommandsDisposables: [DisposableType]?
     static var scriptsFolderMonitor: PathMonitor?
@@ -41,10 +42,13 @@ class ScriptCommands: NSObject {
                     if let _ = try? NSUserScriptTask(url: eachURL) {
                         scriptCommandsDisposables?.append(Commands.add("outlineEditor", commandName: "User Script: \(eachFile.stringByDeletingPathExtension)", callback: {
                             if let runScript = try? NSUserScriptTask(url: eachURL) {
+                                // NSUserScriptTask completion arrives off-main.
                                 runScript.execute { error in
                                     if let error = error {
                                         DispatchQueue.main.async {
-                                            NSApp.presentError(error)
+                                            MainActor.assumeIsolated {
+                                                _ = NSApp.presentError(error)
+                                            }
                                         }
                                     }
                                 }

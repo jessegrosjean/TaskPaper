@@ -9,6 +9,7 @@
 import BirchOutline
 import Cocoa
 
+@MainActor
 class ItemPasteboardProvider: NSObject, NSPasteboardItemDataProvider {
     let item: ItemType
     weak var outlineEditor: OutlineEditorType?
@@ -18,13 +19,19 @@ class ItemPasteboardProvider: NSObject, NSPasteboardItemDataProvider {
         self.outlineEditor = outlineEditor
     }
 
-    @objc func pasteboard(_: NSPasteboard?, item: NSPasteboardItem, provideDataForType type: NSPasteboard.PasteboardType) {
+    // Nonisolated protocol requirement; pasteboard data promises for this
+    // app's items are resolved on the main thread.
+    nonisolated func pasteboard(_: NSPasteboard?, item: NSPasteboardItem, provideDataForType type: NSPasteboard.PasteboardType) {
         // Local variable inserted by Swift 4.2 migrator.
         let type = convertFromNSPasteboardPasteboardType(type)
 
-        if let outlineEditor = outlineEditor {
-            if let items = ItemPasteboardUtilities.readItemsSerializedItemReferences(item, editor: outlineEditor) {
-                item.setString(outlineEditor.serializeItems(items, options: ["type": type as Any]), forType: convertToNSPasteboardPasteboardType(type))
+        // Handed off by AppKit on the main thread; never accessed concurrently.
+        nonisolated(unsafe) let item = item
+        assumeMainActor {
+            if let outlineEditor = outlineEditor {
+                if let items = ItemPasteboardUtilities.readItemsSerializedItemReferences(item, editor: outlineEditor) {
+                    item.setString(outlineEditor.serializeItems(items, options: ["type": type as Any]), forType: convertToNSPasteboardPasteboardType(type))
+                }
             }
         }
     }
