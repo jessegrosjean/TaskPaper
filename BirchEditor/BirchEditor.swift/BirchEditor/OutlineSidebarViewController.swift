@@ -36,32 +36,7 @@ class OutlineSidebarViewController: NSViewController, OutlineEditorHolderType, S
 
     override func viewDidLayout() {
         super.viewDidLayout()
-        // safeAreaInsets (the titlebar height) is only reliable once laid out, and it
-        // changes on fullscreen toggles, so recompute the top inset here.
         updateSidebarTopInset()
-    }
-
-    // Push the sidebar content down by the same top offset the editor applies to its
-    // first line (`originOffset.y` in OutlineEditorView), so the "Home" row's baseline
-    // lines up with the editor's first-row baseline. Derived from the shared editor's
-    // computedItemIndent so it tracks the stylesheet's item indent. The viewport-relative
-    // topMargin (topMarginViewportPaddingPercent, 0 by default) is intentionally ignored.
-    //
-    // Add the offset as a plain contentInset on TOP of the titlebar height (read from the
-    // untouched safeAreaInsets) rather than via additionalSafeAreaInsets. The full-height
-    // sidebar sits under the transparent titlebar, and the window sizes each pane's
-    // "titlebar background while scrolling" from that pane's safe area — so growing the
-    // safe area would make the sidebar's titlebar band taller than the editor's. Leaving
-    // the safe area alone keeps the two titlebars matched while still spacing the text.
-    private func updateSidebarTopInset() {
-        guard let scrollView = sidebarView?.enclosingScrollView else { return }
-        let itemIndent = CGFloat(outlineEditor?.computedItemIndent ?? 17)
-        let extraTop = (itemIndent / 2.0).rounded()
-        scrollView.automaticallyAdjustsContentInsets = false
-        let desiredTop = scrollView.safeAreaInsets.top + extraTop
-        if scrollView.contentInsets.top != desiredTop {
-            scrollView.contentInsets = NSEdgeInsets(top: desiredTop, left: 0, bottom: 0, right: 0)
-        }
     }
 
     deinit {
@@ -79,6 +54,17 @@ class OutlineSidebarViewController: NSViewController, OutlineEditorHolderType, S
                 view.superview?.appearance = computedStyle.allValues[.appearance] as? NSAppearance
             }
             updateSidebarTopInset()
+        }
+    }
+
+    private func updateSidebarTopInset() {
+        guard let scrollView = sidebarView?.enclosingScrollView else { return }
+        let itemIndent = CGFloat(outlineEditor?.computedItemIndent ?? 17)
+        let extraTop = (itemIndent / 2.0).rounded()
+        scrollView.automaticallyAdjustsContentInsets = false
+        let desiredTop = scrollView.safeAreaInsets.top + extraTop
+        if scrollView.contentInsets.top != desiredTop {
+            scrollView.contentInsets = NSEdgeInsets(top: desiredTop, left: 0, bottom: 0, right: 0)
         }
     }
 
