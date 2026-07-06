@@ -176,7 +176,13 @@ open class OutlineDocument: NSDocument {
                 _ = try? (newURL as NSURL).getResourceValue(&newFileModificationDate, forKey: URLResourceKey.contentModificationDateKey)
                 if let newFileModificationDate = newFileModificationDate as? Date, newFileModificationDate != fileModificationDate {
                     if newFileModificationDate.timeIntervalSince(fileModificationDate) >= 0.5 {
-                        _ = try? self.revert(toContentsOf: newURL, ofType: self.fileType ?? "")
+                        do {
+                            try self.revert(toContentsOf: newURL, ofType: self.fileType ?? "")
+                        } catch {
+                            DispatchQueue.main.async {
+                                self.presentError(error)
+                            }
+                        }
                     } else {
                         self.perform(#selector(self.manualRefreshDocumentFromDisk), with: nil, afterDelay: 0.5)
                     }
@@ -350,7 +356,10 @@ open class OutlineDocument: NSDocument {
 
     @objc var textContents: String {
         get {
-            return try! NSString(data: data(ofType: fileType ?? ""), encoding: String.Encoding.utf8.rawValue)! as String
+            guard let data = try? data(ofType: fileType ?? ""), let text = String(data: data, encoding: .utf8) else {
+                return ""
+            }
+            return text
         }
         set(text) {
             outline.reloadSerialization(text, options: ["type": fileType ?? ""])

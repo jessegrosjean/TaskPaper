@@ -9,7 +9,7 @@
 import BirchOutline
 import EventKit
 
-class RemindersStoreAccessError: NSError {
+class RemindersStoreAccessError: NSError, @unchecked Sendable {
     init() {
         let appName = ProcessInfo.processInfo.processName
         let description = NSLocalizedString("\(appName) does not have access to Reminders", tableName: "Reminders", comment: "message text")

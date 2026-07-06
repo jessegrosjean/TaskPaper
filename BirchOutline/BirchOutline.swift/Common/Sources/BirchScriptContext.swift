@@ -76,11 +76,13 @@ open class BirchScriptContext {
 }
 
 func setExceptionHandler(_ context: JSContext) {
-    context.exceptionHandler = { context, exception in
+    context.exceptionHandler = { _, exception in
         let message = NSLocalizedString("Uncaught JavaScript Exception", tableName: "JavascriptException", comment: "message text")
-        let informativeText = NSLocalizedString("\(String(describing: exception))\n\n\(String(describing: exception!.forProperty("stack")))", tableName: "JavascriptException", comment: "informative text")        
+        let description = exception?.toString() ?? "Unknown exception"
+        let stack = exception?.forProperty("stack")?.toString() ?? "No stack trace"
+        let informativeText = NSLocalizedString("\(description)\n\n\(stack)", tableName: "JavascriptException", comment: "informative text")
         cpAlert(message, informativeText: informativeText)
-        exit(EXIT_SUCCESS)
+        exit(EXIT_FAILURE)
     }
 }
 
@@ -93,9 +95,9 @@ func setTimeoutAndClearTimeoutHandlers(_ context: JSContext) {
         setTimeoutID += 1
         setTimeOutIDsToCallbacks[thisTimeOutID] = callback
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(UInt64(wait) * NSEC_PER_MSEC)) / Double(NSEC_PER_SEC), execute: { () -> Void in
-            let _ = setTimeOutIDsToCallbacks[thisTimeOutID]?.call(withArguments: [])
+            let _ = setTimeOutIDsToCallbacks.removeValue(forKey: thisTimeOutID)?.call(withArguments: [])
         })
-        return JSValue.init(int32: setTimeoutID, in: context)
+        return JSValue.init(int32: thisTimeOutID, in: context)
     }
     
     let clearTimeout: @convention(block) (JSValue) -> Void = { (timeoutID) in

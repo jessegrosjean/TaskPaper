@@ -111,7 +111,7 @@ class PreferencesWindowController: NSWindowController {
     }
 }
 
-extension UserDefaults: PreferencesStoreType {
+extension UserDefaults: @retroactive JSExport, PreferencesStoreType {
     public func getPreference(_ key: String) -> Any? {
         return object(forKey: key)
     }
