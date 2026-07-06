@@ -32,7 +32,9 @@ cd BirchOutline/birch-outline.js && npm run start   # gulp watch + webpack
 cd BirchEditor/birch-editor.js && npm run start      # gulp watch + webpack
 ```
 
-Both use gulp to compile CoffeeScript and webpack to produce minified bundles. Xcode detects changes to the `min/` output.
+Both use gulp to compile CoffeeScript and webpack to produce bundles in `min/` (plain webpack output — not minified; UglifyJsPlugin is disabled).
+
+The shipped bundles are the committed files `BirchOutline/BirchOutline.swift/Dependencies/birchoutline.js` and `BirchEditor/BirchEditor.swift/Dependencies/bircheditor.js`. Next to each lives a committed `.sha256` manifest hashing the bundle and its inputs (`src/**`, gulp/webpack config, package.json, package-lock.json). The `javascript.sh` build phase (first phase of every app target) verifies these: when manifests match, builds need no JS toolchain (this is the fresh-clone path); when JS sources have changed, it rebuilds via gulp (auto-using nvm's Node v11.15.0), refreshes `Dependencies/*.js` + manifests, and the changed files must be committed together with the source changes. If a rebuild is needed but Node 11/node_modules are missing or gulp fails, the Xcode build fails with an actionable error instead of silently shipping stale bundles.
 
 ### Xcode
 
