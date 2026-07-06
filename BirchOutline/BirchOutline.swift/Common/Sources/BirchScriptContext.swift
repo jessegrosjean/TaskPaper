@@ -108,6 +108,9 @@ private func installTimeoutHandlers(_ context: JSContext, registry: TimeoutRegis
     // main thread in this app. assumeIsolated documents and enforces that
     // invariant at runtime rather than assuming it silently.
     let setTimeout: @convention(block) (JSValue, Int) -> JSValue = { (callback, wait) in
+        // The block runs on the main thread (asserted below), so the JSValue
+        // parameter never actually crosses an isolation boundary.
+        nonisolated(unsafe) let callback = callback
         // assumeIsolated can only return Sendable values, so hand back the
         // timer ID and build the JSValue outside.
         let thisTimeOutID: Int32 = MainActor.assumeIsolated {
@@ -125,6 +128,9 @@ private func installTimeoutHandlers(_ context: JSContext, registry: TimeoutRegis
     }
 
     let clearTimeout: @convention(block) (JSValue) -> Void = { (timeoutID) in
+        // The block runs on the main thread (asserted below), so the JSValue
+        // parameter never actually crosses an isolation boundary.
+        nonisolated(unsafe) let timeoutID = timeoutID
         MainActor.assumeIsolated {
             _ = registry.callbacks.removeValue(forKey: timeoutID.toInt32())
         }

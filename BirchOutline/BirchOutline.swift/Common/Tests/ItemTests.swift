@@ -17,24 +17,20 @@ class ItemTests: XCTestCase {
     weak var weakOutline: OutlineType?
     var item: ItemType!
 
-    // setUp()/tearDown() overrides stay nonisolated (they inherit the
-    // superclass's isolation); XCTest invokes them on the main thread for
-    // synchronous tests, so assumeIsolated is safe here.
-    override func setUp() {
-        super.setUp()
-        MainActor.assumeIsolated {
-            outline = BirchOutline.createTaskPaperOutline(nil)
-            weakOutline = outline
-            item = outline.createItem("hello")
-        }
+    // The async overrides may add @MainActor isolation (callers await),
+    // which puts setup/teardown on the main actor alongside the tests.
+    @MainActor
+    override func setUp() async throws {
+        outline = BirchOutline.createTaskPaperOutline(nil)
+        weakOutline = outline
+        item = outline.createItem("hello")
     }
 
-    override func tearDown() {
-        MainActor.assumeIsolated {
-            item = nil
-            outline = nil
-            XCTAssertNil(weakOutline)
-        }
+    @MainActor
+    override func tearDown() async throws {
+        item = nil
+        outline = nil
+        XCTAssertNil(weakOutline)
     }
     
     func testInit() {
