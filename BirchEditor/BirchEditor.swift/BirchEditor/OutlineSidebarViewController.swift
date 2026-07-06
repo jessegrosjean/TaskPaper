@@ -18,6 +18,11 @@ class OutlineSidebarViewController: NSViewController, OutlineEditorHolderType, S
 
     var sidebarSubscriptions: [DisposableType]?
     var syncingToJSSidebar = 0
+    let homeSpacerItem = NSObject()
+
+    func isSpacerItem(_ item: Any?) -> Bool {
+        return (item as AnyObject?) === homeSpacerItem
+    }
 
     override func viewDidLoad() {
         sidebarView.registerForDraggedTypes(ItemPasteboardUtilities.readablePasteboardTypes)
@@ -30,13 +35,6 @@ class OutlineSidebarViewController: NSViewController, OutlineEditorHolderType, S
         if userDefaults.bool(forKey: BSidebarFontSizeFollowsSystemPreferences) {
             sidebarView.rowSizeStyle = .default
         }
-
-        updateSidebarTopInset()
-    }
-
-    override func viewDidLayout() {
-        super.viewDidLayout()
-        updateSidebarTopInset()
     }
 
     deinit {
@@ -53,25 +51,15 @@ class OutlineSidebarViewController: NSViewController, OutlineEditorHolderType, S
             if let computedStyle = styleSheet?.computedStyleForElement("sidebar") {
                 view.superview?.appearance = computedStyle.allValues[.appearance] as? NSAppearance
             }
-            updateSidebarTopInset()
-        }
-    }
-
-    private func updateSidebarTopInset() {
-        guard let scrollView = sidebarView?.enclosingScrollView else { return }
-        let itemIndent = CGFloat(outlineEditor?.computedItemIndent ?? 17)
-        let extraTop = (itemIndent / 2.0).rounded()
-        scrollView.automaticallyAdjustsContentInsets = false
-        let desiredTop = scrollView.safeAreaInsets.top + extraTop
-        if scrollView.contentInsets.top != desiredTop {
-            scrollView.contentInsets = NSEdgeInsets(top: desiredTop, left: 0, bottom: 0, right: 0)
+            // The spacer row height derives from the stylesheet's item indent.
+            if let sidebarView = sidebarView, sidebarView.numberOfRows > 0 {
+                sidebarView.noteHeightOfRows(withIndexesChanged: IndexSet(integer: 0))
+            }
         }
     }
 
     weak var outlineEditor: OutlineEditorType? {
         didSet {
-            updateSidebarTopInset()
-
             if let subscriptions = sidebarSubscriptions {
                 for each in subscriptions {
                     each.dispose()
@@ -209,8 +197,13 @@ class OutlineSidebarViewController: NSViewController, OutlineEditorHolderType, S
 
 extension OutlineSidebarViewController: NSOutlineViewDataSource {
     func outlineView(_: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        let item = (item as? OutlineSidebarItem ?? outlineEditor?.outlineSidebar?.rootItem)!
-        return item.children[index]
+        if let item = item as? OutlineSidebarItem {
+            return item.children[index]
+        }        
+        if index == 0 {
+            return homeSpacerItem
+        }
+        return outlineEditor!.outlineSidebar!.rootItem!.children[index - 1]
     }
 
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
@@ -218,8 +211,14 @@ extension OutlineSidebarViewController: NSOutlineViewDataSource {
     }
 
     func outlineView(_: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        if let item = item as? OutlineSidebarItem ?? outlineEditor?.outlineSidebar?.rootItem {
+        if isSpacerItem(item) {
+            return 0
+        }
+        if let item = item as? OutlineSidebarItem {
             return item.children.count
+        }
+        if let rootItem = outlineEditor?.outlineSidebar?.rootItem {
+            return rootItem.children.count + 1 // + homeSpacerItem
         }
         return 0
     }
@@ -322,6 +321,9 @@ extension OutlineSidebarViewController: NSOutlineViewDelegate {
     }
 
     func outlineView(_ outlineView: NSOutlineView, viewFor _: NSTableColumn?, item: Any) -> NSView? {
+        if isSpacerItem(item) {
+            return nil
+        }
         if let item = item as? OutlineSidebarItem ?? outlineEditor?.outlineSidebar?.rootItem {
             var view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "TextCell"), owner: self) as! NSTableCellView
 
@@ -344,6 +346,12 @@ extension OutlineSidebarViewController: NSOutlineViewDelegate {
     }
 
     func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {
+        if isSpacerItem(item) {
+            // Match the editor's first-line top offset (`originOffset.y` in OutlineEditorView).
+            let itemIndent = CGFloat(outlineEditor?.computedItemIndent ?? 17)
+            return (itemIndent / 2.0).rounded()
+        }
+
         if userDefaults.bool(forKey: BSidebarFontSizeFollowsSystemPreferences) {
             if self.outlineView(outlineView, isGroupItem: item) {
                 return outlineView.rowHeight
@@ -362,20 +370,23 @@ extension OutlineSidebarViewController: NSOutlineViewDelegate {
         var eachRow = start
 
         while eachRow != end {
-            if let eachItem = outlineView.item(atRow: eachRow) as? OutlineSidebarItem {
-                if eachItem.isSelectable {
-                    searchableItemIDs.append(eachItem.id)
-                }
-                eachRow += 1
-            } else {
+            if eachRow >= outlineView.numberOfRows {
                 eachRow = 0
+                continue
             }
+            if let eachItem = outlineView.item(atRow: eachRow) as? OutlineSidebarItem, eachItem.isSelectable {
+                searchableItemIDs.append(eachItem.id)
+            }
+            eachRow += 1
         }
 
         return outlineEditor?.outlineSidebar?.matchItemFromIDs(searchableItemIDs, searchString: searchString)
     }
 
     func outlineView(_: NSOutlineView, shouldSelectItem item: Any) -> Bool {
+        if isSpacerItem(item) {
+            return false
+        }
         if let newItem = item as? OutlineSidebarItem ?? outlineEditor?.outlineSidebar?.rootItem {
             guard let sidebar = outlineEditor?.outlineSidebar, syncingToJSSidebar == 0 else {
                 return newItem.isSelectable
@@ -450,6 +461,9 @@ extension OutlineSidebarViewController: NSOutlineViewDelegate {
     }
 
     func outlineView(_: NSOutlineView, isGroupItem item: Any) -> Bool {
+        if isSpacerItem(item) {
+            return false
+        }
         if let item = item as? OutlineSidebarItem ?? outlineEditor?.outlineSidebar?.rootItem {
             return item.isGroup
         }
