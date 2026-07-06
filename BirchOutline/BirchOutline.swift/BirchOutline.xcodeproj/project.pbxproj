@@ -10,48 +10,27 @@
 		4300222B1D4435AA00E7908D /* MutationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4300222A1D4435AA00E7908D /* MutationType.swift */; };
 		4300222D1D452DA500E7908D /* ItemPathQueryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4300222C1D452DA500E7908D /* ItemPathQueryType.swift */; };
 		431852681D32A8DE0049BBB0 /* BirchCrossPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431852671D32A8DE0049BBB0 /* BirchCrossPlatform.swift */; };
-		431852691D32AA7F0049BBB0 /* DisposableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436A90C21D2D7C630082CF46 /* DisposableType.swift */; };
-		4318526A1D32ABD80049BBB0 /* BirchCrossPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431852671D32A8DE0049BBB0 /* BirchCrossPlatform.swift */; };
 		4318526C1D32C7C60049BBB0 /* String-Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4318526B1D32C7C60049BBB0 /* String-Path.swift */; };
-		4318526D1D32C7C60049BBB0 /* String-Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4318526B1D32C7C60049BBB0 /* String-Path.swift */; };
 		4318528D1D3488B90049BBB0 /* ObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 4318528B1D3488B90049BBB0 /* ObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4318528E1D3488B90049BBB0 /* ObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 4318528B1D3488B90049BBB0 /* ObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4318528F1D3488B90049BBB0 /* ObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4318528C1D3488B90049BBB0 /* ObjC.m */; };
-		431852901D3488B90049BBB0 /* ObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4318528C1D3488B90049BBB0 /* ObjC.m */; };
 		433815D61DB69F5700120078 /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433815D51DB69F5700120078 /* DateTime.swift */; };
-		433815D71DB69F5700120078 /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433815D51DB69F5700120078 /* DateTime.swift */; };
 		435A3C011D38292F00E05ED5 /* OutlineFixture.bml in Resources */ = {isa = PBXBuildFile; fileRef = 435A3BFF1D38292F00E05ED5 /* OutlineFixture.bml */; };
-		435A3C021D38292F00E05ED5 /* OutlineFixture.bml in Resources */ = {isa = PBXBuildFile; fileRef = 435A3BFF1D38292F00E05ED5 /* OutlineFixture.bml */; };
 		435A3C031D38292F00E05ED5 /* OutlineFixture.txt in Resources */ = {isa = PBXBuildFile; fileRef = 435A3C001D38292F00E05ED5 /* OutlineFixture.txt */; };
-		435A3C041D38292F00E05ED5 /* OutlineFixture.txt in Resources */ = {isa = PBXBuildFile; fileRef = 435A3C001D38292F00E05ED5 /* OutlineFixture.txt */; };
 		436A90C31D2D7C630082CF46 /* DisposableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436A90C21D2D7C630082CF46 /* DisposableType.swift */; };
 		436C0D741D1D56D50089FA7A /* BirchOutline.h in Headers */ = {isa = PBXBuildFile; fileRef = 436C0D731D1D56D50089FA7A /* BirchOutline.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		436C0D7B1D1D56D50089FA7A /* BirchOutline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436C0D701D1D56D50089FA7A /* BirchOutline.framework */; };
-		436C0DB51D1D63630089FA7A /* BirchOutlineiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 436C0DB41D1D63630089FA7A /* BirchOutlineiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		436C0DBC1D1D63630089FA7A /* BirchOutline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436C0DB21D1D63630089FA7A /* BirchOutline.framework */; };
 		436C0DDE1D1D64D30089FA7A /* BirchOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD01D1D64CC0089FA7A /* BirchOutline.swift */; };
-		436C0DDF1D1D64D40089FA7A /* BirchOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD01D1D64CC0089FA7A /* BirchOutline.swift */; };
 		436C0DE21D1D65090089FA7A /* ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD31D1D64CC0089FA7A /* ItemType.swift */; };
-		436C0DE31D1D65090089FA7A /* ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD31D1D64CC0089FA7A /* ItemType.swift */; };
 		436C0DE41D1D650C0089FA7A /* BirchScriptContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD41D1D64CC0089FA7A /* BirchScriptContext.swift */; };
-		436C0DE51D1D650D0089FA7A /* BirchScriptContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD41D1D64CC0089FA7A /* BirchScriptContext.swift */; };
 		436C0DE61D1D650F0089FA7A /* JSValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD51D1D64CC0089FA7A /* JSValue.swift */; };
-		436C0DE71D1D65100089FA7A /* JSValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD51D1D64CC0089FA7A /* JSValue.swift */; };
 		436C0DEA1D1D65170089FA7A /* OutlineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD71D1D64CC0089FA7A /* OutlineType.swift */; };
-		436C0DEB1D1D65170089FA7A /* OutlineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD71D1D64CC0089FA7A /* OutlineType.swift */; };
 		436C0DEC1D1D651C0089FA7A /* ItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD91D1D64CC0089FA7A /* ItemTests.swift */; };
-		436C0DED1D1D651D0089FA7A /* ItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DD91D1D64CC0089FA7A /* ItemTests.swift */; };
 		436C0DEE1D1D65200089FA7A /* JavaScriptContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DDA1D1D64CC0089FA7A /* JavaScriptContextTests.swift */; };
-		436C0DEF1D1D65210089FA7A /* JavaScriptContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DDA1D1D64CC0089FA7A /* JavaScriptContextTests.swift */; };
 		436C0DF01D1D65230089FA7A /* OutlineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DDD1D1D64CC0089FA7A /* OutlineTests.swift */; };
-		436C0DF11D1D65240089FA7A /* OutlineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DDD1D1D64CC0089FA7A /* OutlineTests.swift */; };
-		4391F82D1D4FEFEA00ED3CF9 /* MutationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4300222A1D4435AA00E7908D /* MutationType.swift */; };
 		43B6ADB41D6BA78100ACA66C /* JSContext-GarbageCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 43B6ADB21D6BA78100ACA66C /* JSContext-GarbageCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43B6ADB51D6BA78100ACA66C /* JSContext-GarbageCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B6ADB31D6BA78100ACA66C /* JSContext-GarbageCollection.m */; };
 		43E6193E1D2340B3001E3F4D /* String-Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E6193D1D2340B3001E3F4D /* String-Localize.swift */; };
-		43E6193F1D2340B3001E3F4D /* String-Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E6193D1D2340B3001E3F4D /* String-Localize.swift */; };
 		43E619501D244344001E3F4D /* birchoutline.js in Resources */ = {isa = PBXBuildFile; fileRef = 43E6194F1D244344001E3F4D /* birchoutline.js */; };
-		43E619511D244344001E3F4D /* birchoutline.js in Resources */ = {isa = PBXBuildFile; fileRef = 43E6194F1D244344001E3F4D /* birchoutline.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,13 +40,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 436C0D6F1D1D56D50089FA7A;
 			remoteInfo = BirchOutline;
-		};
-		436C0DBD1D1D63630089FA7A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 436C0D671D1D56D50089FA7A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 436C0DB11D1D63630089FA7A;
-			remoteInfo = BirchOutlineiOS;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -87,11 +59,6 @@
 		436C0D751D1D56D50089FA7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		436C0D7A1D1D56D50089FA7A /* BirchOutlineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BirchOutlineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		436C0D811D1D56D50089FA7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		436C0DB21D1D63630089FA7A /* BirchOutline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BirchOutline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		436C0DB41D1D63630089FA7A /* BirchOutlineiOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BirchOutlineiOS.h; sourceTree = "<group>"; };
-		436C0DB61D1D63630089FA7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		436C0DBB1D1D63630089FA7A /* BirchOutlineiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BirchOutlineiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		436C0DC21D1D63630089FA7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		436C0DD01D1D64CC0089FA7A /* BirchOutline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirchOutline.swift; sourceTree = "<group>"; };
 		436C0DD31D1D64CC0089FA7A /* ItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemType.swift; sourceTree = "<group>"; };
 		436C0DD41D1D64CC0089FA7A /* BirchScriptContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirchScriptContext.swift; sourceTree = "<group>"; };
@@ -122,21 +89,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		436C0DAE1D1D63630089FA7A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		436C0DB81D1D63630089FA7A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				436C0DBC1D1D63630089FA7A /* BirchOutline.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -156,8 +108,6 @@
 				436C0DCE1D1D64CC0089FA7A /* Common */,
 				436C0D721D1D56D50089FA7A /* BirchOutline */,
 				436C0D7E1D1D56D50089FA7A /* BirchOutlineTests */,
-				436C0DB31D1D63630089FA7A /* BirchOutlineiOS */,
-				436C0DBF1D1D63630089FA7A /* BirchOutlineiOSTests */,
 				436C0D711D1D56D50089FA7A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -167,8 +117,6 @@
 			children = (
 				436C0D701D1D56D50089FA7A /* BirchOutline.framework */,
 				436C0D7A1D1D56D50089FA7A /* BirchOutlineTests.xctest */,
-				436C0DB21D1D63630089FA7A /* BirchOutline.framework */,
-				436C0DBB1D1D63630089FA7A /* BirchOutlineiOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -197,23 +145,6 @@
 				436C0D751D1D56D50089FA7A /* Info.plist */,
 			);
 			name = "Support Files";
-			sourceTree = "<group>";
-		};
-		436C0DB31D1D63630089FA7A /* BirchOutlineiOS */ = {
-			isa = PBXGroup;
-			children = (
-				436C0DB41D1D63630089FA7A /* BirchOutlineiOS.h */,
-				436C0DB61D1D63630089FA7A /* Info.plist */,
-			);
-			path = BirchOutlineiOS;
-			sourceTree = "<group>";
-		};
-		436C0DBF1D1D63630089FA7A /* BirchOutlineiOSTests */ = {
-			isa = PBXGroup;
-			children = (
-				436C0DC21D1D63630089FA7A /* Info.plist */,
-			);
-			path = BirchOutlineiOSTests;
 			sourceTree = "<group>";
 		};
 		436C0DCE1D1D64CC0089FA7A /* Common */ = {
@@ -303,15 +234,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		436C0DAF1D1D63630089FA7A /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4318528E1D3488B90049BBB0 /* ObjC.h in Headers */,
-				436C0DB51D1D63630089FA7A /* BirchOutlineiOS.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -352,42 +274,6 @@
 			productReference = 436C0D7A1D1D56D50089FA7A /* BirchOutlineTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		436C0DB11D1D63630089FA7A /* BirchOutlineiOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 436C0DC31D1D63630089FA7A /* Build configuration list for PBXNativeTarget "BirchOutlineiOS" */;
-			buildPhases = (
-				436C0DAD1D1D63630089FA7A /* Sources */,
-				436C0DAE1D1D63630089FA7A /* Frameworks */,
-				436C0DAF1D1D63630089FA7A /* Headers */,
-				436C0DB01D1D63630089FA7A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = BirchOutlineiOS;
-			productName = BirchOutlineiOS;
-			productReference = 436C0DB21D1D63630089FA7A /* BirchOutline.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		436C0DBA1D1D63630089FA7A /* BirchOutlineiOSTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 436C0DC61D1D63630089FA7A /* Build configuration list for PBXNativeTarget "BirchOutlineiOSTests" */;
-			buildPhases = (
-				436C0DB71D1D63630089FA7A /* Sources */,
-				436C0DB81D1D63630089FA7A /* Frameworks */,
-				436C0DB91D1D63630089FA7A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				436C0DBE1D1D63630089FA7A /* PBXTargetDependency */,
-			);
-			name = BirchOutlineiOSTests;
-			productName = BirchOutlineiOSTests;
-			productReference = 436C0DBB1D1D63630089FA7A /* BirchOutlineiOSTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -403,14 +289,6 @@
 						LastSwiftMigration = 1020;
 					};
 					436C0D791D1D56D50089FA7A = {
-						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
-					};
-					436C0DB11D1D63630089FA7A = {
-						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
-					};
-					436C0DBA1D1D63630089FA7A = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0800;
 					};
@@ -431,8 +309,6 @@
 			targets = (
 				436C0D6F1D1D56D50089FA7A /* BirchOutline */,
 				436C0D791D1D56D50089FA7A /* BirchOutlineTests */,
-				436C0DB11D1D63630089FA7A /* BirchOutlineiOS */,
-				436C0DBA1D1D63630089FA7A /* BirchOutlineiOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -449,23 +325,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		436C0D781D1D56D50089FA7A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		436C0DB01D1D63630089FA7A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				435A3C041D38292F00E05ED5 /* OutlineFixture.txt in Resources */,
-				435A3C021D38292F00E05ED5 /* OutlineFixture.bml in Resources */,
-				43E619511D244344001E3F4D /* birchoutline.js in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		436C0DB91D1D63630089FA7A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -525,35 +384,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		436C0DAD1D1D63630089FA7A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43E6193F1D2340B3001E3F4D /* String-Localize.swift in Sources */,
-				4318526D1D32C7C60049BBB0 /* String-Path.swift in Sources */,
-				431852691D32AA7F0049BBB0 /* DisposableType.swift in Sources */,
-				4318526A1D32ABD80049BBB0 /* BirchCrossPlatform.swift in Sources */,
-				436C0DEB1D1D65170089FA7A /* OutlineType.swift in Sources */,
-				431852901D3488B90049BBB0 /* ObjC.m in Sources */,
-				436C0DE51D1D650D0089FA7A /* BirchScriptContext.swift in Sources */,
-				436C0DE31D1D65090089FA7A /* ItemType.swift in Sources */,
-				436C0DE71D1D65100089FA7A /* JSValue.swift in Sources */,
-				436C0DDF1D1D64D40089FA7A /* BirchOutline.swift in Sources */,
-				433815D71DB69F5700120078 /* DateTime.swift in Sources */,
-				4391F82D1D4FEFEA00ED3CF9 /* MutationType.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		436C0DB71D1D63630089FA7A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				436C0DEF1D1D65210089FA7A /* JavaScriptContextTests.swift in Sources */,
-				436C0DED1D1D651D0089FA7A /* ItemTests.swift in Sources */,
-				436C0DF11D1D65240089FA7A /* OutlineTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -561,11 +391,6 @@
 			isa = PBXTargetDependency;
 			target = 436C0D6F1D1D56D50089FA7A /* BirchOutline */;
 			targetProxy = 436C0D7C1D1D56D50089FA7A /* PBXContainerItemProxy */;
-		};
-		436C0DBE1D1D63630089FA7A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 436C0DB11D1D63630089FA7A /* BirchOutlineiOS */;
-			targetProxy = 436C0DBD1D1D63630089FA7A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -621,12 +446,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -678,10 +504,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -754,72 +581,6 @@
 			};
 			name = Release;
 		};
-		436C0DC41D1D63630089FA7A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 3;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = BirchOutlineiOS/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hogbaysoftware.BirchOutlineiOS;
-				PRODUCT_NAME = BirchOutline;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		436C0DC51D1D63630089FA7A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 3;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = BirchOutlineiOS/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hogbaysoftware.BirchOutlineiOS;
-				PRODUCT_NAME = BirchOutline;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		436C0DC71D1D63630089FA7A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = BirchOutlineiOSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hogbaysoftware.BirchOutlineiOSTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-			};
-			name = Debug;
-		};
-		436C0DC81D1D63630089FA7A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = BirchOutlineiOSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hogbaysoftware.BirchOutlineiOSTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -846,24 +607,6 @@
 			buildConfigurations = (
 				436C0D881D1D56D50089FA7A /* Debug */,
 				436C0D891D1D56D50089FA7A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		436C0DC31D1D63630089FA7A /* Build configuration list for PBXNativeTarget "BirchOutlineiOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				436C0DC41D1D63630089FA7A /* Debug */,
-				436C0DC51D1D63630089FA7A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		436C0DC61D1D63630089FA7A /* Build configuration list for PBXNativeTarget "BirchOutlineiOSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				436C0DC71D1D63630089FA7A /* Debug */,
-				436C0DC81D1D63630089FA7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
