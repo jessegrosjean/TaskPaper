@@ -11,13 +11,7 @@ import Cocoa
 
 extension NSPasteboard.PasteboardType {
     static let itemReference: NSPasteboard.PasteboardType = NSPasteboard.PasteboardType("com.hogbaysoftware.ItemReferencePboardType")
-    static let backwardsCompatibleFileURL: NSPasteboard.PasteboardType = {
-        if #available(OSX 10.13, *) {
-            return NSPasteboard.PasteboardType.fileURL
-        } else {
-            return NSPasteboard.PasteboardType(kUTTypeFileURL as String)
-        }
-    }()
+    static let backwardsCompatibleFileURL: NSPasteboard.PasteboardType = .fileURL
 }
 
 open class ItemPasteboardUtilities {

@@ -21,13 +21,8 @@ class OutlineEditorWindow: NSWindowTabbedBase {
     override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing bufferingType: NSWindow.BackingStoreType, defer flag: Bool) {
         super.init(contentRect: contentRect, styleMask: style, backing: bufferingType, defer: flag)
         addObserver(self, forKeyPath: TabbedWindowsKey, options: [], context: tabbedWindowsContext)
-        if #available(OSX 10.12, *) {
-            DispatchQueue.main.async { [weak self] in
-                self?.lastTabbedWindows = self?.tabbedWindows
-            }
-        }
-        if #available(OSX 11.0, *) {
-            //self.titlebarAppearsTransparent = true
+        DispatchQueue.main.async { [weak self] in
+            self?.lastTabbedWindows = self?.tabbedWindows
         }
     }
 
@@ -64,10 +59,9 @@ class OutlineEditorWindow: NSWindowTabbedBase {
                 }
             }
             synchronizeAllTitles()
-            if #available(OSX 10.12, *) {
-                lastTabbedWindows = tabbedWindows
-            }
-            
+            lastTabbedWindows = tabbedWindows
+
+
             NotificationCenter.default.post(name: .isTabbedWindowDidChange, object: self)
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
@@ -75,50 +69,42 @@ class OutlineEditorWindow: NSWindowTabbedBase {
     }
 
     var isTabbedWindow: Bool {
-        if #available(OSX 10.12, *) {
-            if let tabbedWindows = tabbedWindows, tabbedWindows.count > 0 {
-                return true
-            }
+        if let tabbedWindows = tabbedWindows, tabbedWindows.count > 0 {
+            return true
         }
         return false
     }
 
     var isTabbedWindowWithSingleDocument: Bool {
-        if #available(OSX 10.12, *) {
-            if isTabbedWindow {
-                let document = windowController?.document as? NSDocument
-                for each in tabbedWindows! {
-                    if document != each.windowController?.document as? NSDocument {
-                        return false
-                    }
+        if isTabbedWindow {
+            let document = windowController?.document as? NSDocument
+            for each in tabbedWindows! {
+                if document != each.windowController?.document as? NSDocument {
+                    return false
                 }
-                return true
             }
+            return true
         }
         return false
     }
 
-    @available(OSX 10.12, *)
     @IBAction override func toggleTabBar(_ sender: Any?) {
         super.toggleTabBar(sender)
         synchronizeAllTitles()
     }
 
-    @available(OSX 10.12, *)
     override func addTabbedWindow(_ window: NSWindow, ordered: NSWindow.OrderingMode) {
         super.addTabbedWindow(window, ordered: ordered)
         synchronizeAllTitles()
     }
 
     func synchronizeAllTitles() {
-        if #available(OSX 10.12, *) {
-            for each in tabbedWindows ?? [] {
-                if each != self {
-                    each.windowController?.synchronizeWindowTitleWithDocumentName()
-                }
+        for each in tabbedWindows ?? [] {
+            if each != self {
+                each.windowController?.synchronizeWindowTitleWithDocumentName()
             }
-            self.windowController?.synchronizeWindowTitleWithDocumentName()
         }
+        windowController?.synchronizeWindowTitleWithDocumentName()
     }
     
     override func encodeRestorableState(with coder: NSCoder) {
@@ -139,17 +125,4 @@ class OutlineEditorWindow: NSWindowTabbedBase {
         }
         return super.validateMenuItem(menuItem)
     }
-    
-    /*
-    override func setFrameOrigin(_ point: NSPoint) {
-        super.setFrameOrigin(point)
-    }
-    
-    override func setFrame(_ frameRect: NSRect, display flag: Bool) {
-        super.setFrame(frameRect, display: flag)
-    }
-    
-    override func setFrame(_ frameRect: NSRect, display displayFlag: Bool, animate animateFlag: Bool) {
-        super.setFrame(frameRect, display: displayFlag, animate: animateFlag)
-    }*/
 }

@@ -606,25 +606,15 @@ class OutlineEditorView: NSTextView {
     // MARK: - Disable Old Forms Of Tracking
 
     override func addTrackingRect(_: NSRect, owner _: Any, userData _: UnsafeMutableRawPointer?, assumeInside _: Bool) -> NSView.TrackingRectTag {
-        Swift.print("BAD addTrackingRect called")
         return -1
     }
 
     override func addCursorRect(_: NSRect, cursor _: NSCursor) {
-        Swift.print("BAD addCursorRect called")
     }
 
     // MARK: - Menu
 
     override func menu(for event: NSEvent) -> NSMenu? {
-        /* if let _ = outlineEditor?.mouseOverItemHandle {
-             let menu = NSMenu(title: "")
-             menu.addItem(withTitle: "Cut".localized(), action: #selector(cut(_:)), keyEquivalent: "")
-             menu.addItem(withTitle: "Copy".localized(), action: #selector(copy(_:)), keyEquivalent: "")
-             menu.addItem(withTitle: "Paste".localized(), action: #selector(paste(_:)), keyEquivalent: "")
-             return menu
-         } */
-
         let menu = super.menu(for: event)
 
         if let removeItem = menu?.submenuItem(withAction: NSSelectorFromString("orderFrontColorPanel:"))?.parent {

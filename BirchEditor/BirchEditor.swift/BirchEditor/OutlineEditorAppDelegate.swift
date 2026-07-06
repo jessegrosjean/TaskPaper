@@ -56,11 +56,6 @@ open class OutlineEditorAppDelegate: NSObject, NSApplicationDelegate {
         styleSheetsSetup()
         checkForUpdatesSetup()
         licenseSetup()
-
-        if #available(OSX 10.12, *) {
-        } else {
-            newTab.menu?.removeItem(newTab)
-        }
     }
 
     func appVersionSetup() {

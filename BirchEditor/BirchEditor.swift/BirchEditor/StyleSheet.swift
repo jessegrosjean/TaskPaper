@@ -101,8 +101,6 @@ open class StyleSheet {
         jsStyleSheet = scriptContext.jsStyleSheetClass.construct(withArguments: [processedLessText])
     }
 
-    deinit {}
-
     public let source: URL
 
     // MARK: - Computed Styles

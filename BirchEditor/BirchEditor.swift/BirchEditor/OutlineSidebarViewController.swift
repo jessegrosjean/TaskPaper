@@ -393,43 +393,30 @@ extension OutlineSidebarViewController: NSOutlineViewDelegate {
             }
 
             if sidebar.shouldSelectItem(newItem) {
-                if #available(OSX 10.12, *) {
+                let newType = newItem.type
 
-                    let newType = newItem.type
-                    
-                    
-                    /*
-                    if @_selectedItem.type is 'home' or @_selectedItem.type is 'project'
-                      @outlineEditor.focusedItem = @outlineEditor.outline.getItemForID(@_selectedItem.representedObject)
-                    else
-                      switch @_selectedItem.type
-                        when 'search', 'tag', 'tag-value'
-                          @outlineEditor.itemPathFilter = @_selectedItem.representedObject
-                     */
-                    
-                    let isFocused = outlineEditor?.focusedItem != nil
-                    let isFiltered = !(outlineEditor?.itemPathFilter ?? "").isEmpty
-                    let isPerformingHoist = newType == "home" || newType == "project"
-                    let isPerformingFilter = !isPerformingHoist
-                    let maintainHoistedWhenFilter = userDefaults.bool(forKey: BMaintainHoistedItemWhenFiltering)
-                    let maintainFilterWhenHoisting = userDefaults.bool(forKey: BMaintainItemPathFilterWhenHoisting)
+                let isFocused = outlineEditor?.focusedItem != nil
+                let isFiltered = !(outlineEditor?.itemPathFilter ?? "").isEmpty
+                let isPerformingHoist = newType == "home" || newType == "project"
+                let isPerformingFilter = !isPerformingHoist
+                let maintainHoistedWhenFilter = userDefaults.bool(forKey: BMaintainHoistedItemWhenFiltering)
+                let maintainFilterWhenHoisting = userDefaults.bool(forKey: BMaintainItemPathFilterWhenHoisting)
 
-                    if isPerformingFilter && isFocused && maintainHoistedWhenFilter {
-                        return true
-                    }
-                    
-                    if isPerformingHoist && isFiltered && maintainFilterWhenHoisting {
-                        return true
-                    }
+                if isPerformingFilter && isFocused && maintainHoistedWhenFilter {
+                    return true
+                }
 
-                    if let window = sidebarView.window {
-                        for each in window.tabbedWindows ?? [] {
-                            if window != each, let eachOutlineEditor = (each.windowController as? OutlineEditorWindowController)?.outlineEditor, let eachSidebar = eachOutlineEditor.outlineSidebar {
-                                if outlineEditor?.outline.jsOutline == eachOutlineEditor.outline.jsOutline, eachSidebar.selectedItem.id == newItem.id {
-                                    // if different window, but same outline and same selected item... just switch tab
-                                    each.makeKeyAndOrderFront(nil)
-                                    return false
-                                }
+                if isPerformingHoist && isFiltered && maintainFilterWhenHoisting {
+                    return true
+                }
+
+                if let window = sidebarView.window {
+                    for each in window.tabbedWindows ?? [] {
+                        if window != each, let eachOutlineEditor = (each.windowController as? OutlineEditorWindowController)?.outlineEditor, let eachSidebar = eachOutlineEditor.outlineSidebar {
+                            if outlineEditor?.outline.jsOutline == eachOutlineEditor.outline.jsOutline, eachSidebar.selectedItem.id == newItem.id {
+                                // if different window, but same outline and same selected item... just switch tab
+                                each.makeKeyAndOrderFront(nil)
+                                return false
                             }
                         }
                     }
@@ -498,7 +485,6 @@ extension OutlineSidebarViewController: NSMenuDelegate {
         }
     }
 
-    @available(OSX 10.12, *)
     @IBAction func openInNewTab(_ sender: Any?) {
         guard let window = sidebarView.window else {
             return
@@ -603,9 +589,7 @@ extension OutlineSidebarViewController: NSMenuDelegate {
         if let clickedItem = sidebarView.item(atRow: sidebarView.clickedRow) as? OutlineSidebarItem {
             func addOpenInItems() {
                 menu.addItem(withTitle: NSLocalizedString("Open in New Window", tableName: "Sidebar", comment: "menu"), action: #selector(openInNewWindow(_:)), keyEquivalent: "")
-                if #available(OSX 10.12, *) {
-                    menu.addItem(withTitle: NSLocalizedString("Open in New Tab", tableName: "Sidebar", comment: "menu"), action: #selector(self.openInNewTab(_:)), keyEquivalent: "")
-                }
+                menu.addItem(withTitle: NSLocalizedString("Open in New Tab", tableName: "Sidebar", comment: "menu"), action: #selector(openInNewTab(_:)), keyEquivalent: "")
                 menu.addItem(NSMenuItem.separator())
             }
 

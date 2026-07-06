@@ -118,14 +118,12 @@ open class OutlineEditorWindowController: NSWindowController, OutlineEditorHolde
     override open func synchronizeWindowTitleWithDocumentName() {
         super.synchronizeWindowTitleWithDocumentName()
 
-        if #available(OSX 10.13, *) {
-            if let window = (window as? OutlineEditorWindow) {
-                let selectedItemTitle = outlineEditor?.outlineSidebar?.selectedItem?.title ?? ""
-                if window.isTabbedWindowWithSingleDocument {
-                    window.tab.title = selectedItemTitle
-                } else {
-                    window.tab.title = "\(window.title) • \(selectedItemTitle)"
-                }
+        if let window = (window as? OutlineEditorWindow) {
+            let selectedItemTitle = outlineEditor?.outlineSidebar?.selectedItem?.title ?? ""
+            if window.isTabbedWindowWithSingleDocument {
+                window.tab.title = selectedItemTitle
+            } else {
+                window.tab.title = "\(window.title) • \(selectedItemTitle)"
             }
         }
     }
@@ -173,7 +171,6 @@ open class OutlineEditorWindowController: NSWindowController, OutlineEditorHolde
         }
     }
 
-    @available(OSX 10.12, *)
     @IBAction func newTab(_: Any?) {
         if let document = document as? OutlineDocument {
             let windowController = document.makeWindowController()

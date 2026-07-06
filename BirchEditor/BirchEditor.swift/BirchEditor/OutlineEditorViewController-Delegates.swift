@@ -62,36 +62,6 @@ extension OutlineEditorViewController: NSTextViewDelegate {
                 view.setSelectedRange(NSMakeRange(charIndex, 0))
                 menu.removeAllItems()
             }
-
-            // let item = itemPick.storageItem.item
-
-            /* if let menuItem = menu.addItemWithTitle("Focus In".localized(), action: #selector(OutlineEditorViewController.focusIn(_:)), keyEquivalent: "") {
-                 menuItem.representedObject = item.id
-             }
-
-             if let menuItem = menu.addItemWithTitle("Focus Out".localized(), action: #selector(OutlineEditorViewController.focusOut(_:)), keyEquivalent: "") {
-                 menuItem.representedObject = item.id
-             }
-
-             menu.addItem(NSMenuItem.separatorItem())
-
-             menu.addItemWithTitle("Group".localized(), action: #selector(OutlineEditorViewController.groupLines(_:)), keyEquivalent: "")
-             menu.addItemWithTitle("Duplicate".localized(), action: #selector(OutlineEditorViewController.duplicateLines(_:)), keyEquivalent: "")
-
-             menu.addItem(NSMenuItem.separatorItem())
-
-             menu.addItemWithTitle("Delete".localized(), action: #selector(OutlineEditorViewController.deleteLines(_:)), keyEquivalent: "")
-
-             menu.addItem(NSMenuItem.separatorItem()) */
-
-            // let menuItem = menu.addItem(withTitle: "Open in New Window".localized(), action: #selector(OutlineDocument.newWindowController), keyEquivalent: "")
-            // menuItem.representedObject = item.id
-
-            // if #available(OSX 10.12, *) {
-            //    menu.addItem(withTitle: "Open in New Tab".localized(), action: #selector(self.openInNewTab(_:)), keyEquivalent: "")
-            // }
-
-            // menu.addItem(NSMenuItem.separator())
         }
         return menu
     }
