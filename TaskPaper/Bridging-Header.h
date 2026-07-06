@@ -10,7 +10,6 @@
 #import "JGMethodSwizzler.h"
 #import "NSTextStorageBase.h"
 #import "NSTextStorage-Performance.h"
-#import "NSWindowTabbedBase.h"
 #import "NSMutableAttributedString-Performance.h"
 #import "NSTextView-RangeForUserCompletionAdditions.h"
 #import "NSTextView-AccessibilityPerformanceHacks.h"

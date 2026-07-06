@@ -16,8 +16,6 @@
 		431673E21D9C3C2700A84EC6 /* searches.taskpaper in Resources */ = {isa = PBXBuildFile; fileRef = 431673E01D9C3C2700A84EC6 /* searches.taskpaper */; };
 		431673E41D9C3CB800A84EC6 /* tags.taskpaper in Resources */ = {isa = PBXBuildFile; fileRef = 431673E31D9C3CB800A84EC6 /* tags.taskpaper */; };
 		431673E51D9C3CB800A84EC6 /* tags.taskpaper in Resources */ = {isa = PBXBuildFile; fileRef = 431673E31D9C3CB800A84EC6 /* tags.taskpaper */; };
-		43167F951D89AD8B00FF919B /* NSWindowTabbedBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43167F941D89AD8B00FF919B /* NSWindowTabbedBase.m */; };
-		43167F961D89AD8B00FF919B /* NSWindowTabbedBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43167F941D89AD8B00FF919B /* NSWindowTabbedBase.m */; };
 		431713F91DD677CD00B9F605 /* OutlineEditorHandleClickGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431713F81DD677CD00B9F605 /* OutlineEditorHandleClickGestureRecognizer.swift */; };
 		431713FA1DD677CD00B9F605 /* OutlineEditorHandleClickGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431713F81DD677CD00B9F605 /* OutlineEditorHandleClickGestureRecognizer.swift */; };
 		431713FB1DD677CD00B9F605 /* OutlineEditorHandleClickGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431713F81DD677CD00B9F605 /* OutlineEditorHandleClickGestureRecognizer.swift */; };
@@ -88,7 +86,6 @@
 		433815F31DB93DB900120078 /* NSRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B281D69FB96001F6A2B /* NSRect.swift */; };
 		433815F41DB93DB900120078 /* OutlineEditorTextStorageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B411D69FB96001F6A2B /* OutlineEditorTextStorageItem.swift */; };
 		433815F51DB93DB900120078 /* OutlineEditorTypesetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B431D69FB96001F6A2B /* OutlineEditorTypesetter.swift */; };
-		433815F61DB93DB900120078 /* NSWindowTabbedBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43167F941D89AD8B00FF919B /* NSWindowTabbedBase.m */; };
 		433815F71DB93DB900120078 /* ChoicePaletteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B0E1D69FB96001F6A2B /* ChoicePaletteRowView.swift */; };
 		433815F81DB93DB900120078 /* ChoicePaletteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B101D69FB96001F6A2B /* ChoicePaletteTableView.swift */; };
 		433815F91DB93DB900120078 /* ChoicePaletteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B111D69FB96001F6A2B /* ChoicePaletteTextField.swift */; };
@@ -562,8 +559,6 @@
 		431673DD1D9C2A8500A84EC6 /* ConfigurationOutlinesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationOutlinesController.swift; sourceTree = "<group>"; };
 		431673E01D9C3C2700A84EC6 /* searches.taskpaper */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = searches.taskpaper; sourceTree = "<group>"; };
 		431673E31D9C3CB800A84EC6 /* tags.taskpaper */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tags.taskpaper; sourceTree = "<group>"; };
-		43167F931D89AD8B00FF919B /* NSWindowTabbedBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSWindowTabbedBase.h; sourceTree = "<group>"; };
-		43167F941D89AD8B00FF919B /* NSWindowTabbedBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSWindowTabbedBase.m; sourceTree = "<group>"; };
 		431713F81DD677CD00B9F605 /* OutlineEditorHandleClickGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineEditorHandleClickGestureRecognizer.swift; sourceTree = "<group>"; };
 		431714001DD677FB00B9F605 /* OutlineEditorHandleDragGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineEditorHandleDragGestureRecognizer.swift; sourceTree = "<group>"; };
 		43192D082A87B8DB00FF7AA8 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
@@ -1014,8 +1009,6 @@
 				4315A2B0219CADFB00348175 /* NSTextView-AccessibilityPerformanceHacks.m */,
 				43402B2B1D69FB96001F6A2B /* NSTextStorageBase.h */,
 				43402B2C1D69FB96001F6A2B /* NSTextStorageBase.m */,
-				43167F931D89AD8B00FF919B /* NSWindowTabbedBase.h */,
-				43167F941D89AD8B00FF919B /* NSWindowTabbedBase.m */,
 				43402B291D69FB96001F6A2B /* NSTextStorage-Performance.h */,
 				43402B2A1D69FB96001F6A2B /* NSTextStorage-Performance.m */,
 				43402B251D69FB96001F6A2B /* NSMutableAttributedString-Performance.h */,
@@ -1686,7 +1679,6 @@
 				433815F41DB93DB900120078 /* OutlineEditorTextStorageItem.swift in Sources */,
 				433815F51DB93DB900120078 /* OutlineEditorTypesetter.swift in Sources */,
 				434DA1EA1E4E28E200513DCC /* CoreFoundation-Extensions.swift in Sources */,
-				433815F61DB93DB900120078 /* NSWindowTabbedBase.m in Sources */,
 				433815F71DB93DB900120078 /* ChoicePaletteRowView.swift in Sources */,
 				433815F81DB93DB900120078 /* ChoicePaletteTableView.swift in Sources */,
 				433815F91DB93DB900120078 /* ChoicePaletteTextField.swift in Sources */,
@@ -1810,7 +1802,6 @@
 				43402B8F1D69FB96001F6A2B /* OutlineEditorTextStorageItem.swift in Sources */,
 				43402B911D69FB96001F6A2B /* OutlineEditorTypesetter.swift in Sources */,
 				434DA1E81E4E28E200513DCC /* CoreFoundation-Extensions.swift in Sources */,
-				43167F951D89AD8B00FF919B /* NSWindowTabbedBase.m in Sources */,
 				43402B631D69FB96001F6A2B /* ChoicePaletteRowView.swift in Sources */,
 				43402B651D69FB96001F6A2B /* ChoicePaletteTableView.swift in Sources */,
 				43402B661D69FB96001F6A2B /* ChoicePaletteTextField.swift in Sources */,
@@ -1946,7 +1937,6 @@
 				43B6ADED1D6CE91600ACA66C /* OutlineEditorTextStorageItem.swift in Sources */,
 				43B6ADEE1D6CE91600ACA66C /* OutlineEditorTypesetter.swift in Sources */,
 				434DA1E91E4E28E200513DCC /* CoreFoundation-Extensions.swift in Sources */,
-				43167F961D89AD8B00FF919B /* NSWindowTabbedBase.m in Sources */,
 				43B6ADEF1D6CE91600ACA66C /* ChoicePaletteRowView.swift in Sources */,
 				43B6ADF01D6CE91600ACA66C /* ChoicePaletteTableView.swift in Sources */,
 				43B6ADF11D6CE91600ACA66C /* ChoicePaletteTextField.swift in Sources */,

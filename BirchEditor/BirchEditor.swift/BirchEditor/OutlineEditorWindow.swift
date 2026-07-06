@@ -6,7 +6,7 @@
 //  Copyright © 2005–2018 Jesse Grosjean. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 var TabbedWindowsKey = "tabbedWindows"
 var tabbedWindowsContext = malloc(1)!
@@ -15,7 +15,7 @@ extension Notification.Name {
     static let isTabbedWindowDidChange = Notification.Name("isTabbedWindowDidChange")
 }
 
-class OutlineEditorWindow: NSWindowTabbedBase {
+class OutlineEditorWindow: NSWindow {
     var lastTabbedWindows: [NSWindow]?
 
     override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing bufferingType: NSWindow.BackingStoreType, defer flag: Bool) {
