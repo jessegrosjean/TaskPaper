@@ -9,6 +9,7 @@
 import Foundation
 import JavaScriptCore
 
+@MainActor
 public protocol DateTimeType: AnyObject {
     
     static func parse(dateTime: String) -> Date?
@@ -16,6 +17,7 @@ public protocol DateTimeType: AnyObject {
     
 }
 
+@MainActor
 public class DateTime: DateTimeType {
 
     static let jsDateTimeClass = BirchOutline.sharedContext.jsDateTimeClass

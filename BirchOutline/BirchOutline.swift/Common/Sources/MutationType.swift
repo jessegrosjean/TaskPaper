@@ -17,6 +17,7 @@ public enum MutationKind {
 
 }
 
+@MainActor
 public protocol MutationType: AnyObject {
     
     var target: ItemType { get }
@@ -28,6 +29,7 @@ public protocol MutationType: AnyObject {
     
 }
 
+@MainActor
 open class Mutation: MutationType {
     
     open var jsMutation: JSValue

@@ -38,7 +38,11 @@ class SearchBarViewController: NSViewController, OutlineEditorHolderType, Styles
     var isTabbedWindowObserver: NSObjectProtocol?
 
     deinit {
-        itemPathFilterSubscription?.dispose()
+        // deinit is nonisolated, but view controllers deallocate on the main
+        // thread with their window hierarchy.
+        MainActor.assumeIsolated {
+            itemPathFilterSubscription?.dispose()
+        }
         if let isTabbedWindowObserver = isTabbedWindowObserver {
             NotificationCenter.default.removeObserver(isTabbedWindowObserver)
         }

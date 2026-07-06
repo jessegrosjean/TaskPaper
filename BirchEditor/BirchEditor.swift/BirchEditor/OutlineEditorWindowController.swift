@@ -183,11 +183,15 @@ open class OutlineEditorWindowController: NSWindowController, OutlineEditorHolde
     }
 
     deinit {
-        pathMonitor?.stopMonitoring()
-        pathMonitor = nil
-        styleSheetUpdateDebouncer?.cancel()
-        styleSheetUpdateDebouncer = nil
-        sidebarSelectionDisposable?.dispose()
+        // deinit is nonisolated, but window controllers deallocate on the
+        // main thread with their window.
+        MainActor.assumeIsolated {
+            pathMonitor?.stopMonitoring()
+            pathMonitor = nil
+            styleSheetUpdateDebouncer?.cancel()
+            styleSheetUpdateDebouncer = nil
+            sidebarSelectionDisposable?.dispose()
+        }
         windowEffectiveAppearanceObserver?.invalidate()
         userDefaults.removeObserver(self, forKeyPath: BUserFontSizeDefaultsKey)
     }

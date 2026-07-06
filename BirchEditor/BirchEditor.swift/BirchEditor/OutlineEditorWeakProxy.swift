@@ -16,6 +16,11 @@ import BirchOutline
 import EventKit
 import JavaScriptCore
 
+// JS calls these methods on the thread that evaluates JS — always main in
+// this app. @MainActor on the @objc protocol leaves the ObjC metadata
+// unchanged for JSExport scraping, and SE-0423 adds runtime isolation
+// assertions to the ObjC thunks in debug builds.
+@MainActor
 @objc protocol NativeOutlineEditor: JSExport {
     var isEditing: Bool { get }
     var visibleRect: CGRect { get }
@@ -48,6 +53,7 @@ import JavaScriptCore
     func getDateFromUser(_ placeholder: String, dateStringTemplate: String?, callback: JSValue)
 }
 
+@MainActor
 class OutlineEditorWeakProxy: NSObject {
     weak var outlineEditor: OutlineEditor?
     var isEditingCount: UInt = 0

@@ -11,30 +11,40 @@ import JavaScriptCore
 @testable import TaskPaper
 import XCTest
 
+@MainActor
 class OutlineDocument: XCTestCase {
     var document: TaskPaperDocument?
     weak var weakDocument: TaskPaperDocument?
 
+    // setUp()/tearDown() overrides stay nonisolated (inherited from the
+    // superclass); XCTest invokes them on the main thread for synchronous
+    // tests, so assumeIsolated is safe here.
     override func setUp() {
         super.setUp()
-        autoreleasepool {
-            document = try! NSDocumentController.shared.makeUntitledDocument(ofType: "com.taskpaper.text") as? TaskPaperDocument
+        MainActor.assumeIsolated {
+            autoreleasepool {
+                document = try! NSDocumentController.shared.makeUntitledDocument(ofType: "com.taskpaper.text") as? TaskPaperDocument
+            }
+            weakDocument = document
         }
-        weakDocument = document
     }
 
     override func tearDown() {
-        autoreleasepool {
-            document?.close()
-            document = nil
+        MainActor.assumeIsolated {
+            autoreleasepool {
+                document?.close()
+                document = nil
+            }
         }
 
         let expectation = self.expectation(description: "Should Deinit")
-        delay(0) {
-            while self.weakDocument != nil {
-                RunLoop.current.run(until: NSDate(timeIntervalSinceNow: 0.1) as Date)
+        MainActor.assumeIsolated {
+            delay(0) {
+                while self.weakDocument != nil {
+                    RunLoop.current.run(until: NSDate(timeIntervalSinceNow: 0.1) as Date)
+                }
+                expectation.fulfill()
             }
-            expectation.fulfill()
         }
 
         waitForExpectations(timeout: 5) { error in
@@ -43,7 +53,9 @@ class OutlineDocument: XCTestCase {
             }
         }
 
-        XCTAssertNil(weakDocument)
+        MainActor.assumeIsolated {
+            XCTAssertNil(weakDocument)
+        }
 
         super.tearDown()
     }

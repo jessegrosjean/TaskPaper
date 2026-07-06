@@ -12,6 +12,7 @@ import JavaScriptCore
 
 public typealias OutlineEditorState = (hoistedItem: ItemType?, focusedItem: ItemType?, itemPathFilter: String?)
 
+@MainActor
 public protocol OutlineEditorType: AnyObject, StylesheetHolder {
     var outline: OutlineType { get }
     var outlineSidebar: OutlineSidebarType? { get }
@@ -76,10 +77,12 @@ public protocol OutlineEditorType: AnyObject, StylesheetHolder {
     func createPasteboardItem(_ item: ItemType) -> NSPasteboardItem
 }
 
+@MainActor
 public protocol OutlineEditorHolderType {
     var outlineEditor: OutlineEditorType? { get set }
 }
 
+@MainActor
 public final class OutlineEditor: NSObject, OutlineEditorType {
     public let outline: OutlineType
     public var outlineSidebar: OutlineSidebarType?
@@ -114,10 +117,14 @@ public final class OutlineEditor: NSObject, OutlineEditorType {
     }
 
     deinit {
-        outlineSidebar?.destroy()
-        textStorage.cleanUp()
-        styleSheetListener?.dispose()
-        jsOutlineEditor.invokeMethod("destroy", withArguments: [])
+        // deinit is nonisolated, but OutlineEditor is owned by main-actor UI
+        // (documents/view controllers), so the last release happens on main.
+        MainActor.assumeIsolated {
+            outlineSidebar?.destroy()
+            textStorage.cleanUp()
+            styleSheetListener?.dispose()
+            jsOutlineEditor.invokeMethod("destroy", withArguments: [])
+        }
     }
 
     public var selectedRange: NSRange {
@@ -243,23 +250,25 @@ public final class OutlineEditor: NSObject, OutlineEditorType {
         jsOutlineEditor.invokeMethod("toggleAttribute", withArguments: [attribute])
     }
 
+    // JSC invokes these blocks on the thread that evaluates JS (always main);
+    // assumeIsolated enforces that invariant at runtime.
     public func onDidChangeHoistedItem(_ callback: @escaping () -> Void) -> DisposableType {
         let callbackWrapper: @convention(block) () -> Void = {
-            callback()
+            MainActor.assumeIsolated { callback() }
         }
         return jsOutlineEditor.invokeMethod("onDidChangeHoistedItem", withArguments: [unsafeBitCast(callbackWrapper, to: AnyObject.self)])
     }
 
     public func onDidChangeFocusedItem(_ callback: @escaping () -> Void) -> DisposableType {
         let callbackWrapper: @convention(block) () -> Void = {
-            callback()
+            MainActor.assumeIsolated { callback() }
         }
         return jsOutlineEditor.invokeMethod("onDidChangeFocusedItem", withArguments: [unsafeBitCast(callbackWrapper, to: AnyObject.self)])
     }
 
     public func onDidChangeItemPathFilter(_ callback: @escaping () -> Void) -> DisposableType {
         let callbackWrapper: @convention(block) () -> Void = {
-            callback()
+            MainActor.assumeIsolated { callback() }
         }
         return jsOutlineEditor.invokeMethod("onDidChangeItemPathFilter", withArguments: [unsafeBitCast(callbackWrapper, to: AnyObject.self)])
     }

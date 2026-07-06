@@ -6,6 +6,7 @@
 //  Copyright © 2005–2018 Jesse Grosjean. All rights reserved.
 //
 
+@MainActor
 open class BirchOutline {
 
     static var _sharedContext: BirchScriptContext!

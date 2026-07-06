@@ -24,6 +24,7 @@ struct StorageItemPick {
     let handleContainsPoint: Bool
 }
 
+@MainActor
 struct StorageItemDropTargetPick {
     let storageItemPick: StorageItemPick
     let dropLocation: ItemDropLocation

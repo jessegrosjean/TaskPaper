@@ -10,22 +10,30 @@ import XCTest
 import JavaScriptCore
 @testable import BirchOutline
 
+@MainActor
 class OutlineTests: XCTestCase {
 
     var outline: OutlineType!
     weak var weakOutline: OutlineType?
-    
+
+    // setUp()/tearDown() overrides stay nonisolated (they inherit the
+    // superclass's isolation); XCTest invokes them on the main thread for
+    // synchronous tests, so assumeIsolated is safe here.
     override func setUp() {
         super.setUp()
-        let path = Bundle(for: BirchScriptContext.self).path(forResource: "OutlineFixture", ofType: "txt")!
-        let textContents = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
-        outline = BirchOutline.createTaskPaperOutline(textContents as String)
-        weakOutline = outline
+        MainActor.assumeIsolated {
+            let path = Bundle(for: BirchScriptContext.self).path(forResource: "OutlineFixture", ofType: "txt")!
+            let textContents = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
+            outline = BirchOutline.createTaskPaperOutline(textContents as String)
+            weakOutline = outline
+        }
     }
-    
+
     override func tearDown() {
-        outline = nil
-        XCTAssertNil(weakOutline)
+        MainActor.assumeIsolated {
+            outline = nil
+            XCTAssertNil(weakOutline)
+        }
     }
 
     func testInit() {

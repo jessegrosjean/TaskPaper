@@ -14,6 +14,7 @@ extension NSPasteboard.PasteboardType {
     static let backwardsCompatibleFileURL: NSPasteboard.PasteboardType = .fileURL
 }
 
+@MainActor
 open class ItemPasteboardUtilities {
     open class var readablePasteboardTypes: [NSPasteboard.PasteboardType] {
         return [

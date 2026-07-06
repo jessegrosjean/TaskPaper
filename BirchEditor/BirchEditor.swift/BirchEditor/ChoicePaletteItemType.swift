@@ -8,6 +8,10 @@
 
 import JavaScriptCore
 
+// JS calls these members on the thread that evaluates JS (always main).
+// @MainActor on the @objc protocol leaves the ObjC metadata unchanged for
+// JSExport scraping.
+@MainActor
 @objc public protocol ChoicePaletteItemType: JSExport {
     weak var parent: ChoicePaletteItemType? { get set }
     var children: [ChoicePaletteItemType] { get }
@@ -28,6 +32,7 @@ import JavaScriptCore
     func appendChild(_ child: ChoicePaletteItemType)
 }
 
+@MainActor
 open class ChoicePaletteItem: NSObject, ChoicePaletteItemType {
     open var type: String
     open var title: String
@@ -111,6 +116,7 @@ open class ChoicePaletteItem: NSObject, ChoicePaletteItemType {
     }
 }
 
+@MainActor
 func flattenChoicePaletteItemBranches(_ choicePaletteItems: [ChoicePaletteItemType]) -> [ChoicePaletteItemType] {
     var flat = [ChoicePaletteItemType]()
     for each in choicePaletteItems {

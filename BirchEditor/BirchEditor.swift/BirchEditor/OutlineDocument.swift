@@ -56,8 +56,25 @@ open class OutlineDocument: NSDocument {
     }
 
     deinit {
-        disposable?.dispose()
-        presentedItemDidChangeDebouncer?.cancel()
+        // NSDocument can be deallocated off the main thread (e.g. on its
+        // "NSDocument Version Cleanup" queue), but the JS-subscription
+        // cleanup must run on main. The captured values are uniquely owned
+        // by this dying document, so handing them to the main queue is safe.
+        nonisolated(unsafe) let disposable = self.disposable
+        let debouncer = self.presentedItemDidChangeDebouncer
+        if Thread.isMainThread {
+            MainActor.assumeIsolated {
+                disposable?.dispose()
+                debouncer?.cancel()
+            }
+        } else {
+            DispatchQueue.main.async {
+                MainActor.assumeIsolated {
+                    disposable?.dispose()
+                    debouncer?.cancel()
+                }
+            }
+        }
     }
 
     // MARK: - Data
@@ -96,11 +113,17 @@ open class OutlineDocument: NSDocument {
         return false
     }
 
+    // NSDocument's reading/writing primitives are nonisolated so documents
+    // can opt into concurrent I/O; this document opts out
+    // (canConcurrentlyReadDocuments/canAsynchronouslyWrite are false), so they
+    // run on the main thread and may assert isolation.
     override open func write(to url: URL, ofType typeName: String) throws {
         try super.write(to: url, ofType: typeName)
-        _ = url.setExtendedAttribute(string: outline.serializedMetadata, forName: "com.taskpaper.outline.metadata")
-        if let outlineEditor = outlineEditorForSheet {
-            _ = url.setExtendedAttribute(string: outlineEditor.serializedRestorableState, forName: "com.taskpaper.editor.defaultRestorableState.\(NSUserName())")
+        MainActor.assumeIsolated {
+            _ = url.setExtendedAttribute(string: outline.serializedMetadata, forName: "com.taskpaper.outline.metadata")
+            if let outlineEditor = outlineEditorForSheet {
+                _ = url.setExtendedAttribute(string: outlineEditor.serializedRestorableState, forName: "com.taskpaper.editor.defaultRestorableState.\(NSUserName())")
+            }
         }
     }
 
@@ -113,7 +136,9 @@ open class OutlineDocument: NSDocument {
         //        options[key] = restorableState[key]
         //    }
         // }
-        return outline.serialize(options).data(using: String.Encoding.utf8)!
+        return MainActor.assumeIsolated {
+            outline.serialize(options).data(using: String.Encoding.utf8)!
+        }
     }
 
     override open func revert(toContentsOf url: URL, ofType typeName: String) throws {
@@ -125,15 +150,17 @@ open class OutlineDocument: NSDocument {
     override open func read(from url: URL, ofType typeName: String) throws {
         try super.read(from: url, ofType: typeName)
 
-        if !isReverting {
-            if let serializedMetadata = url.extendedAttributeString(forName: "com.taskpaper.outline.metadata") {
-                outline.serializedMetadata = serializedMetadata
-                updateChangeCount(.changeCleared)
-            }
+        MainActor.assumeIsolated {
+            if !isReverting {
+                if let serializedMetadata = url.extendedAttributeString(forName: "com.taskpaper.outline.metadata") {
+                    outline.serializedMetadata = serializedMetadata
+                    updateChangeCount(.changeCleared)
+                }
 
-            if let serializedRestorableState = url.extendedAttributeString(forName: "com.taskpaper.editor.defaultRestorableState.\(NSUserName())") {
-                editorDefaultRestorableState = serializedRestorableState
-                outlineEditorForSheet?.serializedRestorableState = serializedRestorableState
+                if let serializedRestorableState = url.extendedAttributeString(forName: "com.taskpaper.editor.defaultRestorableState.\(NSUserName())") {
+                    editorDefaultRestorableState = serializedRestorableState
+                    outlineEditorForSheet?.serializedRestorableState = serializedRestorableState
+                }
             }
         }
     }
@@ -142,7 +169,9 @@ open class OutlineDocument: NSDocument {
         guard let string = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else {
             throw BirchError.runtimeError("Failed to decode string as utf8")
         }
-        outline.reloadSerialization(string as String, options: ["type": typeName as Any])
+        MainActor.assumeIsolated {
+            outline.reloadSerialization(string as String, options: ["type": typeName as Any])
+        }
     }
 
     // MARK: - File Refresh

@@ -9,6 +9,7 @@
 import BirchOutline
 import Foundation
 
+@MainActor
 class ConfigurationOutlinesController: NSObject {
     static var outlines = [OutlineType]()
     static var subscriptions = [DisposableType]()

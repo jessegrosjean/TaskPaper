@@ -9,6 +9,7 @@
 import JavaScriptCore
 import WebKit
 
+@MainActor
 open class BirchScriptContext {
     
     open var context: JSContext!    
@@ -86,22 +87,47 @@ func setExceptionHandler(_ context: JSContext) {
     }
 }
 
+// JS timers are main-actor state: JS only ever evaluates on the main thread,
+// and the fired callbacks re-enter the JS context.
+@MainActor
+private final class TimeoutRegistry {
+    var nextID: Int32 = 1
+    var callbacks = [Int32: JSValue]()
+}
+
+@MainActor
 func setTimeoutAndClearTimeoutHandlers(_ context: JSContext) {
-    var setTimeoutID: Int32 = 1
-    var setTimeOutIDsToCallbacks = [Int32:JSValue]()
-    
+    installTimeoutHandlers(context, registry: TimeoutRegistry())
+}
+
+// Nonisolated so the blocks below stay nonisolated function values (a closure
+// formed in a @MainActor context would infer @MainActor isolation, which is
+// ill-formed for a block taking non-Sendable JSValue parameters).
+private func installTimeoutHandlers(_ context: JSContext, registry: TimeoutRegistry) {
+    // JSC invokes these blocks on whatever thread evaluates JS — always the
+    // main thread in this app. assumeIsolated documents and enforces that
+    // invariant at runtime rather than assuming it silently.
     let setTimeout: @convention(block) (JSValue, Int) -> JSValue = { (callback, wait) in
-        let thisTimeOutID = setTimeoutID
-        setTimeoutID += 1
-        setTimeOutIDsToCallbacks[thisTimeOutID] = callback
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(UInt64(wait) * NSEC_PER_MSEC)) / Double(NSEC_PER_SEC), execute: { () -> Void in
-            let _ = setTimeOutIDsToCallbacks.removeValue(forKey: thisTimeOutID)?.call(withArguments: [])
-        })
+        // assumeIsolated can only return Sendable values, so hand back the
+        // timer ID and build the JSValue outside.
+        let thisTimeOutID: Int32 = MainActor.assumeIsolated {
+            let thisTimeOutID = registry.nextID
+            registry.nextID += 1
+            registry.callbacks[thisTimeOutID] = callback
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(UInt64(wait) * NSEC_PER_MSEC)) / Double(NSEC_PER_SEC)) {
+                MainActor.assumeIsolated {
+                    let _ = registry.callbacks.removeValue(forKey: thisTimeOutID)?.call(withArguments: [])
+                }
+            }
+            return thisTimeOutID
+        }
         return JSValue.init(int32: thisTimeOutID, in: context)
     }
-    
+
     let clearTimeout: @convention(block) (JSValue) -> Void = { (timeoutID) in
-        setTimeOutIDsToCallbacks.removeValue(forKey: timeoutID.toInt32())
+        MainActor.assumeIsolated {
+            _ = registry.callbacks.removeValue(forKey: timeoutID.toInt32())
+        }
     }
 
     context.setObject(unsafeBitCast(setTimeout, to: AnyObject.self), forKeyedSubscript: "setTimeout" as (NSCopying & NSObjectProtocol))

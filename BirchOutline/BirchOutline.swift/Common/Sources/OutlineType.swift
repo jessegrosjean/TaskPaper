@@ -9,6 +9,7 @@
 import Foundation
 import JavaScriptCore
 
+@MainActor
 public protocol OutlineType: AnyObject {
     
     var jsOutline: JSValue { get }
@@ -90,6 +91,7 @@ public enum ChangeKind {
 
 }
 
+@MainActor
 public class Outline: OutlineType {
     
     public var jsOutline: JSValue
@@ -146,14 +148,14 @@ public class Outline: OutlineType {
 
     public func groupUndo(_ callback: @escaping () -> Void) {
         let callbackWrapper: @convention(block) () -> Void = {
-            callback()
+            MainActor.assumeIsolated { callback() }
         }
         jsOutline.invokeMethod("groupUndo", withArguments: [unsafeBitCast(callbackWrapper, to: AnyObject.self)])
     }
 
     public func groupChanges(_ callback: @escaping () -> Void) {
         let callbackWrapper: @convention(block) () -> Void = {
-            callback()
+            MainActor.assumeIsolated { callback() }
         }
         jsOutline.invokeMethod("groupChanges", withArguments: [unsafeBitCast(callbackWrapper, to: AnyObject.self)])
     }
@@ -168,47 +170,49 @@ public class Outline: OutlineType {
     
     public func onDidUpdateChangeCount(_ callback: @escaping (_ changeKind: ChangeKind) -> Void) -> DisposableType {
         let callbackWrapper: @convention(block) (_ changeKindString: String) -> Void = { changeKindString in
-            callback(ChangeKind(string: changeKindString)!)
+            MainActor.assumeIsolated { callback(ChangeKind(string: changeKindString)!) }
         }
         return jsOutline.invokeMethod("onDidUpdateChangeCount", withArguments: [unsafeBitCast(callbackWrapper, to: AnyObject.self)])
     }
     
     public func onWillChange(_ callback: @escaping () -> Void) -> DisposableType {
         let callbackWrapper: @convention(block) () -> Void = {
-            callback()
+            MainActor.assumeIsolated { callback() }
         }
         return jsOutline.invokeMethod("onWillChange", withArguments: [unsafeBitCast(callbackWrapper, to: AnyObject.self)])
     }
 
     public func onDidChange(_ callback: @escaping (_ mutation: MutationType) -> Void) -> DisposableType {
         let callbackWrapper: @convention(block) (_ mutation: JSValue) -> Void = { mutation in
-            callback(Mutation(jsMutation: mutation))
+            MainActor.assumeIsolated { callback(Mutation(jsMutation: mutation)) }
         }
         return jsOutline.invokeMethod("onDidChange", withArguments: [unsafeBitCast(callbackWrapper, to: AnyObject.self)])
     }
 
     public func onDidEndChanges(_ callback: @escaping (_ mutations: [MutationType]) -> Void) -> DisposableType {
         let callbackWrapper: @convention(block) (_ mutation: JSValue) -> Void = { jsMutations in
-            let length = Int((jsMutations.forProperty("length").toInt32()))
-            var mutations = [Mutation]()
-            for i in 0..<length {
-                mutations.append(Mutation(jsMutation: jsMutations.atIndex(i)))
+            MainActor.assumeIsolated {
+                let length = Int((jsMutations.forProperty("length").toInt32()))
+                var mutations = [Mutation]()
+                for i in 0..<length {
+                    mutations.append(Mutation(jsMutation: jsMutations.atIndex(i)))
+                }
+                callback(mutations)
             }
-            callback(mutations)
         }
         return jsOutline.invokeMethod("onDidEndChanges", withArguments: [unsafeBitCast(callbackWrapper, to: AnyObject.self)])
     }
     
     public func onWillReload(_ callback: @escaping () -> Void) -> DisposableType {
         let callbackWrapper: @convention(block) () -> Void = {
-            callback()
+            MainActor.assumeIsolated { callback() }
         }
         return jsOutline.invokeMethod("onWillReload", withArguments: [unsafeBitCast(callbackWrapper, to: AnyObject.self)])
     }
 
     public func onDidReload(_ callback: @escaping () -> Void) -> DisposableType {
         let callbackWrapper: @convention(block) () -> Void = {
-            callback()
+            MainActor.assumeIsolated { callback() }
         }
         return jsOutline.invokeMethod("onDidReload", withArguments: [unsafeBitCast(callbackWrapper, to: AnyObject.self)])
     }

@@ -9,6 +9,7 @@
 import Foundation
 import JavaScriptCore
 
+@MainActor
 public protocol ItemPathQueryType: AnyObject {
     
     func onDidChange(_ callback: @escaping (_ items: [ItemType]) -> Void) -> DisposableType
@@ -23,6 +24,7 @@ public protocol ItemPathQueryType: AnyObject {
     
 }
 
+@MainActor
 open class ItemPathQuery: ItemPathQueryType {
     
     var jsItemPathQuery: JSValue
@@ -33,7 +35,7 @@ open class ItemPathQuery: ItemPathQueryType {
     
     open func onDidChange(_ callback: @escaping (_ items: [ItemType]) -> Void) -> DisposableType {
         let callbackWrapper: @convention(block) (_ items: JSValue) -> Void = { items in
-            callback(items.toItemTypeArray())
+            MainActor.assumeIsolated { callback(items.toItemTypeArray()) }
         }
         return jsItemPathQuery.invokeMethod("onDidChange", withArguments: [unsafeBitCast(callbackWrapper, to: AnyObject.self)])
     }

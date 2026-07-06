@@ -11,6 +11,7 @@ import JavaScriptCore
 @testable import TaskPaper
 import XCTest
 
+@MainActor
 class OutlineEditorTextStorageTests: XCTestCase {
     var outline: OutlineType!
     weak var weakOutline: OutlineType?
@@ -19,28 +20,35 @@ class OutlineEditorTextStorageTests: XCTestCase {
     var outlineEditorTextStorage: OutlineEditorTextStorage!
     weak var weakOutlineEditorTextStorage: OutlineEditorTextStorage?
 
+    // setUp()/tearDown() overrides stay nonisolated (inherited from the
+    // superclass); XCTest invokes them on the main thread for synchronous
+    // tests, so assumeIsolated is safe here.
     override func setUp() {
         super.setUp()
-        outline = BirchEditor.createTaskPaperOutline(nil)
-        weakOutline = outline
-        outlineEditor = BirchEditor.createOutlineEditor(outline, styleSheet: nil)
-        weakOutlineEditor = outlineEditor
-        outlineEditorTextStorage = outlineEditor.textStorage
-        weakOutlineEditorTextStorage = outlineEditorTextStorage
-        let path = Bundle(for: BirchScriptContext.self).path(forResource: "OutlineFixture", ofType: "bml")!
-        let textContents = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
-        outline.reloadSerialization(textContents as String, options: ["type": "text/bml+html" as Any])
-        XCTAssertEqual(outline.retainCount, 1)
+        MainActor.assumeIsolated {
+            outline = BirchEditor.createTaskPaperOutline(nil)
+            weakOutline = outline
+            outlineEditor = BirchEditor.createOutlineEditor(outline, styleSheet: nil)
+            weakOutlineEditor = outlineEditor
+            outlineEditorTextStorage = outlineEditor.textStorage
+            weakOutlineEditorTextStorage = outlineEditorTextStorage
+            let path = Bundle(for: BirchScriptContext.self).path(forResource: "OutlineFixture", ofType: "bml")!
+            let textContents = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
+            outline.reloadSerialization(textContents as String, options: ["type": "text/bml+html" as Any])
+            XCTAssertEqual(outline.retainCount, 1)
+        }
     }
 
     override func tearDown() {
-        outlineEditor = nil
-        XCTAssertNil(weakOutlineEditor)
-        outlineEditorTextStorage = nil
-        XCTAssertNil(weakOutlineEditorTextStorage)
-        XCTAssertEqual(outline.retainCount, 0)
-        outline = nil
-        XCTAssertNil(weakOutline)
+        MainActor.assumeIsolated {
+            outlineEditor = nil
+            XCTAssertNil(weakOutlineEditor)
+            outlineEditorTextStorage = nil
+            XCTAssertNil(weakOutlineEditorTextStorage)
+            XCTAssertEqual(outline.retainCount, 0)
+            outline = nil
+            XCTAssertNil(weakOutline)
+        }
         super.tearDown()
     }
 

@@ -9,6 +9,7 @@
 import Foundation
 import JavaScriptCore
 
+@MainActor
 public protocol ItemType: AnyObject {
     
     static func getCommonAncestors(_ items: [ItemType]) -> [ItemType]

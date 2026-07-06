@@ -38,10 +38,14 @@ class OutlineSidebarViewController: NSViewController, OutlineEditorHolderType, S
     }
 
     deinit {
-        outlineEditor = nil
-        if let subscriptions = sidebarSubscriptions {
-            for each in subscriptions {
-                each.dispose()
+        // deinit is nonisolated, but view controllers deallocate on the main
+        // thread with their window hierarchy.
+        MainActor.assumeIsolated {
+            outlineEditor = nil
+            if let subscriptions = sidebarSubscriptions {
+                for each in subscriptions {
+                    each.dispose()
+                }
             }
         }
     }
@@ -79,7 +83,7 @@ class OutlineSidebarViewController: NSViewController, OutlineEditorHolderType, S
                             return
                         }
 
-                        func reloadIfNeeded(_ item: OutlineSidebarItem) {
+                        @MainActor func reloadIfNeeded(_ item: OutlineSidebarItem) {
                             if item.childrenChanged {
                                 sidebarView.reloadItem(item, reloadChildren: true)
                                 sidebarView.reloadItem(item)

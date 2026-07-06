@@ -15,6 +15,11 @@
 import BirchOutline
 import JavaScriptCore
 
+// Text storage is main-actor state: NSTextView drives all editing and layout
+// on the main thread, and this storage is backed by the main-confined JS
+// context. NSTextStorage itself is nonisolated in the SDK, so overrides below
+// stay nonisolated and assert main-actor isolation at runtime.
+@MainActor
 open class OutlineEditorTextStorage: NSTextStorageBase {
     open weak var outlineEditor: OutlineEditor?
 
@@ -63,6 +68,12 @@ open class OutlineEditorTextStorage: NSTextStorageBase {
     }
 
     override open func replaceCharacters(in range: NSRange, with str: String) {
+        MainActor.assumeIsolated {
+            replaceCharactersAssumingMainActor(in: range, with: str)
+        }
+    }
+
+    private func replaceCharactersAssumingMainActor(in range: NSRange, with str: String) {
         var insertString = str as NSString
 
         // Make sure line endings are consistent between cocoa and javascript models. unnormalizedLineEnding
@@ -160,17 +171,25 @@ open class OutlineEditorTextStorage: NSTextStorageBase {
     }
 
     override open func beginEditing() {
-        isEditingCount += 1
+        MainActor.assumeIsolated {
+            isEditingCount += 1
+        }
         super.beginEditing()
         backingStorage.beginEditing()
-        outlineEditor?.outline.beginUndoGrouping()
+        MainActor.assumeIsolated {
+            outlineEditor?.outline.beginUndoGrouping()
+        }
     }
 
     override open func endEditing() {
-        isEditingCount -= 1
+        MainActor.assumeIsolated {
+            isEditingCount -= 1
+        }
         backingStorage.endEditing()
         super.endEditing()
-        outlineEditor?.outline.endUndoGrouping()
+        MainActor.assumeIsolated {
+            outlineEditor?.outline.endUndoGrouping()
+        }
     }
 
     // MARK: - Util

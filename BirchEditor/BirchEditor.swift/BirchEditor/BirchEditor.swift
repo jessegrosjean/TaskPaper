@@ -9,6 +9,7 @@
 import BirchOutline
 import Cocoa
 
+@MainActor
 open class BirchEditor {
     public static var semanticVersion: [Int] {
         let shortVersionString = Bundle(for: BirchOutline.self).object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String

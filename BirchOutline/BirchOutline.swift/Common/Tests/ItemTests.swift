@@ -10,24 +10,31 @@ import XCTest
 import JavaScriptCore
 @testable import BirchOutline
 
+@MainActor
 class ItemTests: XCTestCase {
-    
+
     var outline: OutlineType!
     weak var weakOutline: OutlineType?
     var item: ItemType!
-    
+
+    // setUp()/tearDown() overrides stay nonisolated (they inherit the
+    // superclass's isolation); XCTest invokes them on the main thread for
+    // synchronous tests, so assumeIsolated is safe here.
     override func setUp() {
         super.setUp()
-        
-        outline = BirchOutline.createTaskPaperOutline(nil)
-        weakOutline = outline
-        item = outline.createItem("hello")
+        MainActor.assumeIsolated {
+            outline = BirchOutline.createTaskPaperOutline(nil)
+            weakOutline = outline
+            item = outline.createItem("hello")
+        }
     }
-    
+
     override func tearDown() {
-        item = nil
-        outline = nil
-        XCTAssertNil(weakOutline)
+        MainActor.assumeIsolated {
+            item = nil
+            outline = nil
+            XCTAssertNil(weakOutline)
+        }
     }
     
     func testInit() {

@@ -17,6 +17,7 @@ import BirchOutline
 let BLastRunVersion = "BLastRunVersion"
 let userDefaults = UserDefaults.standard
 
+@MainActor
 open class OutlineEditorAppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet var newTab: NSMenuItem!
     @IBOutlet var styleSheetsMenu: NSMenu!

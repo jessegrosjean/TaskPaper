@@ -10,6 +10,11 @@ import Cocoa
 import CoreText
 import Foundation
 
+// Drawing and layout for NSTextView happen on the main thread; this layout
+// manager's state is main-actor state. NSLayoutManager is nonisolated in the
+// SDK, so the drawing overrides stay nonisolated and assert isolation at
+// runtime.
+@MainActor
 class OutlineEditorLayoutManager: NSLayoutManager {
     let outlineEditor: OutlineEditorType
 
@@ -109,6 +114,13 @@ class OutlineEditorLayoutManager: NSLayoutManager {
     }
 
     override func drawGlyphs(forGlyphRange glyphsToShow: NSRange, at origin: NSPoint) {
+        MainActor.assumeIsolated {
+            drawGlyphsAssumingMainActor(forGlyphRange: glyphsToShow, at: origin)
+        }
+        super.drawGlyphs(forGlyphRange: glyphsToShow, at: origin)
+    }
+
+    private func drawGlyphsAssumingMainActor(forGlyphRange glyphsToShow: NSRange, at origin: NSPoint) {
         if drawInvisibles {
             if let textStorage = textStorage as? OutlineEditorTextStorage, let textView = textViewForBeginningOfSelection, let textContainer = textView.textContainer {
                 let selectedRange = textView.selectedRange
@@ -185,12 +197,16 @@ class OutlineEditorLayoutManager: NSLayoutManager {
                 }
             }
         }
-        super.drawGlyphs(forGlyphRange: glyphsToShow, at: origin)
     }
 
     override func drawBackground(forGlyphRange glyphsToShow: NSRange, at origin: NSPoint) {
         super.drawBackground(forGlyphRange: glyphsToShow, at: origin)
+        MainActor.assumeIsolated {
+            drawBackgroundAssumingMainActor(forGlyphRange: glyphsToShow, at: origin)
+        }
+    }
 
+    private func drawBackgroundAssumingMainActor(forGlyphRange glyphsToShow: NSRange, at origin: NSPoint) {
         guard
             let outlineEditorTextStorage = textStorage as? OutlineEditorTextStorage,
             let outlineEditor = outlineEditorTextStorage.outlineEditor,

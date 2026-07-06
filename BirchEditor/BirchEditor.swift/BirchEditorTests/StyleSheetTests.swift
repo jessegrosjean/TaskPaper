@@ -11,20 +11,28 @@ import JavaScriptCore
 @testable import TaskPaper
 import XCTest
 
+@MainActor
 class StyleSheetTests: XCTestCase {
     var styleSheet: StyleSheet?
     weak var weakStyleSheet: StyleSheet?
 
+    // setUp()/tearDown() overrides stay nonisolated (inherited from the
+    // superclass); XCTest invokes them on the main thread for synchronous
+    // tests, so assumeIsolated is safe here.
     override func setUp() {
-        styleSheet = StyleSheet(source: nil, scriptContext: BirchOutline.sharedContext)
-        weakStyleSheet = styleSheet
+        MainActor.assumeIsolated {
+            styleSheet = StyleSheet(source: nil, scriptContext: BirchOutline.sharedContext)
+            weakStyleSheet = styleSheet
+        }
         super.setUp()
     }
 
     override func tearDown() {
         super.tearDown()
-        styleSheet = nil
-        XCTAssertNil(weakStyleSheet)
+        MainActor.assumeIsolated {
+            styleSheet = nil
+            XCTAssertNil(weakStyleSheet)
+        }
     }
 
     func testComputeStyleKeyForElement() {
