@@ -16,48 +16,34 @@ class OutlineDocument: XCTestCase {
     var document: TaskPaperDocument?
     weak var weakDocument: TaskPaperDocument?
 
-    // setUp()/tearDown() overrides stay nonisolated (inherited from the
-    // superclass); XCTest invokes them on the main thread for synchronous
-    // tests, so assumeIsolated is safe here.
-    override func setUp() {
-        super.setUp()
-        MainActor.assumeIsolated {
-            autoreleasepool {
-                document = try! NSDocumentController.shared.makeUntitledDocument(ofType: "com.taskpaper.text") as? TaskPaperDocument
-            }
-            weakDocument = document
+    // The async overrides may add @MainActor isolation (callers await),
+    // which puts setup/teardown on the main actor alongside the tests.
+    @MainActor
+    override func setUp() async throws {
+        autoreleasepool {
+            document = try! NSDocumentController.shared.makeUntitledDocument(ofType: "com.taskpaper.text") as? TaskPaperDocument
         }
+        weakDocument = document
     }
 
-    override func tearDown() {
-        MainActor.assumeIsolated {
-            autoreleasepool {
-                document?.close()
-                document = nil
-            }
+    @MainActor
+    override func tearDown() async throws {
+        autoreleasepool {
+            document?.close()
+            document = nil
         }
 
         let expectation = self.expectation(description: "Should Deinit")
-        MainActor.assumeIsolated {
-            delay(0) {
-                while self.weakDocument != nil {
-                    RunLoop.current.run(until: NSDate(timeIntervalSinceNow: 0.1) as Date)
-                }
-                expectation.fulfill()
+        delay(0) {
+            while self.weakDocument != nil {
+                RunLoop.current.run(until: NSDate(timeIntervalSinceNow: 0.1) as Date)
             }
+            expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 5) { error in
-            if let error = error {
-                XCTFail("Error: \(error.localizedDescription)")
-            }
-        }
+        await fulfillment(of: [expectation], timeout: 5)
 
-        MainActor.assumeIsolated {
-            XCTAssertNil(weakDocument)
-        }
-
-        super.tearDown()
+        XCTAssertNil(weakDocument)
     }
 
     func testCreateDocument() {

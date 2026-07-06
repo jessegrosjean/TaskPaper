@@ -35,7 +35,8 @@ class SearchBarViewController: NSViewController, OutlineEditorHolderType, Styles
     var searchFieldSecondaryTextColor = NSColor.gray
     var searchFieldErrorTextColor = NSColor.red
     var searchPlaceholderString: NSAttributedString?
-    var isTabbedWindowObserver: NSObjectProtocol?
+    // nonisolated(unsafe) so the nonisolated deinit can remove the observer.
+    nonisolated(unsafe) var isTabbedWindowObserver: NSObjectProtocol?
 
     deinit {
         // deinit is nonisolated, but view controllers deallocate on the main
@@ -73,8 +74,12 @@ class SearchBarViewController: NSViewController, OutlineEditorHolderType, Styles
             NotificationCenter.default.removeObserver(isTabbedWindowObserver)
         }
         
+        // With queue: nil the block runs synchronously on the posting thread,
+        // which is always main for this notification.
         isTabbedWindowObserver = NotificationCenter.default.addObserver(forName: .isTabbedWindowDidChange, object: window, queue: nil) { [weak self] _ in
-            self?.view.needsUpdateConstraints = true
+            MainActor.assumeIsolated {
+                self?.view.needsUpdateConstraints = true
+            }
         }
 
         titleBarConstraint?.isActive = false

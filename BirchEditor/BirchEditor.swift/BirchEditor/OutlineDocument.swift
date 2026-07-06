@@ -31,7 +31,8 @@ open class OutlineDocument: NSDocument {
         }
     }
 
-    fileprivate var disposable: DisposableType?
+    // nonisolated(unsafe) so the nonisolated deinit can read it for cleanup.
+    nonisolated(unsafe) fileprivate var disposable: DisposableType?
 
     var outlineRuntimeType: String {
         return "notype"
@@ -176,10 +177,13 @@ open class OutlineDocument: NSDocument {
 
     // MARK: - File Refresh
 
+    // NSFilePresenter callback; arrives off-main and hops to the main queue.
     override open func presentedItemDidChange() {
         super.presentedItemDidChange()
         OperationQueue.main.addOperation { [weak self] in
-            self?.presentedItemDidChangeDebouncer?.call()
+            MainActor.assumeIsolated {
+                self?.presentedItemDidChangeDebouncer?.call()
+            }
         }
     }
 
@@ -308,7 +312,7 @@ open class OutlineDocument: NSDocument {
         BirchOutline.sharedContext.garbageCollect()
     }
 
-    override open func restoreWindow(withIdentifier identifier: NSUserInterfaceItemIdentifier, state: NSCoder, completionHandler: @escaping (NSWindow?, Error?) -> Void) {
+    override open func restoreWindow(withIdentifier identifier: NSUserInterfaceItemIdentifier, state: NSCoder, completionHandler: @escaping @Sendable (NSWindow?, Error?) -> Void) {
         if identifier == NSUserInterfaceItemIdentifier(rawValue: "OutlineEditorWindow") {
             // Must do this manually because we can have mutliple windows with same identifier and appkit doesn't handle that case
             let outlineEditorWindowController = makeWindowController()

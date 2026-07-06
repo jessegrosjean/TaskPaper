@@ -9,7 +9,7 @@
 import Cocoa
 
 let previewTitlebarAccessoryBundle = Bundle(for: PreviewTitlebarAccessoryViewController.self)
-let previewTitlebarAccessoryStoryboard = NSStoryboard(name: "PreviewTitlebarAccessory", bundle: previewTitlebarAccessoryBundle)
+@MainActor let previewTitlebarAccessoryStoryboard = NSStoryboard(name: "PreviewTitlebarAccessory", bundle: previewTitlebarAccessoryBundle)
 
 class PreviewTitlebarAccessoryViewController: NSTitlebarAccessoryViewController {
     static func addPreviewTitlebarAccessoryIfNeeded(_ window: NSWindow) {

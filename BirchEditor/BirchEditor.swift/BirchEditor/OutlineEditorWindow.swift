@@ -8,8 +8,11 @@
 
 import Cocoa
 
-var TabbedWindowsKey = "tabbedWindows"
-var tabbedWindowsContext = malloc(1)!
+let TabbedWindowsKey = "tabbedWindows"
+// Used only as an identity token for KVO callbacks, never dereferenced.
+// @MainActor is impossible because the nonisolated deinit passes it to
+// removeObserver.
+nonisolated(unsafe) let tabbedWindowsContext = malloc(1)!
 
 extension Notification.Name {
     static let isTabbedWindowDidChange = Notification.Name("isTabbedWindowDidChange")
@@ -48,21 +51,26 @@ class OutlineEditorWindow: NSWindow {
         isFloatingWindow.toggle()
     }
     
+    // Nonisolated NSObject override; this KVO fires on the main thread
+    // (tabbedWindows changes happen during main-thread window operations).
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if context == tabbedWindowsContext {
-            let last = lastTabbedWindows
-            DispatchQueue.main.async {
-                if let windows = last {
-                    for each in windows {
-                        each.windowController?.synchronizeWindowTitleWithDocumentName()
+            assumeMainActor {
+                let last = lastTabbedWindows
+                DispatchQueue.main.async {
+                    MainActor.assumeIsolated {
+                        if let windows = last {
+                            for each in windows {
+                                each.windowController?.synchronizeWindowTitleWithDocumentName()
+                            }
+                        }
                     }
                 }
+                synchronizeAllTitles()
+                lastTabbedWindows = tabbedWindows
+
+                NotificationCenter.default.post(name: .isTabbedWindowDidChange, object: self)
             }
-            synchronizeAllTitles()
-            lastTabbedWindows = tabbedWindows
-
-
-            NotificationCenter.default.post(name: .isTabbedWindowDidChange, object: self)
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }

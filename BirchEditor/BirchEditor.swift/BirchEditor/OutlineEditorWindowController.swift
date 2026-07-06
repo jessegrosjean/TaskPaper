@@ -95,9 +95,12 @@ open class OutlineEditorWindowController: NSWindowController, OutlineEditorHolde
 
             PreviewTitlebarAccessoryViewController.addPreviewTitlebarAccessoryIfNeeded(window)
 
+            // Appearance KVO fires on the main thread with the window change.
             windowEffectiveAppearanceObserver = window.observe(\.effectiveAppearance) { [weak self] _, _ in
-                if let `self` = self, let currentStyleSheet = self.styleSheet {
-                    self.styleSheet = BirchEditor.createStyleSheet(currentStyleSheet.source)
+                MainActor.assumeIsolated {
+                    if let `self` = self, let currentStyleSheet = self.styleSheet {
+                        self.styleSheet = BirchEditor.createStyleSheet(currentStyleSheet.source)
+                    }
                 }
             }
         }
@@ -105,10 +108,14 @@ open class OutlineEditorWindowController: NSWindowController, OutlineEditorHolde
 
     var windowEffectiveAppearanceObserver: NSKeyValueObservation?
 
+    // Nonisolated NSObject override; UserDefaults KVO fires on the thread
+    // that set the value — always main here (preferences UI).
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == BUserFontSizeDefaultsKey {
-            if let currentStyleSheet = styleSheet {
-                styleSheet = BirchEditor.createStyleSheet(currentStyleSheet.source)
+            assumeMainActor {
+                if let currentStyleSheet = styleSheet {
+                    styleSheet = BirchEditor.createStyleSheet(currentStyleSheet.source)
+                }
             }
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)

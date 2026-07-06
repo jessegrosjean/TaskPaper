@@ -26,9 +26,13 @@ open class OutlineEditorSplitViewController: NSSplitViewController, /* TitleLayo
 
     deinit {
         // Manually to force deinit immediatly. Otherwise won't release split view controllers until a few seconds after.
-        for each in splitViewItems {
-            removeSplitViewItem(each)
-            each.viewController.view.removeFromSuperview()
+        // deinit is nonisolated, but view controllers deallocate on the main
+        // thread with their window hierarchy.
+        assumeMainActor {
+            for each in splitViewItems {
+                removeSplitViewItem(each)
+                each.viewController.view.removeFromSuperview()
+            }
         }
     }
 

@@ -68,8 +68,10 @@ open class OutlineEditorTextStorage: NSTextStorageBase {
     }
 
     override open func replaceCharacters(in range: NSRange, with str: String) {
+        // Safe: assumeIsolated traps unless already on the main thread.
+        nonisolated(unsafe) let this = self
         MainActor.assumeIsolated {
-            replaceCharactersAssumingMainActor(in: range, with: str)
+            this.replaceCharactersAssumingMainActor(in: range, with: str)
         }
     }
 
@@ -171,24 +173,26 @@ open class OutlineEditorTextStorage: NSTextStorageBase {
     }
 
     override open func beginEditing() {
+        nonisolated(unsafe) let this = self
         MainActor.assumeIsolated {
-            isEditingCount += 1
+            this.isEditingCount += 1
         }
         super.beginEditing()
         backingStorage.beginEditing()
         MainActor.assumeIsolated {
-            outlineEditor?.outline.beginUndoGrouping()
+            this.outlineEditor?.outline.beginUndoGrouping()
         }
     }
 
     override open func endEditing() {
+        nonisolated(unsafe) let this = self
         MainActor.assumeIsolated {
-            isEditingCount -= 1
+            this.isEditingCount -= 1
         }
         backingStorage.endEditing()
         super.endEditing()
         MainActor.assumeIsolated {
-            outlineEditor?.outline.endUndoGrouping()
+            this.outlineEditor?.outline.endUndoGrouping()
         }
     }
 

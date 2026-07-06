@@ -16,23 +16,18 @@ class StyleSheetTests: XCTestCase {
     var styleSheet: StyleSheet?
     weak var weakStyleSheet: StyleSheet?
 
-    // setUp()/tearDown() overrides stay nonisolated (inherited from the
-    // superclass); XCTest invokes them on the main thread for synchronous
-    // tests, so assumeIsolated is safe here.
-    override func setUp() {
-        MainActor.assumeIsolated {
-            styleSheet = StyleSheet(source: nil, scriptContext: BirchOutline.sharedContext)
-            weakStyleSheet = styleSheet
-        }
-        super.setUp()
+    // The async overrides may add @MainActor isolation (callers await),
+    // which puts setup/teardown on the main actor alongside the tests.
+    @MainActor
+    override func setUp() async throws {
+        styleSheet = StyleSheet(source: nil, scriptContext: BirchOutline.sharedContext)
+        weakStyleSheet = styleSheet
     }
 
-    override func tearDown() {
-        super.tearDown()
-        MainActor.assumeIsolated {
-            styleSheet = nil
-            XCTAssertNil(weakStyleSheet)
-        }
+    @MainActor
+    override func tearDown() async throws {
+        styleSheet = nil
+        XCTAssertNil(weakStyleSheet)
     }
 
     func testComputeStyleKeyForElement() {

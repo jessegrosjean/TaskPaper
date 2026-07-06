@@ -175,7 +175,18 @@ class OutlineEditorView: NSTextView {
         }
     }
 
+    // Nonisolated NSObject override; UserDefaults KVO fires on the thread
+    // that set the value — always main here (preferences UI).
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
+        nonisolated(unsafe) let object = object
+        nonisolated(unsafe) let change = change
+        nonisolated(unsafe) let context = context
+        assumeMainActor {
+            observeValueAssumingMainActor(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
+    }
+
+    private func observeValueAssumingMainActor(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == BCheckSpellingAsYouType {
             isContinuousSpellCheckingEnabled = userDefaults.bool(forKey: BCheckSpellingAsYouType)
         } else if keyPath == BCheckGrammarWithSpelling {

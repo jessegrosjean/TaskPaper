@@ -146,6 +146,7 @@
 		433816351DB93DB900120078 /* OutlineSidebarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B581D69FB96001F6A2B /* OutlineSidebarItem.swift */; };
 		433816361DB93DB900120078 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433815C11DB67EE900120078 /* DatePickerViewController.swift */; };
 		433816371DB93DB900120078 /* delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B181D69FB96001F6A2B /* delay.swift */; };
+		AA00000000000000000A0002 /* assumeMainActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000A0001 /* assumeMainActor.swift */; };
 		433816391DB93DB900120078 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B4D1D69FB96001F6A2B /* PreferencesWindowController.swift */; };
 		4338163A1DB93DB900120078 /* ItemPasteboardUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B1C1D69FB96001F6A2B /* ItemPasteboardUtilities.swift */; };
 		4338163B1DB93DB900120078 /* NSTextStorage-Performance.m in Sources */ = {isa = PBXBuildFile; fileRef = 43402B2A1D69FB96001F6A2B /* NSTextStorage-Performance.m */; };
@@ -196,6 +197,7 @@
 		43402B6B1D69FB96001F6A2B /* ComputedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B161D69FB96001F6A2B /* ComputedStyle.swift */; };
 		43402B6C1D69FB96001F6A2B /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B171D69FB96001F6A2B /* Debouncer.swift */; };
 		43402B6D1D69FB96001F6A2B /* delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B181D69FB96001F6A2B /* delay.swift */; };
+		AA00000000000000000A0003 /* assumeMainActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000A0001 /* assumeMainActor.swift */; };
 		43402B6F1D69FB96001F6A2B /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B1A1D69FB96001F6A2B /* Font.swift */; };
 		43402B711D69FB96001F6A2B /* ItemPasteboardUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B1C1D69FB96001F6A2B /* ItemPasteboardUtilities.swift */; };
 		43402B721D69FB96001F6A2B /* JGMethodSwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 43402B1E1D69FB96001F6A2B /* JGMethodSwizzler.m */; };
@@ -421,6 +423,7 @@
 		43B6AE231D6CE91600ACA66C /* NSView-Hiearchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B311D69FB96001F6A2B /* NSView-Hiearchy.swift */; };
 		43B6AE241D6CE91600ACA66C /* OutlineSidebarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B581D69FB96001F6A2B /* OutlineSidebarItem.swift */; };
 		43B6AE251D6CE91600ACA66C /* delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B181D69FB96001F6A2B /* delay.swift */; };
+		AA00000000000000000A0004 /* assumeMainActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000A0001 /* assumeMainActor.swift */; };
 		43B6AE261D6CE91600ACA66C /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B4D1D69FB96001F6A2B /* PreferencesWindowController.swift */; };
 		43B6AE271D6CE91600ACA66C /* ItemPasteboardUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43402B1C1D69FB96001F6A2B /* ItemPasteboardUtilities.swift */; };
 		43B6AE281D6CE91600ACA66C /* NSTextStorage-Performance.m in Sources */ = {isa = PBXBuildFile; fileRef = 43402B2A1D69FB96001F6A2B /* NSTextStorage-Performance.m */; };
@@ -602,6 +605,7 @@
 		43402B161D69FB96001F6A2B /* ComputedStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputedStyle.swift; sourceTree = "<group>"; };
 		43402B171D69FB96001F6A2B /* Debouncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		43402B181D69FB96001F6A2B /* delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = delay.swift; sourceTree = "<group>"; };
+		AA00000000000000000A0001 /* assumeMainActor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = assumeMainActor.swift; sourceTree = "<group>"; };
 		43402B1A1D69FB96001F6A2B /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		43402B1C1D69FB96001F6A2B /* ItemPasteboardUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPasteboardUtilities.swift; sourceTree = "<group>"; };
 		43402B1D1D69FB96001F6A2B /* JGMethodSwizzler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGMethodSwizzler.h; sourceTree = "<group>"; };
@@ -1032,6 +1036,7 @@
 				43B6ADC31D6CCBC600ACA66C /* ItemPasteboardProvider.swift */,
 				43402B4B1D69FB96001F6A2B /* PathMonitor.swift */,
 				43402B181D69FB96001F6A2B /* delay.swift */,
+				AA00000000000000000A0001 /* assumeMainActor.swift */,
 				43402B1F1D69FB96001F6A2B /* JSON.swift */,
 				43402B171D69FB96001F6A2B /* Debouncer.swift */,
 				431D9C831D77795900CB4F8E /* getMACAddress.swift */,
@@ -1754,6 +1759,7 @@
 				433816351DB93DB900120078 /* OutlineSidebarItem.swift in Sources */,
 				433816361DB93DB900120078 /* DatePickerViewController.swift in Sources */,
 				433816371DB93DB900120078 /* delay.swift in Sources */,
+				AA00000000000000000A0002 /* assumeMainActor.swift in Sources */,
 				434DA1E11E4E288000513DCC /* OutlineEditorCollectionView.swift in Sources */,
 				433816391DB93DB900120078 /* PreferencesWindowController.swift in Sources */,
 				4338163A1DB93DB900120078 /* ItemPasteboardUtilities.swift in Sources */,
@@ -1877,6 +1883,7 @@
 				43402BA61D69FB96001F6A2B /* OutlineSidebarItem.swift in Sources */,
 				433815C31DB67EE900120078 /* DatePickerViewController.swift in Sources */,
 				43402B6D1D69FB96001F6A2B /* delay.swift in Sources */,
+				AA00000000000000000A0003 /* assumeMainActor.swift in Sources */,
 				434DA1DF1E4E288000513DCC /* OutlineEditorCollectionView.swift in Sources */,
 				43402B9B1D69FB96001F6A2B /* PreferencesWindowController.swift in Sources */,
 				43402B711D69FB96001F6A2B /* ItemPasteboardUtilities.swift in Sources */,
@@ -2012,6 +2019,7 @@
 				43B6AE241D6CE91600ACA66C /* OutlineSidebarItem.swift in Sources */,
 				433815C41DB67EE900120078 /* DatePickerViewController.swift in Sources */,
 				43B6AE251D6CE91600ACA66C /* delay.swift in Sources */,
+				AA00000000000000000A0004 /* assumeMainActor.swift in Sources */,
 				434DA1E01E4E288000513DCC /* OutlineEditorCollectionView.swift in Sources */,
 				43B6AE261D6CE91600ACA66C /* PreferencesWindowController.swift in Sources */,
 				43B6AE271D6CE91600ACA66C /* ItemPasteboardUtilities.swift in Sources */,

@@ -17,9 +17,11 @@ class OutlineEditorTypesetter: NSATSTypesetter {
     var currentTextStorageItem: OutlineEditorTextStorageItem?
 
     override func beginParagraph() {
+        // Safe: assumeIsolated traps unless already on the main thread.
+        nonisolated(unsafe) let this = self
         MainActor.assumeIsolated {
-            if let textStorage = attributedString as? OutlineEditorTextStorage {
-                currentTextStorageItem = textStorage.storageItemAtIndex(paragraphCharacterRange.location)
+            if let textStorage = this.attributedString as? OutlineEditorTextStorage {
+                this.currentTextStorageItem = textStorage.storageItemAtIndex(this.paragraphCharacterRange.location)
             }
         }
         super.beginParagraph()
@@ -27,8 +29,9 @@ class OutlineEditorTypesetter: NSATSTypesetter {
 
     override func endParagraph() {
         super.endParagraph()
+        nonisolated(unsafe) let this = self
         MainActor.assumeIsolated {
-            currentTextStorageItem = nil
+            this.currentTextStorageItem = nil
         }
     }
 
@@ -40,8 +43,9 @@ class OutlineEditorTypesetter: NSATSTypesetter {
         // assumeIsolated can only return Sendable values; hand the
         // non-Sendable dictionary out through an unsafe local instead.
         nonisolated(unsafe) var attributes: [NSAttributedString.Key: Any]?
+        nonisolated(unsafe) let lm = layoutManager
         MainActor.assumeIsolated {
-            attributes = layoutManager.outlineEditor.computedStyle?.inheritedAttributedStringValues
+            attributes = lm.outlineEditor.computedStyle?.inheritedAttributedStringValues
         }
         return attributes ?? super.attributesForExtraLineFragment
     }
@@ -55,9 +59,10 @@ class OutlineEditorTypesetter: NSATSTypesetter {
                                       paragraphSpacingBefore: CGFloat,
                                       paragraphSpacingAfter: CGFloat) {
         
+        nonisolated(unsafe) let this = self
         MainActor.assumeIsolated {
-            if let tc = currentTextContainer as? OutlineEditorTextContainer {
-                tc.itemIndentLevel = currentTextStorageItem?.indentLevel ?? 1
+            if let tc = this.currentTextContainer as? OutlineEditorTextContainer {
+                tc.itemIndentLevel = this.currentTextStorageItem?.indentLevel ?? 1
             }
         }
 
@@ -65,8 +70,9 @@ class OutlineEditorTypesetter: NSATSTypesetter {
 
         let paragraphStartGlyphLocation = paragraphGlyphRange.location
         if startingGlyphIndex != paragraphStartGlyphLocation {
+            nonisolated(unsafe) let lineFragmentRect = lineFragmentRect
             MainActor.assumeIsolated {
-                if let item = currentTextStorageItem, let lm = layoutManager, item.type == "task" {
+                if let item = this.currentTextStorageItem, let lm = this.layoutManager, item.type == "task" {
                     let start = lm.location(forGlyphAt: paragraphStartGlyphLocation)
                     let end = lm.location(forGlyphAt: paragraphStartGlyphLocation + 2)
                     let adjust = end.x - start.x
@@ -95,9 +101,12 @@ class OutlineEditorTypesetter: NSATSTypesetter {
         // lineRect.pointee.size.width = usedRect.pointee.size.width + (usedRect.pointee.origin.x - lineRect.pointee.origin.x)
 
         if let layoutManager = layoutManager as? OutlineEditorLayoutManager {
+            nonisolated(unsafe) let this = self
+            nonisolated(unsafe) let layoutManager = layoutManager
+            nonisolated(unsafe) let lineRect = lineRect
             MainActor.assumeIsolated {
                 // Room is made for this expansion by textContainer.roomForTrailingInvisibles
-                lineRect.pointee.size.width += layoutManager.lineSeparatorAdvanceForStorageItem(currentTextStorageItem, lineCharacterRange: paragraphCharacterRange)
+                lineRect.pointee.size.width += layoutManager.lineSeparatorAdvanceForStorageItem(this.currentTextStorageItem, lineCharacterRange: this.paragraphCharacterRange)
             }
         }
 

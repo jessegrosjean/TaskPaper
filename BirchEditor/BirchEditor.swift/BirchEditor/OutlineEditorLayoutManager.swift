@@ -114,8 +114,10 @@ class OutlineEditorLayoutManager: NSLayoutManager {
     }
 
     override func drawGlyphs(forGlyphRange glyphsToShow: NSRange, at origin: NSPoint) {
+        // Safe: assumeIsolated traps unless already on the main thread.
+        nonisolated(unsafe) let this = self
         MainActor.assumeIsolated {
-            drawGlyphsAssumingMainActor(forGlyphRange: glyphsToShow, at: origin)
+            this.drawGlyphsAssumingMainActor(forGlyphRange: glyphsToShow, at: origin)
         }
         super.drawGlyphs(forGlyphRange: glyphsToShow, at: origin)
     }
@@ -201,8 +203,9 @@ class OutlineEditorLayoutManager: NSLayoutManager {
 
     override func drawBackground(forGlyphRange glyphsToShow: NSRange, at origin: NSPoint) {
         super.drawBackground(forGlyphRange: glyphsToShow, at: origin)
+        nonisolated(unsafe) let this = self
         MainActor.assumeIsolated {
-            drawBackgroundAssumingMainActor(forGlyphRange: glyphsToShow, at: origin)
+            this.drawBackgroundAssumingMainActor(forGlyphRange: glyphsToShow, at: origin)
         }
     }
 

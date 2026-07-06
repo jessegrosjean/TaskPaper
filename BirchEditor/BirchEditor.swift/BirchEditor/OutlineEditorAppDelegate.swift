@@ -15,7 +15,9 @@ import BirchOutline
 #endif
 
 let BLastRunVersion = "BLastRunVersion"
-let userDefaults = UserDefaults.standard
+// UserDefaults is documented thread-safe; the SDK just doesn't mark it
+// Sendable.
+nonisolated(unsafe) let userDefaults = UserDefaults.standard
 
 @MainActor
 open class OutlineEditorAppDelegate: NSObject, NSApplicationDelegate {
@@ -313,9 +315,14 @@ extension OutlineEditorAppDelegate {
             _ = alert.addButton(withTitle: NSLocalizedString("OK", tableName: "LicenseAlerts", comment: "button"))
             _ = alert.addButton(withTitle: NSLocalizedString("Cancel", tableName: "LicenseAlerts", comment: "button"))
             if alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn {
+                // Paddle may deliver its completion off-main; hop back for UI.
                 paddleProduct?.deactivate(completion: { success, error in
                     if !success, let error = error {
-                        NSApp.presentError(error)
+                        DispatchQueue.main.async {
+                            MainActor.assumeIsolated {
+                                _ = NSApp.presentError(error)
+                            }
+                        }
                     }
                 })
             }
@@ -328,7 +335,10 @@ extension OutlineEditorAppDelegate {
 }
 
 #if DIRECT
-    extension OutlineEditorAppDelegate: PaddleDelegate {
+    // Paddle's ObjC protocol is unannotated (nonisolated); the
+    // @preconcurrency conformance lets the main-actor-isolated delegate
+    // satisfy it with runtime isolation checks in debug builds.
+    extension OutlineEditorAppDelegate: @preconcurrency PaddleDelegate {
         /* public func willShowPaddle(_ uiType: PADUIType, product: PADProduct) -> PADDisplayConfiguration? {
              return nil
          }

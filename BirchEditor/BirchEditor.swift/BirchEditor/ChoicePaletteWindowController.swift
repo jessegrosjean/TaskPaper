@@ -9,7 +9,7 @@
 import Cocoa
 
 let choicePaletteBundle = Bundle(for: ChoicePaletteWindowController.self)
-let choicePaletteStoryboard = NSStoryboard(name: "ChoicePalette", bundle: choicePaletteBundle)
+@MainActor let choicePaletteStoryboard = NSStoryboard(name: "ChoicePalette", bundle: choicePaletteBundle)
 
 class ChoicePaletteWindowController: NSWindowController {
     var isClosingWindowAfterPerformingCommand = 0

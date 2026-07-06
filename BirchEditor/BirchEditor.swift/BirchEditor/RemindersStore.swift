@@ -34,6 +34,8 @@ class RemindersStore {
     nonisolated(unsafe) static let eventStore = EKEventStore()
 
     static func requestAccess(to entityType: EKEntityType, completion: @escaping EKEventStoreRequestAccessCompletionHandler) {
+        // Handed to EventKit's completion; invoked once, never shared.
+        nonisolated(unsafe) let completion = completion
         eventStore.requestAccess(to: entityType) { granted, error in
             if granted {
                 completion(granted, error)
@@ -44,9 +46,12 @@ class RemindersStore {
     }
 
     static func fetchReminderCalendars(callback: @escaping @MainActor ([EKCalendar]?, Error?) -> Void) {
+        // Handed to the main queue and only invoked there; the EK objects are
+        // handed off, never accessed concurrently.
+        nonisolated(unsafe) let callback = callback
         RemindersStore.requestAccess(to: .reminder) { granted, error in
             if granted {
-                let calendars = self.eventStore.calendars(for: .reminder)
+                nonisolated(unsafe) let calendars = self.eventStore.calendars(for: .reminder)
                 DispatchQueue.main.async {
                     MainActor.assumeIsolated { callback(calendars, error) }
                 }
@@ -59,6 +64,9 @@ class RemindersStore {
     }
 
     static func fetchReminders(useDefaultList: Bool = false, allowCompletedReminders: Bool = false, callback: @escaping @MainActor ([EKReminder]?, Error?) -> Void) {
+        // Handed to the main queue and only invoked there; the EK objects are
+        // handed off, never accessed concurrently.
+        nonisolated(unsafe) let callback = callback
         RemindersStore.requestAccess(to: .reminder) { granted, error in
             if granted {
                 let calendar = NSCalendar.current
@@ -72,7 +80,7 @@ class RemindersStore {
                     eventStore.predicateForReminders(in: calendars as? [EKCalendar]) :
                     eventStore.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: calendars as? [EKCalendar])
                 self.eventStore.fetchReminders(matching: predicate, completion: { fetchedReminders in
-                    let sortedReminders = fetchedReminders?.sorted {
+                    nonisolated(unsafe) let sortedReminders = fetchedReminders?.sorted {
                         if $0.isCompleted != $1.isCompleted {
                             return $1.isCompleted
                         }

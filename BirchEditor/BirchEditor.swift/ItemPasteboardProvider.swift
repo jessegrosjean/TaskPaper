@@ -25,7 +25,9 @@ class ItemPasteboardProvider: NSObject, NSPasteboardItemDataProvider {
         // Local variable inserted by Swift 4.2 migrator.
         let type = convertFromNSPasteboardPasteboardType(type)
 
-        MainActor.assumeIsolated {
+        // Handed off by AppKit on the main thread; never accessed concurrently.
+        nonisolated(unsafe) let item = item
+        assumeMainActor {
             if let outlineEditor = outlineEditor {
                 if let items = ItemPasteboardUtilities.readItemsSerializedItemReferences(item, editor: outlineEditor) {
                     item.setString(outlineEditor.serializeItems(items, options: ["type": type as Any]), forType: convertToNSPasteboardPasteboardType(type))

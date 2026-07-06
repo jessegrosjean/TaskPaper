@@ -1,3 +1,4 @@
+@MainActor
 protocol FirstResponderDelegate {
     func controlDidBecomeFirstResponder(_ sender: NSControl)
     func controlDidResignFirstResponder(_ sender: NSControl)
